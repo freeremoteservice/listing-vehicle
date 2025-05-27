@@ -100,10 +100,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </div>
             <?php endif; ?>
 
-            <!-- <div class="float-right btn-wrapper">
-              <a class="btn btn-outline-primary" href="add-listings.html">+ <span>Add listing</span></a>
-            </div> -->
-            <?php if (!is_admin()): ?>
+            <?php if (is_admin()): ?>
+            <div class="float-right btn-wrapper">
+              <a class="btn btn-outline-primary" href="<?= base_url('admin/add_vehicle'); ?>">+ <span>Add Vehicle</span></a>
+            </div>
+            <?php else: ?>
             <ul class="menuzord-menu menuzord-right">
               <li class="">
                 <a href="<?= base_url(); ?>">Home</a>

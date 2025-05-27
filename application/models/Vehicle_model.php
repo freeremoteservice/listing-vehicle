@@ -11,4 +11,9 @@ class Vehicle_model extends CI_Model
 
     }
 
+    // Insert a vehicle into the database
+    public function insert_vehicle($data) {
+        return $this->db->insert('vehicles', $data);
+    }
+
 }
