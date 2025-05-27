@@ -1,7 +1,7 @@
 
 </div> <!-- element wrapper ends -->
 
-<footer class="footer-dark" style="background-image: url(assets/img/background/bg-footer.jpg)">
+<footer class="footer-dark" style="background-image: url(<?= base_url('assets/img/background/bg-footer.jpg'); ?>)">
 
   <div class="container">
     <div class="row">
@@ -114,22 +114,22 @@
 
 
   <!-- JAVASCRIPTS -->
-  <script src='assets/plugins/jquery/jquery-3.4.1.min.js'></script>
-  <script src='assets/plugins/bootstrap/js/bootstrap.bundle.js'></script>
-  <script src='assets/plugins/menuzord/js/menuzord.js'></script>
+  <script src='<?= base_url("assets/plugins/jquery/jquery-3.4.1.min.js"); ?>'></script>
+  <script src='<?= base_url("assets/plugins/bootstrap/js/bootstrap.bundle.js"); ?>'></script>
+  <script src='<?= base_url("assets/plugins/menuzord/js/menuzord.js"); ?>'></script>
 
-  <script src='assets/plugins/selectric/jquery.selectric.min.js'></script>
-  <script src='assets/plugins/dzsparallaxer/dzsparallaxer.js'></script>
-  <script src='assets/plugins/isotope/isotope.pkgd.min.js'></script>
-  <script src='assets/plugins/imagesloaded/imagesloaded.pkgd.min.js'></script>
+  <script src='<?= base_url("assets/plugins/selectric/jquery.selectric.min.js"); ?>'></script>
+  <script src='<?= base_url("assets/plugins/dzsparallaxer/dzsparallaxer.js"); ?>'></script>
+  <script src='<?= base_url("assets/plugins/isotope/isotope.pkgd.min.js"); ?>'></script>
+  <script src='<?= base_url("assets/plugins/imagesloaded/imagesloaded.pkgd.min.js"); ?>'></script>
   
   
   
-  <script src='assets/plugins/revolution/js/jquery.themepunch.tools.min.js'></script>
-  <script src='assets/plugins/revolution/js/jquery.themepunch.revolution.min.js'></script>
-  <script src='assets/plugins/smoothscroll/SmoothScroll.js'></script>
-  <script src='assets/plugins/lazyestload/lazyestload.js'></script>
-  <script src='assets/plugins/owl-carousel/owl.carousel.min.js'></script>
+  <script src='<?= base_url("assets/plugins/revolution/js/jquery.themepunch.tools.min.js"); ?>'></script>
+  <script src='<?= base_url("assets/plugins/revolution/js/jquery.themepunch.revolution.min.js"); ?>'></script>
+  <script src='<?= base_url("assets/plugins/smoothscroll/SmoothScroll.js"); ?>'></script>
+  <script src='<?= base_url("assets/plugins/lazyestload/lazyestload.js"); ?>'></script>
+  <script src='<?= base_url("assets/plugins/owl-carousel/owl.carousel.min.js"); ?>'></script>
   
   
   
@@ -148,7 +148,7 @@
     var year = d.getFullYear();
     document.getElementById("copy-year").innerHTML = year;
   </script>
-  <script src='assets/js/listty.js'></script>
+  <script src='<?= base_url("assets/js/listty.js"); ?>'></script>
 </body>
 </html>
 
