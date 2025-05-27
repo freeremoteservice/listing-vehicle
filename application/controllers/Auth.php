@@ -19,10 +19,11 @@ class Auth extends MY_Controller {
                     'user_id' => $user->id,
                     'username' => $user->username,
                     'avatar' => $user->avatar ?? 'default-avatar.png', // Default avatar if none set
+                    'role' => $user->role,
                     'logged_in' => TRUE
                 ]);
                 $this->session->set_flashdata('success', 'Login successful.');
-                redirect('home');
+                redirect(base_url());
             } else {
                 $this->session->set_flashdata('error', 'Invalid email or password.');
             }
@@ -45,6 +46,7 @@ class Auth extends MY_Controller {
                     'username' => $this->input->post('username'),
                     'email'    => $this->input->post('email'),
                     'password' => password_hash($this->input->post('password'), PASSWORD_BCRYPT),
+                    'role'     => 'user' // Default to 'user'
                 ];
 
                 if ($this->User_model->register($data)) {

@@ -68,67 +68,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
             <?php if ($this->session->userdata('logged_in')): ?>
             <div class="menu-right menu-left">
-                <div class="notification">
-                  <a class="dropdown-toggle" href="javascript:void(0)" role="button" data-bs-toggle="dropdown" data-bs-display="static"
-                    aria-haspopup="true" aria-expanded="false">
-                    <i class="far fa-bell" aria-hidden="true"></i>
-                    <span class="badge">21</span>
-                  </a>
-
-                  <ul class="dropdown-menu dropdown-menu-end">
-                    <li>
-                      <a href="javascript:void(0)">
-                        <div class="media media-xs align-items-center">
-                          <img class="rounded-circle me-3" src="assets/img/user/user-xs-1.jpg" alt="Image">
-                          <div class="media-body">
-                            <span class="font-weight-bold">Aaren</span>
-                            <p class="mb-1">Lorem ipsum dolor sit amet.</p>
-                            <em class="small">15min ago</em>
-                          </div>
-                        </div>
-                      </a>
-                    </li>
-
-                    <li>
-                      <a href="javascript:void(0)">
-                        <div class="media media-xs align-items-center">
-                          <img class="rounded-circle me-3" src="assets/img/user/user-xs-2.jpg" alt="Image">
-                          <div class="media-body">
-                            <span class="font-weight-bold">Abby</span>
-                            <p class="mb-1">Lorem ipsum dolor sit amet.</p>
-                            <em class="small">26 min ago</em>
-                          </div>
-                        </div>
-                      </a>
-                    </li>
-
-                    <li>
-                      <a href="javascript:void(0)">
-                        <div class="media media-xs align-items-center">
-                          <img class="rounded-circle me-3" src="assets/img/user/user-xs-3.jpg" alt="Image">
-                          <div class="media-body">
-                            <span class="font-weight-bold">Abriel</span>
-                            <p class="mb-1">Lorem ipsum dolor sit amet.</p>
-                            <em class="small">32 min ago</em>
-                          </div>
-                        </div>
-                      </a>
-                    </li>
-
-                    <li>
-                      <a href="javascript:void(0)">
-                        See all
-                      </a>
-                    </li>
-
-                  </ul>
-                </div>
                 <div class="avatar">
                   <a class="dropdown-toggle" href="javascript:void(0)" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
                     data-bs-display="static" aria-expanded="false">
-                    <img class="avatar-img lazyestload" data-src="assets/img/user/user-2.jpg" src="assets/img/user/user-2.jpg" alt="Image">
+                    <img class="avatar-img lazyestload" data-src="<?= base_url('assets/img/user/user-2.jpg'); ?>" src="<?= base_url('assets/img/user/user-2.jpg'); ?>" alt="Image">
                     <span class="avatar-name"><?= $this->session->userdata('username'); ?>
-                      <span class="small">User</span>
+                      <span class="small"><?= is_admin() ? 'Admin' : 'User'; ?></span>
                     </span>
                   </a>
                   <ul class="dropdown-menu">
@@ -136,12 +81,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                       <a class="d-flex flex-wrap align-items-center" href="profile-user.html">
                         <i class="fa fa-user me-2" aria-hidden="true"></i>
                         <span>My Profile</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="d-flex flex-wrap align-items-center" href="messages.html">
-                        <i class="fa fa-envelope me-2" aria-hidden="true"></i>
-                        <span>Messages</span>
                       </a>
                     </li>
                     <li>
@@ -164,6 +103,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <!-- <div class="float-right btn-wrapper">
               <a class="btn btn-outline-primary" href="add-listings.html">+ <span>Add listing</span></a>
             </div> -->
+            <?php if (!is_admin()): ?>
             <ul class="menuzord-menu menuzord-right">
               <li class="">
                 <a href="<?= base_url(); ?>">Home</a>
@@ -182,8 +122,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <li class="">
                 <a href="blog.html">Blog</a>
               </li>
-
             </ul>
+            <?php endif; ?>
 
           </div>
         </div>
