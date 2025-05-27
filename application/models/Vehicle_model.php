@@ -7,8 +7,8 @@ class Vehicle_model extends CI_Model
         parent::__construct();
     }
 
-    public function getAll() {
-
+    public function get_all_vehicles() {
+        return $this->db->get('vehicles')->result_array(); // Fetch all records as an array
     }
 
     // Insert a vehicle into the database

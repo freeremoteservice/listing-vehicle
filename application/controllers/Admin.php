@@ -16,7 +16,7 @@ class Admin extends MY_Controller {
     }
 
     public function dashboard() {
-        $data['vehicles'] = $this->Vehicle_model->getAll();
+        $data['vehicles'] = $this->Vehicle_model->get_all_vehicles();
         $this->render('admin/dashboard', $data);
     }
 
