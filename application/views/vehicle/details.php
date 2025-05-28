@@ -10,9 +10,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div class="row">
       <div class="col-lg-8">
         <div class="mb-2 mb-lg-0">
-          <h1 class="single-listing-title">Tom's Restuarant</h1>
-          <p class="text-muted mb-1"> <i class="fas fa-map-marker-alt text-primary me-1"></i> NY, USA </p>
-          <p class="text-muted mb-1"> <i class="fas fa-phone-alt text-primary me-1"></i> +55 654 545 122</p>
+          <h1 class="single-listing-title"><?= $vehicle->name; ?></h1>
+          <p class="text-muted mb-1"> <i class="fas fa-map-marker-alt text-primary me-1"></i> Type: <?= $vehicle->type; ?> </p>
+          <p class="text-muted mb-1"> <i class="fas fa-euro-sign text-primary me-1"></i> <?= $vehicle->price; ?></p>
           <div class="d-flex align-items-center">
             <ul class="list-inline list-inline-rating me-2">
               <li class="list-inline-item">
@@ -31,16 +31,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <i class="fa fa-star" aria-hidden="true"></i>
               </li>
             </ul>
-            <span class="d-inline-block me-2">(5 Reviews)</span>
-            <button class="btn-like px-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Favourite this listing">
-              <i class="far fa-heart text-primary" aria-hidden="true"></i>
-              <span>5 k</span>
-            </button>
           </div>
         </div>
       </div>
+
       <div class="col-lg-4 d-lg-flex justify-content-end align-items-end">
-        <a href="#add-review" class="btn btn-primary">Write a review</a>
+        <!-- <a href="#add-review" class="btn btn-primary">Book Now</a> -->
+        <a href="<?= base_url('auth/login'); ?>" class="btn btn-primary">Book Now</a>
       </div>
     </div>
 
@@ -54,44 +51,44 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <div class="owl-carousel owl-theme listing-details-carousel nav-light-dark">
 
     <div class="single-item">
-      <a class="overlay-dark" href="assets/img/single-listing/reservation/reservation-img-big-01.jpg" data-fancybox="gallery" data-caption="Caption for single image">
-        <img class="lazyestload" data-src="assets/img/single-listing/reservation/reservation-img-01.jpg" src="assets/img/single-listing/reservation/reservation-img-01.jpg" alt="Image" />
+      <a class="overlay-dark" href="<?= $vehicle->image ? base_url('uploads/vehicles/' . $vehicle->image) : base_url('public/img/default-vehicle.jpg'); ?>" data-fancybox="gallery" data-caption="Caption for single image">
+        <img class="lazyestload" data-src="<?= $vehicle->image ? base_url('uploads/vehicles/' . $vehicle->image) : base_url('public/img/default-vehicle.jpg'); ?>" src="<?= $vehicle->image ? base_url('uploads/vehicles/' . $vehicle->image) : base_url('public/img/default-vehicle.jpg'); ?>" alt="Image" />
       </a>
     </div>
 
     <div class="single-item">
-      <a class="overlay-dark" href="assets/img/single-listing/reservation/reservation-img-big-02.jpg" data-fancybox="gallery" data-caption="Caption for single image">
-        <img class="lazyestload" data-src="assets/img/single-listing/reservation/reservation-img-02.jpg" src="assets/img/single-listing/reservation/reservation-img-02.jpg" alt="Image" />
+      <a class="overlay-dark" href="<?= $vehicle->image ? base_url('uploads/vehicles/' . $vehicle->image) : base_url('public/img/default-vehicle.jpg'); ?>" data-fancybox="gallery" data-caption="Caption for single image">
+        <img class="lazyestload" data-src="<?= $vehicle->image ? base_url('uploads/vehicles/' . $vehicle->image) : base_url('public/img/default-vehicle.jpg'); ?>" src="<?= $vehicle->image ? base_url('uploads/vehicles/' . $vehicle->image) : base_url('public/img/default-vehicle.jpg'); ?>" alt="Image" />
       </a>
     </div>
 
     <div class="single-item">
-      <a class="overlay-dark" href="assets/img/single-listing/reservation/reservation-img-big-03.jpg" data-fancybox="gallery" data-caption="Caption for single image">
-        <img class="lazyestload" data-src="assets/img/single-listing/reservation/reservation-img-03.jpg" src="assets/img/single-listing/reservation/reservation-img-03.jpg" alt="Image" />
+      <a class="overlay-dark" href="<?= $vehicle->image ? base_url('uploads/vehicles/' . $vehicle->image) : base_url('public/img/default-vehicle.jpg'); ?>" data-fancybox="gallery" data-caption="Caption for single image">
+        <img class="lazyestload" data-src="<?= $vehicle->image ? base_url('uploads/vehicles/' . $vehicle->image) : base_url('public/img/default-vehicle.jpg'); ?>" src="<?= $vehicle->image ? base_url('uploads/vehicles/' . $vehicle->image) : base_url('public/img/default-vehicle.jpg'); ?>" alt="Image" />
       </a>
     </div>
 
     <div class="single-item">
-      <a class="overlay-dark" href="assets/img/single-listing/reservation/reservation-img-big-04.jpg" data-fancybox="gallery" data-caption="Caption for single image">
-        <img class="lazyestload" data-src="assets/img/single-listing/reservation/reservation-img-04.jpg" src="assets/img/single-listing/reservation/reservation-img-04.jpg" alt="Image" />
+      <a class="overlay-dark" href="<?= $vehicle->image ? base_url('uploads/vehicles/' . $vehicle->image) : base_url('public/img/default-vehicle.jpg'); ?>" data-fancybox="gallery" data-caption="Caption for single image">
+        <img class="lazyestload" data-src="<?= $vehicle->image ? base_url('uploads/vehicles/' . $vehicle->image) : base_url('public/img/default-vehicle.jpg'); ?>" src="<?= $vehicle->image ? base_url('uploads/vehicles/' . $vehicle->image) : base_url('public/img/default-vehicle.jpg'); ?>" alt="Image" />
       </a>
     </div>
 
     <div class="single-item">
-      <a class="overlay-dark" href="assets/img/single-listing/reservation/reservation-img-big-05.jpg" data-fancybox="gallery" data-caption="Caption for single image">
-        <img class="lazyestload" data-src="assets/img/single-listing/reservation/reservation-img-05.jpg" src="assets/img/single-listing/reservation/reservation-img-05.jpg" alt="Image" />
+      <a class="overlay-dark" href="<?= $vehicle->image ? base_url('uploads/vehicles/' . $vehicle->image) : base_url('public/img/default-vehicle.jpg'); ?>" data-fancybox="gallery" data-caption="Caption for single image">
+        <img class="lazyestload" data-src="<?= $vehicle->image ? base_url('uploads/vehicles/' . $vehicle->image) : base_url('public/img/default-vehicle.jpg'); ?>" src="<?= $vehicle->image ? base_url('uploads/vehicles/' . $vehicle->image) : base_url('public/img/default-vehicle.jpg'); ?>" alt="Image" />
       </a>
     </div>
 
     <div class="single-item">
-      <a class="overlay-dark" href="assets/img/single-listing/reservation/reservation-img-big-06.jpg" data-fancybox="gallery" data-caption="Caption for single image">
-        <img class="lazyestload" data-src="assets/img/single-listing/reservation/reservation-img-06.jpg" src="assets/img/single-listing/reservation/reservation-img-06.jpg" alt="Image" />
+      <a class="overlay-dark" href="<?= $vehicle->image ? base_url('uploads/vehicles/' . $vehicle->image) : base_url('public/img/default-vehicle.jpg'); ?>" data-fancybox="gallery" data-caption="Caption for single image">
+        <img class="lazyestload" data-src="<?= $vehicle->image ? base_url('uploads/vehicles/' . $vehicle->image) : base_url('public/img/default-vehicle.jpg'); ?>" src="<?= $vehicle->image ? base_url('uploads/vehicles/' . $vehicle->image) : base_url('public/img/default-vehicle.jpg'); ?>" alt="Image" />
       </a>
     </div>
 
     <div class="single-item">
-      <a class="overlay-dark" href="assets/img/single-listing/reservation/reservation-img-big-07.jpg" data-fancybox="gallery" data-caption="Caption for single image">
-        <img class="lazyestload" data-src="assets/img/single-listing/reservation/reservation-img-07.jpg" src="assets/img/single-listing/reservation/reservation-img-07.jpg" alt="Image" />
+      <a class="overlay-dark" href="<?= $vehicle->image ? base_url('uploads/vehicles/' . $vehicle->image) : base_url('public/img/default-vehicle.jpg'); ?>" data-fancybox="gallery" data-caption="Caption for single image">
+        <img class="lazyestload" data-src="<?= $vehicle->image ? base_url('uploads/vehicles/' . $vehicle->image) : base_url('public/img/default-vehicle.jpg'); ?>" src="<?= $vehicle->image ? base_url('uploads/vehicles/' . $vehicle->image) : base_url('public/img/default-vehicle.jpg'); ?>" alt="Image" />
       </a>
     </div>
 
@@ -108,16 +105,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <!-- About -->
         <div class="single-listing-content mb-6">
           <h3 class="fw-normal mb-6">About This Restuarant</h3>
-          <p class="mb-6">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed eiusmod tempor incididunt labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
-
-          <!-- Hours -->
-          <div class="mb-6">
-            <h4 class="fw-normal mb-4">Hours</h4>
-            <p class="mb-1">LUNCH - MONDAY – FRIDAY: 11:30am-3pm</p>
-            <p class="mb-1">ALL DAY MENU - MONDAY – FRIDAY: 3pm-5:30pm</p>
-            <p class="mb-1">DINNER - MONDAY – SUNDAY: 5:30pm-11pm</p>
-            <p class="mb-1">BRUNCH - 10am-3pm</p>
-          </div>
+          <p class="mb-6"><?= $vehicle->description; ?></p>
 
           <!-- Departments at this Store -->
           <div class="mb-6">
@@ -169,362 +157,31 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <hr>
         </div>
 
-        <!-- Added By -->
-        <div>
-          <h3 class="fw-normal mb-6">Added By </h3>
-          <div class="media mb-7">
-            <div class="media-img">
-              <img src="assets/img/user/user-xs-4.jpg" data-src="assets/img/user/user-xs-4.jpg" class="me-3 media-object rounded-circle lazyestload" alt="Image User">
-            </div>
-            <div class="media-body">
-              <h5 class="media-heading">Adam Smith</h5>
-              <div class="d-flex flex-column flex-lg-row align-items-lg-center">
-                <ul class="list-inline d-flex flex-column flex-lg-row mb-0">
-
-                  <li class="list-inline-item">
-                    <i class="fas fa-phone-alt" aria-hidden="true"></i>
-                    <span class="ms-2">+55 654 545 122</span>
-                  </li>
-                  <li class="list-inline-item">
-                    <i class="fa fa-envelope" aria-hidden="true"></i>
-                    <span class="ms-2">example.com</span>
-                  </li>
-
-                </ul>
-
-                <ul class="list-inline list-inline-icon ms-lg-auto">
-                  <li class="list-inline-item">
-                    <a class="me-2" href="javascript:void(0)">
-                      <i class="fab fa-facebook-square" aria-hidden="true"></i>
-                    </a>
-                  </li>
-                  <li class="list-inline-item">
-                    <a class="me-2" href="javascript:void(0)">
-                      <i class="fab fa-twitter" aria-hidden="true"></i>
-                    </a>
-                  </li>
-                  <li class="list-inline-item">
-                    <a class="me-2" href="javascript:void(0)">
-                      <i class="fab fa-instagram" aria-hidden="true"></i>
-                    </a>
-                  </li>
-
-                </ul>
-
-              </div>
-            </div>
-          </div>
-
-          <hr>
-        </div>
-
-        <!-- Reviews -->
-        <div class="mt-6">
-          <h3 class="fw-normal mb-6">Reviews (3)</h3>
-          <div class="media mb-3">
-            <div class="media-img">
-              <img src="assets/img/user/user-xs-1.jpg" data-src="assets/img/user/user-xs-1.jpg" class="me-3 media-object rounded-circle lazyestload" alt="Image User">
-            </div>
-            <div class="media-body">
-              <h5 class="media-heading">Aaren</h5>
-              <ul class="list-inline list-inline-rating">
-                <li class="list-inline-item">
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                </li>
-                <li class="list-inline-item">
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                </li>
-                <li class="list-inline-item">
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                </li>
-                <li class="list-inline-item">
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                </li>
-                <li class="list-inline-item">
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                </li>
-              </ul>
-              <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudan totam rem ape
-                riam,</p>
-
-              <!-- Reply Section -->
-              <div class="reply-wrapper">
-                <a class="d-inline-block mb-2 btn-reply" href="javascript:0">Reply</a>
-                <form class="form-reply my-3">
-                  <textarea class="form-control mb-6" rows="6" placeholder="Enter your comment"></textarea>
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-              </div>
-
-            </div>
-          </div>
-          <div class="media mb-3">
-            <div class="media-img">
-              <img src="assets/img/user/user-xs-2.jpg" data-src="assets/img/user/user-xs-2.jpg" class="me-3 media-object rounded-circle lazyestload" alt="Image User">
-            </div>
-            <div class="media-body">
-              <h5 class="media-heading">Abby</h5>
-              <ul class="list-inline list-inline-rating">
-                <li class="list-inline-item">
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                </li>
-                <li class="list-inline-item">
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                </li>
-                <li class="list-inline-item">
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                </li>
-                <li class="list-inline-item">
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                </li>
-                <li class="list-inline-item">
-                  <i class="far fa-star" aria-hidden="true"></i>
-                </li>
-              </ul>
-              <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque lauda totam rem ape riam,
-              </p>
-
-              <p class="bg-light p-4 rounded">Nam illo asperiores architecto fuga corrupti. Voluptates, assumenda. Repellendus,
-                dicta voluptatum. Voluptatibus eos voluptatum, consequuntur rerum voluptas reiciendis et quo deleniti illum
-                nihil</p>
-            </div>
-          </div>
-          <div class="media mb-3">
-            <div class="media-img">
-              <img src="assets/img/user/user-xs-3.jpg" data-src="assets/img/user/user-xs-3.jpg" class="me-3 media-object rounded-circle lazyestload" alt="Image User">
-            </div>
-            <div class="media-body">
-              <h5 class="media-heading">Abriel</h5>
-              <ul class="list-inline list-inline-rating">
-                <li class="list-inline-item">
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                </li>
-                <li class="list-inline-item">
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                </li>
-                <li class="list-inline-item">
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                </li>
-                <li class="list-inline-item">
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                </li>
-                <li class="list-inline-item">
-                  <i class="far fa-star" aria-hidden="true"></i>
-                </li>
-              </ul>
-              <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudan totam rem ape
-                riam,</p>
-
-              <p class="bg-light p-4 rounded">Nam illo asperiores architecto fuga corrupti. Voluptates, assumenda. Repellendus,
-                dicta
-                voluptatum. Voluptatibus eos voluptatum, consequuntur rerum voluptas reiciendis et quo deleniti illum nihil</p>
-
-            </div>
-          </div>
-
-          <hr>
-        </div>
-
-        <!-- Add Review -->
-        <div class="mb-6 pt-6 mt-n3" id="add-review">
-          <h3 class="fw-normal mb-6"> Add Review </h3>
-          <span class="star add-rating-default ps-0 mb-6"></span>
-          <form>
-            <div class="form-check form-check-inline mb-6 me-lg-7">
-              <input class="form-check-input me-2" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"
-                checked>
-              <label class="form-check-label" for="inlineRadio1">
-                <div class="media media-xs align-items-center">
-                  <img src="assets/img/user/user-xs-3.jpg" data-src="assets/img/user/user-xs-3.jpg" class="me-2 media-object rounded-circle lazyestload" alt="Image User">
-                  <div class="media-body">
-                    <h5 class="media-heading mb-0">William</h5>
-                  </div>
-                </div>
-              </label>
-            </div>
-            <div class="form-check form-check-inline mb-6">
-              <input class="form-check-input me-2" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-              <label class="form-check-label" for="inlineRadio2">
-                <div class="media media-xs align-items-center">
-                  <img src="assets/img/user/avatar-01.png" data-src="assets/img/user/avatar-01.png" class="me-2 media-object rounded-circle border lazyestload" alt="Image User">
-                  <div class="media-body">
-                    <h5 class="media-heading mb-0">Anonymous</h5>
-                  </div>
-                </div>
-              </label>
-            </div>
-            <div class="form-group mb-6">
-              <textarea class="form-control" rows="6" placeholder="Enter Your Comment"></textarea>
-            </div>
-            <div class="form-group">
-              <button type="submit" class="btn btn-primary text-uppercase"> Send Review </button>
-            </div>
-          </form>
-
-        </div>
-
       </div>
 
       <!--======= Sidebar =======-->
       <div class="col-md-5 col-lg-4 ps-xl-8">
-        <!-- Single listing Map -->
-        <div class="map-sidebar border rounded mb-5">
-          <div id="single-listing-map" data-lat="40.805638" data-lag="-73.965384"></div>
-          <div class="px-6 py-5">
-            <ul class="list-unstyled mb-0">
-              <li class="d-flex align-items-start">
-                <i class="fas fa-map-marker-alt me-3 mt-1" aria-hidden="true"></i>
-                <span>2880 Broadway, New York, NY 10025, USA</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-
         <!-- Make Online Reservations -->
         <form class="mb-5" action="#">
-          <h3 class="mb-3 fw-normal">Make Online Reservations</h3>
+          <?php if (!$this->session->userdata('logged_in')): ?>
+            <h3 class="mb-3 fw-normal"><a href="<?= base_url('auth/login'); ?>">Login</a> to be able to book</h3>
+          <?php endif; ?>
 
           <div class="form-group mb-6">
-            <input type="text" class="form-control single-date">
+            The final total price is made up of the surcharge and VAT. See online terms and conditions.
           </div>
 
           <div class="form-group mb-6">
-            <div class="select-bg-transparent select-border w-100">
-              <select class="select-location">
-                <option>Time</option>
-                <option>4.00 pm</option>
-                <option>5.00 pm</option>
-                <option>6.00 pm</option>
-                <option>7.00 pm</option>
-                <option>8.00 pm</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="form-group mb-6">
-            <div class="select-bg-transparent select-border w-100">
-              <select class="select-location">
-                <option>01 People</option>
-                <option>02 People</option>
-                <option>03 People</option>
-                <option>04 People</option>
-                <option>05 People</option>
-                <option>06 People</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="form-group mb-6">
-            <button type="submit" class="btn btn-primary"> Book Now </button>
+            <?php if ($this->session->userdata('logged_in')): ?>
+              <input type="hidden" name="user_id" value="<?= $this->session->userdata('user_id'); ?>">
+              <input type="hidden" name="vehicle_id" value="<?= $vehicle->id; ?>">
+              <button type="submit" class="btn btn-primary"> Book Now </button>
+            <?php else: ?>
+              <a href="<?= base_url('auth/login'); ?>" class="btn btn-primary">Book Now</a>
+            <?php endif; ?>
           </div>
 
         </form>
-
-        <!-- Opening Hours -->
-        <div class="border rounded px-6 py-5 mb-5">
-					<h3 class="mb-4 fw-normal">Opening Hours</h3>
-					<ul class="list-unstyled mb-0">
-						<li class="d-flex justify-content-between mb-3 pb-3 border-bottom">
-							<span>Monday</span>
-							<span>08.00am - 05.00pm</span>
-						</li>
-						<li class="d-flex justify-content-between mb-3 pb-3 border-bottom">
-							<span>Tuesday</span>
-							<span>08.00am - 05.00pm</span>
-						</li>
-						<li class="d-flex justify-content-between mb-3 pb-3 border-bottom">
-							<span>Wednesday</span>
-							<span>08.00am - 05.00pm</span>
-						</li>
-						<li class="d-flex justify-content-between mb-3 pb-3 border-bottom">
-							<span>Thrusday</span>
-							<span>08.00am - 05.00pm</span>
-						</li>
-						<li class="d-flex justify-content-between mb-3 pb-3 border-bottom">
-							<span>Friday</span>
-							<span>08.00am - 05.00pm</span>
-						</li>
-						<li class="d-flex justify-content-between mb-3 pb-3 border-bottom">
-							<span>Saturday</span>
-							<span><a href="#">Closed</a></span>
-						</li>
-						<li class="d-flex justify-content-between mb-3">
-							<span>Sunday</span>
-							<span><a href="#">Closed</a></span>
-						</li>
-					</ul>
-        </div>
-
-        <!-- You may also like  -->
-        <div class="border rounded px-6 pt-5 mb-5">
-          <h3 class="mb-4 fw-normal">You may also like</h3>
-
-          <div class="card rounded-0 card-hover-overlay">
-            <div class="position-relative">
-              <img class="card-img rounded-0 lazyestload" data-src="assets/img/listing/listing-4.jpg" src="assets/img/listing/listing-4.jpg" alt="Card image cap">
-              <div class="card-img-overlay">
-                <ul class="list-inline list-inline-rating">
-                  <li class="list-inline-item">
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                  </li>
-                  <li class="list-inline-item">
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                  </li>
-                  <li class="list-inline-item">
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                  </li>
-                  <li class="list-inline-item">
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                  </li>
-                  <li class="list-inline-item">
-                    <i class="far fa-star" aria-hidden="true"></i>
-                  </li>
-                </ul>
-                <h3>
-                  <a href="listing-reservation.html">
-                    Think Coffee <i class="fa fa-check-circle" aria-hidden="true"></i>
-                  </a>
-                </h3>
-                <p class="text-white">215 Terry Lane, New York</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="card rounded-0 card-hover-overlay">
-            <div class="position-relative">
-              <img class="card-img rounded-0 lazyestload" data-src="assets/img/listing/listing-5.jpg" src="assets/img/listing/listing-5.jpg" alt="Card image cap">
-              <div class="card-img-overlay">
-                <ul class="list-inline list-inline-rating">
-                  <li class="list-inline-item">
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                  </li>
-                  <li class="list-inline-item">
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                  </li>
-                  <li class="list-inline-item">
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                  </li>
-                  <li class="list-inline-item">
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                  </li>
-                  <li class="list-inline-item">
-                    <i class="fa fa-star" aria-hidden="true"></i>
-                  </li>
-                </ul>
-                <h3>
-                  <a href="listing-reservation.html">
-                    Burger House<i class="fa fa-check-circle" aria-hidden="true"></i>
-                  </a>
-                </h3>
-                <p class="text-white">2726 Shinn Street, New York</p>
-              </div>
-            </div>
-
-          </div>
-
-
-
-        </div>
 
       </div>
     </div>

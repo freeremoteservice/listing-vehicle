@@ -110,7 +110,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <a href="<?= base_url(); ?>">Home</a>
               </li>
               <li class="">
-                <a href="<?= base_url('vehicle'); ?>">Listing</a>
+                <a href="<?= base_url('vehicle'); ?>">Vehicle</a>
               </li>
               <li class="">
                 <a href="javascript:0">Pages</a>
