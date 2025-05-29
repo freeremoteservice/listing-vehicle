@@ -61,6 +61,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       </ul>
     </nav>
 
+    <?php if ($this->session->flashdata('success')): ?>
+        <div class="alert alert-success"><?= $this->session->flashdata('success'); ?></div>
+    <?php endif; ?>
+
+    <?php if ($this->session->flashdata('error')): ?>
+        <div class="alert alert-danger"><?= $this->session->flashdata('error'); ?></div>
+    <?php endif; ?>
+
+
     <table id="my-listing" class="display nowrap table-data-default" style="width:100%">
       <thead>
         <tr class="table-row-bg-white">
@@ -84,8 +93,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   </a>
 
                   <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="javascript:void(0)">Edit</a>
-                    <a class="dropdown-item" href="javascript:void(0)">Remove</a>
+                    <a class="dropdown-item" href="<?= site_url('admin/remove_user/' . $user['id']); ?>" onclick="return confirm('Are you sure you want to remove this user?');">Remove</a>
                   </div>
                 </div>
               </td>

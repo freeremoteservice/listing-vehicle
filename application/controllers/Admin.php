@@ -136,4 +136,13 @@ class Admin extends MY_Controller {
         $this->render('admin/users', $data);
     }
 
+    public function remove_user($user_id) {
+        if ($this->User_model->delete_user($user_id)) {
+            $this->session->set_flashdata('success', 'User removed successfully.');
+        } else {
+            $this->session->set_flashdata('error', 'User cannot be removed because there are related orders.');
+        }
+        redirect('admin/users');
+    }    
+
 }

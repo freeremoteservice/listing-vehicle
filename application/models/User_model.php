@@ -22,4 +22,19 @@ class User_model extends CI_Model {
         $this->db->where('username', $username);
         return $this->db->get('users')->row();
     }
+
+    public function delete_user($user_id) {
+        // Check if the user has related orders
+        $this->db->where('user_id', $user_id);
+        $query = $this->db->get('orders');
+        
+        if ($query->num_rows() > 0) {
+            return false; // User cannot be deleted
+        }
+    
+        // Delete the user if no related orders
+        $this->db->where('id', $user_id);
+        return $this->db->delete('users');
+    }
+    
 }
