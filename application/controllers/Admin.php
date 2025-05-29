@@ -17,19 +17,12 @@ class Admin extends MY_Controller {
     }
 
     public function dashboard() {
-        $data['vehicles'] = $this->Vehicle_model->get_all_vehicles();
-        $data['page_level_css'] = [
-            'assets/plugins/DataTables/DataTables-1.10.18/css/jquery.dataTables.min.css',
-            'assets/plugins/DataTables/Responsive-2.2.2/css/responsive.dataTables.min.css'
-        ];
-        $data['page_level_js'] = [
-            'assets/plugins/DataTables/DataTables-1.10.18/js/jquery.dataTables.min.js',
-            'assets/plugins/DataTables/Responsive-2.2.2/js/dataTables.responsive.min.js'
-        ];
+        $data['title'] = "Admin Panel - Dashboard";
         $this->render('admin/dashboard', $data);
     }
 
     public function vehicles() {
+        $data['title'] = "Admin Panel - List Vehicles";
         $data['vehicles'] = $this->Vehicle_model->get_all_vehicles();
         $data['page_level_css'] = [
             'assets/plugins/DataTables/DataTables-1.10.18/css/jquery.dataTables.min.css',
@@ -97,6 +90,7 @@ class Admin extends MY_Controller {
     }
 
     public function orders() {
+        $data['title'] = "Admin Panel - List Orders";
         $this->load->model('Order_model');
         $data['orders'] = $this->Order_model->getAll();
         $this->load->view('admin/orders', $data);
@@ -113,6 +107,7 @@ class Admin extends MY_Controller {
     }
 
     public function users() {
+        $data['title'] = "Admin Panel - List Users";
         $data['users'] = $this->User_model->get_users_by_role('user');
         $data['page_level_css'] = [
             'assets/plugins/DataTables/DataTables-1.10.18/css/jquery.dataTables.min.css',

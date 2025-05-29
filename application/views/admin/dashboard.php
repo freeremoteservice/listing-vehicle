@@ -20,7 +20,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </li>
 
         <li class="nav-item">
-          <a class="nav-link " href="<?= base_url('admin/orders'); ?>">
+          <a class="nav-link" href="<?= base_url('admin/orders'); ?>">
             <i class="fa fa-users" aria-hidden="true"></i> List Orders </a>
         </li>
 
@@ -48,64 +48,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </nav>
 
 
-
-<!-- ====================================
-——— LISTINGS
-===================================== -->
-<section class="bg-light pb-8 pt-5 height100vh">
-  <div class="container">
-    <table id="my-listing" class="display nowrap table-data-default" style="width:100%">
-      <thead>
-        <tr class="table-row-bg-white">
-          <th>Image</th>
-          <th>Type</th>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Price</th>
-          <th>Status</th>
-          <th data-priority="2"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php if (!empty($vehicles)): ?>
-          <?php foreach ($vehicles as $vehicle): ?>
-            <tr class="table-row-bg-white">
-              <td class="td-media">
-                <div class="media media-table">
-                  <a class="media-img" href="listing-reservation.html">
-                    <img class="img-fluid rounded me-2 lazyestload" data-src="<?= !empty($vehicle['image']) ? base_url('uploads/vehicles/' . $vehicle['image']) : base_url('public/img/default-vehicle.jpg'); ?>" src="<?= !empty($vehicle['image']) ? base_url('uploads/vehicles/' . $vehicle['image']) : base_url('public/img/default-vehicle.jpg'); ?>">
-                  </a>
-                </div>
-              </td>
-              <td><?= $vehicle['type']; ?></td>
-              <td><?= $vehicle['name']; ?></td>
-              <td><?= $vehicle['description']; ?></td>
-              <td><?= $vehicle['price']; ?></td>
-              <td>
-                <span class="badge badge-warning px-2 py-1 text-white">Pending</span>
-              </td>
-              <td>
-                <div class="dropdown">
-                  <a class="dropdown-toggle icon-burger-mini" href="javascript:void(0)" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false" data-bs-display="static">
-                  </a>
-
-                  <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="javascript:void(0)">Approve</a>
-                    <a class="dropdown-item" href="javascript:void(0)">Cancel</a>
-                  </div>
-                </div>
-              </td>
-            </tr>
-          <?php endforeach; ?>
-        <?php else: ?>
-          <tr>
-            <td colspan="6">No vehicles available</td>
-          </tr>
-        <?php endif; ?>
-
-      </tbody>
-    </table>
-
-  </div>
+<section style="margin: 200px 0;">
+<h1>This is Dashboard Page...</h1>
 </section>
