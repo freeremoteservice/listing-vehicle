@@ -23,6 +23,11 @@ class Home extends MY_Controller {
         $this->render('terms_of_services', $data);
     }
 
+    public function how_it_works() {
+        $data['title'] = "How it Works";
+        $this->render('how_it_works', $data);
+    }
+
     public function blog() {
         $data['title'] = "Blog";
         $this->render('blog', $data);

@@ -56,4 +56,5 @@ $route['translate_uri_dashes'] = FALSE;
 $route['vehicle/(:num)'] = 'vehicle/details/$1';
 $route['contact_us'] = 'home/contact_us';
 $route['terms_of_services'] = 'home/terms_of_services';
+$route['how_it_works'] = 'home/how_it_works';
 $route['blog'] = 'home/blog';

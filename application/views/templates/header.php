@@ -123,7 +123,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <ul class="dropdown">
                   <li><a href="<?= base_url('contact_us'); ?>">Contact Us</a></li>
                   <li><a href="<?= base_url('terms_of_services'); ?>">Terms and Conditions</a></li>
-                  <li><a href="how-it-works.html">How It Works</a></li>
+                  <li><a href="<?= base_url('how_it_works'); ?>">How It Works</a></li>
                 </ul>
               </li>
               <li class="">
