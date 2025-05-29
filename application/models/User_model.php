@@ -7,6 +7,12 @@ class User_model extends CI_Model {
         return $this->db->insert('users', $data);
     }
 
+    public function get_users_by_role($role) {
+        // Fetch users by role
+        $this->db->where('role', $role);
+        return $this->db->get('users')->result_array();
+    }
+
     public function get_user_by_email($email) {
         $this->db->where('email', $email);
         return $this->db->get('users')->row();

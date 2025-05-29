@@ -134,7 +134,12 @@
   
   
   
-  
+  <!-- Page Level JS -->
+  <?php if (isset($page_level_js) && is_array($page_level_js)): ?>
+    <?php foreach ($page_level_js as $js): ?>
+      <script src="<?= base_url($js); ?>"></script>
+    <?php endforeach; ?>
+  <?php endif; ?>
   
   
   

@@ -5,6 +5,7 @@ class Admin extends MY_Controller {
 
     public function __construct() {
         parent::__construct();
+        $this->load->model('User_model');
         $this->load->model('Vehicle_model');
         $this->load->helper(['form', 'url']);
         $this->load->library(['form_validation']); // Load form validation library
@@ -17,6 +18,14 @@ class Admin extends MY_Controller {
 
     public function dashboard() {
         $data['vehicles'] = $this->Vehicle_model->get_all_vehicles();
+        $data['page_level_css'] = [
+            'assets/plugins/DataTables/DataTables-1.10.18/css/jquery.dataTables.min.css',
+            'assets/plugins/DataTables/Responsive-2.2.2/css/responsive.dataTables.min.css'
+        ];
+        $data['page_level_js'] = [
+            'assets/plugins/DataTables/DataTables-1.10.18/js/jquery.dataTables.min.js',
+            'assets/plugins/DataTables/Responsive-2.2.2/js/dataTables.responsive.min.js'
+        ];
         $this->render('admin/dashboard', $data);
     }
 
@@ -88,6 +97,19 @@ class Admin extends MY_Controller {
     public function reject($id) {
         $this->Order_model->updateStatus($id, 'rejected');
         redirect('admin/orders');
+    }
+
+    public function users() {
+        $data['users'] = $this->User_model->get_users_by_role('user');
+        $data['page_level_css'] = [
+            'assets/plugins/DataTables/DataTables-1.10.18/css/jquery.dataTables.min.css',
+            'assets/plugins/DataTables/Responsive-2.2.2/css/responsive.dataTables.min.css'
+        ];
+        $data['page_level_js'] = [
+            'assets/plugins/DataTables/DataTables-1.10.18/js/jquery.dataTables.min.js',
+            'assets/plugins/DataTables/Responsive-2.2.2/js/dataTables.responsive.min.js'
+        ];
+        $this->render('admin/users', $data);
     }
 
 }

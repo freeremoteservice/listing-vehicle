@@ -25,7 +25,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <link href='<?= base_url("assets/plugins/owl-carousel/assets/owl.theme.default.min.css"); ?>' rel='stylesheet'>
   <link href='<?= base_url("assets/plugins/revolution/css/settings.css"); ?>' rel='stylesheet'>
   
-  
+  <!-- Page Level CSS -->
+  <?php if (isset($page_level_css) && is_array($page_level_css)): ?>
+    <?php foreach ($page_level_css as $css): ?>
+        <link rel="stylesheet" href="<?= base_url($css); ?>">
+    <?php endforeach; ?>
+  <?php endif; ?>
   
   
   
