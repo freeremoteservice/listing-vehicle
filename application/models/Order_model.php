@@ -16,4 +16,9 @@ class Order_model extends CI_Model
         return $query->result(); // Returns an array of objects
     }
 
+    public function update_order_status($order_id, $status) {
+        $this->db->where('id', $order_id);
+        return $this->db->update('orders', ['status' => $status]);
+    }
+
 }

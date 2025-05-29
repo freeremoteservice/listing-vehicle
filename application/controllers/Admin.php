@@ -104,13 +104,21 @@ class Admin extends MY_Controller {
         $this->render('admin/orders', $data);
     }
 
-    public function approve($id) {
-        $this->Order_model->updateStatus($id, 'approved');
+    public function approve_order($order_id) {
+        if ($this->Order_model->update_order_status($order_id, 'approved')) {
+            $this->session->set_flashdata('success', 'Order approved successfully.');
+        } else {
+            $this->session->set_flashdata('error', 'Failed to approve the order.');
+        }
         redirect('admin/orders');
     }
 
-    public function reject($id) {
-        $this->Order_model->updateStatus($id, 'rejected');
+    public function reject_order($order_id) {
+        if ($this->Order_model->update_order_status($order_id, 'rejected')) {
+            $this->session->set_flashdata('success', 'Order rejected successfully.');
+        } else {
+            $this->session->set_flashdata('error', 'Failed to reject the order.');
+        }
         redirect('admin/orders');
     }
 

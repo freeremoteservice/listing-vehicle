@@ -61,6 +61,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       </ul>
     </nav>
 
+    <?php if ($this->session->flashdata('success')): ?>
+        <div class="alert alert-success"><?= $this->session->flashdata('success'); ?></div>
+    <?php endif; ?>
+
+    <?php if ($this->session->flashdata('error')): ?>
+        <div class="alert alert-danger"><?= $this->session->flashdata('error'); ?></div>
+    <?php endif; ?>
+
+
     <table id="my-listing" class="display nowrap table-data-default" style="width:100%">
       <thead>
         <tr class="table-row-bg-white">
@@ -74,8 +83,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </tr>
       </thead>
       <tbody>
-        <?php if (!empty($orders)): ?>
-          <?php foreach ($orders as $order): ?>
+        <?php 
+            if (!empty($orders)):
+            foreach ($orders as $order): 
+                $status_class = '';
+                switch ($order->status) {
+                    case 'approved':
+                        $status_class = "bg-success";
+                        break;
+
+                    case 'rejected':
+                        $status_class = "bg-danger";
+                        break;
+                    
+                    default:
+                        $status_class = "bg-warning";
+                        break;
+            }
+        ?>
             <tr class="table-row-bg-white">
               <td><?= $order->user_name; ?></td>
               <td><?= $order->vehicle_name; ?></td>
@@ -94,7 +119,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </div>
               </td>
               <td>
-                <span class="badge badge-warning px-2 py-1 text-white"><?= $order->status; ?></span>
+                <span class="badge <?= $status_class; ?> px-2 py-1 text-white"><?= $order->status; ?></span>
               </td>
               <td><?= $order->created_at; ?></td>
               <td>
@@ -104,18 +129,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   </a>
 
                   <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="javascript:void(0)">Approve</a>
-                    <a class="dropdown-item" href="javascript:void(0)">Cancel</a>
+                    <a class="dropdown-item" href="<?= site_url('admin/approve_order/' . $order->id); ?>">Approve</a>
+                    <a class="dropdown-item" href="<?= site_url('admin/reject_order/' . $order->id); ?>">Reject</a>
                   </div>
                 </div>
               </td>
             </tr>
-          <?php endforeach; ?>
-        <?php else: ?>
+        <?php 
+            endforeach;
+                else: 
+        ?>
           <tr>
             <td colspan="6">No orders available</td>
           </tr>
-        <?php endif; ?>
+        <?php 
+            endif;
+        ?>
 
       </tbody>
     </table>
