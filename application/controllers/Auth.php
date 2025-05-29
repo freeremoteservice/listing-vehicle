@@ -9,6 +9,8 @@ class Auth extends MY_Controller {
     }
 
 	public function login() {
+        $data['title'] = "Sign In";
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $email = $this->input->post('email');
             $password = $this->input->post('password');
@@ -28,10 +30,12 @@ class Auth extends MY_Controller {
                 $this->session->set_flashdata('error', 'Invalid email or password.');
             }
         }
-        $this->render('auth/login');
+        $this->render('auth/login', $data);
     }
     
     public function register() {
+        $data['title'] = "Sign Up";
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $this->load->library('form_validation');
 
@@ -57,7 +61,7 @@ class Auth extends MY_Controller {
                 }
             }
         }
-        $this->render('auth/register');
+        $this->render('auth/register', $data);
     }
 
     public function logout() {

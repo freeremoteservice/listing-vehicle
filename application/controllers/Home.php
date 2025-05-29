@@ -8,7 +8,8 @@ class Home extends MY_Controller {
             redirect('admin/dashboard'); // Admin's root page
         }
 
+        $data['title'] = "Homepage";
         // Default behavior for guests (not logged in)
-        $this->render('home');
+        $this->render('home', $data);
     }
 }

@@ -8,6 +8,8 @@ class Vehicle extends MY_Controller {
     }
 
     public function index() {
+        $data['title'] = "List Vehicles Page";
+
         $type = $this->input->get('type'); // Get the type from the query string
         $data['types'] = ['car', 'van', 'motorbike', 'caravan', 'tractor']; // Vehicle types
 
