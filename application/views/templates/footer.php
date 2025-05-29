@@ -37,19 +37,19 @@
         </div>
         <ul class="list-unstyled list-gray">
           <li class="mb-3">
-            <a href="index.html">Home</a>
+            <a href="<?= base_url(); ?>">Home</a>
           </li>
           <li class="mb-3">
-            <a href="sign-up.html">Create Account</a>
+            <a href="<?= base_url('auth/register'); ?>">Create Account</a>
           </li>
           <li class="mb-3">
-            <a href="login.html">Login</a>
+            <a href="<?= base_url('auth/login'); ?>">Login</a>
           </li>
           <li class="mb-3">
-            <a href="add-listings.html">Add Listing</a>
+            <a href="<?= base_url('vehicle'); ?>">Vehicle</a>
           </li>
           <li class="mb-3">
-            <a href="edit-listings.html">Edit Listing</a>
+            <a href="<?= base_url('blog'); ?>">Blog</a>
           </li>
         </ul>
       </div>
@@ -60,19 +60,13 @@
         </div>
         <ul class="list-unstyled list-gray">
           <li class="mb-3">
-            <a href="contact-us.html">Contact Us</a>
+            <a href="<?= base_url('contact_us'); ?>">Contact Us</a>
           </li>
           <li class="mb-3">
-            <a href="terms-of-services.html">Terms and Conditions</a>
+            <a href="<?= base_url('terms_of_services'); ?>">Terms and Conditions</a>
           </li>
           <li class="mb-3">
-            <a href="how-it-works.html">How It Works</a>
-          </li>
-          <li class="mb-3">
-            <a href="payment-process.html">Payment</a>
-          </li>
-          <li class="mb-3">
-            <a href="pricing-table.html">Pricing</a>
+            <a href="<?= base_url('how_it_works'); ?>">How It Works</a>
           </li>
         </ul>
       </div>
