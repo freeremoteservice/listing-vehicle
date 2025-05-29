@@ -63,6 +63,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       </ul>
     </nav>
 
+    <?php if ($this->session->flashdata('success')): ?>
+        <div class="alert alert-success"><?= $this->session->flashdata('success'); ?></div>
+    <?php endif; ?>
+
+    <?php if ($this->session->flashdata('error')): ?>
+        <div class="alert alert-danger"><?= $this->session->flashdata('error'); ?></div>
+    <?php endif; ?>
+
     <table id="my-listing" class="display nowrap table-data-default" style="width:100%">
       <thead>
         <tr class="table-row-bg-white">
@@ -71,7 +79,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <th>Name</th>
           <th>Description</th>
           <th>Price</th>
-          <th>Status</th>
           <th data-priority="2"></th>
         </tr>
       </thead>
@@ -91,17 +98,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <td><?= $vehicle['description']; ?></td>
               <td><?= $vehicle['price']; ?></td>
               <td>
-                <span class="badge badge-warning px-2 py-1 text-white">Pending</span>
-              </td>
-              <td>
                 <div class="dropdown">
                   <a class="dropdown-toggle icon-burger-mini" href="javascript:void(0)" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false" data-bs-display="static">
                   </a>
 
                   <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="javascript:void(0)">Edit</a>
-                    <a class="dropdown-item" href="javascript:void(0)">Remove</a>
+                    <!-- <a class="dropdown-item" href="javascript:void(0)">Edit</a> -->
+                    <a class="dropdown-item" href="<?= site_url('admin/remove_vehicle/' . $vehicle['id']); ?>">Remove</a>
                   </div>
                 </div>
               </td>

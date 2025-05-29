@@ -22,6 +22,38 @@ class Admin extends MY_Controller {
         $this->render('admin/dashboard', $data);
     }
 
+    public function orders() {
+        $data['title'] = "Admin Panel - List Orders";
+        $data['orders'] = $this->Order_model->get_all_orders();
+        $data['page_level_css'] = [
+            'assets/plugins/DataTables/DataTables-1.10.18/css/jquery.dataTables.min.css',
+            'assets/plugins/DataTables/Responsive-2.2.2/css/responsive.dataTables.min.css'
+        ];
+        $data['page_level_js'] = [
+            'assets/plugins/DataTables/DataTables-1.10.18/js/jquery.dataTables.min.js',
+            'assets/plugins/DataTables/Responsive-2.2.2/js/dataTables.responsive.min.js'
+        ];
+        $this->render('admin/orders', $data);
+    }
+
+    public function approve_order($order_id) {
+        if ($this->Order_model->update_order_status($order_id, 'approved')) {
+            $this->session->set_flashdata('success', 'Order approved successfully.');
+        } else {
+            $this->session->set_flashdata('error', 'Failed to approve the order.');
+        }
+        redirect('admin/orders');
+    }
+
+    public function reject_order($order_id) {
+        if ($this->Order_model->update_order_status($order_id, 'rejected')) {
+            $this->session->set_flashdata('success', 'Order rejected successfully.');
+        } else {
+            $this->session->set_flashdata('error', 'Failed to reject the order.');
+        }
+        redirect('admin/orders');
+    }
+
     public function vehicles() {
         $data['title'] = "Admin Panel - List Vehicles";
         $data['vehicles'] = $this->Vehicle_model->get_all_vehicles();
@@ -90,36 +122,13 @@ class Admin extends MY_Controller {
         }
     }
 
-    public function orders() {
-        $data['title'] = "Admin Panel - List Orders";
-        $data['orders'] = $this->Order_model->get_all_orders();
-        $data['page_level_css'] = [
-            'assets/plugins/DataTables/DataTables-1.10.18/css/jquery.dataTables.min.css',
-            'assets/plugins/DataTables/Responsive-2.2.2/css/responsive.dataTables.min.css'
-        ];
-        $data['page_level_js'] = [
-            'assets/plugins/DataTables/DataTables-1.10.18/js/jquery.dataTables.min.js',
-            'assets/plugins/DataTables/Responsive-2.2.2/js/dataTables.responsive.min.js'
-        ];
-        $this->render('admin/orders', $data);
-    }
-
-    public function approve_order($order_id) {
-        if ($this->Order_model->update_order_status($order_id, 'approved')) {
-            $this->session->set_flashdata('success', 'Order approved successfully.');
+    public function remove_vehicle($vehicle_id) {
+        if ($this->Vehicle_model->delete_vehicle($vehicle_id)) {
+            $this->session->set_flashdata('success', 'Vehicle removed successfully.');
         } else {
-            $this->session->set_flashdata('error', 'Failed to approve the order.');
+            $this->session->set_flashdata('error', 'Cannot delete vehicle. It has related orders.');
         }
-        redirect('admin/orders');
-    }
-
-    public function reject_order($order_id) {
-        if ($this->Order_model->update_order_status($order_id, 'rejected')) {
-            $this->session->set_flashdata('success', 'Order rejected successfully.');
-        } else {
-            $this->session->set_flashdata('error', 'Failed to reject the order.');
-        }
-        redirect('admin/orders');
+        redirect('admin/vehicles'); // Redirect back to the vehicle list page
     }
 
     public function users() {
