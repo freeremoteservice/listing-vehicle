@@ -53,4 +53,4 @@ $route['default_controller'] = 'home';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['vehicle/(:num)'] = 'vehicle/detail/$1';
+$route['vehicle/(:num)'] = 'vehicle/details/$1';

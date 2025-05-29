@@ -37,7 +37,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
       <div class="col-lg-4 d-lg-flex justify-content-end align-items-end">
         <!-- <a href="#add-review" class="btn btn-primary">Book Now</a> -->
-        <a href="<?= base_url('auth/login'); ?>" class="btn btn-primary">Book Now</a>
+        <a href="#booking-form" class="btn btn-primary">Book Now</a>
       </div>
     </div>
 
@@ -161,8 +161,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
       <!--======= Sidebar =======-->
       <div class="col-md-5 col-lg-4 ps-xl-8">
+        <?php if ($this->session->flashdata('success')): ?>
+          <p class="success" style="color: green;"><?= $this->session->flashdata('success') ?></p>
+        <?php endif; ?>
+
+        <?php if ($this->session->flashdata('error')): ?>
+          <p class="error"><?= $this->session->flashdata('error') ?></p>
+        <?php endif; ?>
+
         <!-- Make Online Reservations -->
-        <form class="mb-5" action="#">
+        <?= form_open_multipart('vehicle/book/' . $vehicle->id, ['id' => 'booking-form', 'class' => 'mb-5', 'method' => 'post']); ?>
           <?php if (!$this->session->userdata('logged_in')): ?>
             <h3 class="mb-3 fw-normal"><a href="<?= base_url('auth/login'); ?>">Login</a> to be able to book</h3>
           <?php endif; ?>
@@ -170,18 +178,38 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <div class="form-group mb-6">
             The final total price is made up of the surcharge and VAT. See online terms and conditions.
           </div>
+          
+          <?php if ($this->session->userdata('logged_in')): ?>
+            <div class="form-group mb-6">
+              <label for="id_front">Upload Front photo of your ID:</label>
+              <div class="form-group position-relative mb-6 form-group-dragable">
+                <input type="file" id="id_front" name="id_front" class="custom-file-input">
+                <label class="custom-file-label mb-0" for="id_front">
+                    Click or Drag images here
+                </label>
+                <span class="error" style="color: red;"><?= form_error('id_front'); ?></span>
+              </div>
+            </div>
 
-          <div class="form-group mb-6">
-            <?php if ($this->session->userdata('logged_in')): ?>
-              <input type="hidden" name="user_id" value="<?= $this->session->userdata('user_id'); ?>">
-              <input type="hidden" name="vehicle_id" value="<?= $vehicle->id; ?>">
-              <button type="submit" class="btn btn-primary"> Book Now </button>
-            <?php else: ?>
-              <a href="<?= base_url('auth/login'); ?>" class="btn btn-primary">Book Now</a>
-            <?php endif; ?>
-          </div>
+            <div class="form-group mb-6">
+              <label for="id_back">Upload Back photo of your ID:</label>
+              <div class="form-group position-relative mb-6 form-group-dragable">
+                <input type="file" id="id_back" name="id_back" class="custom-file-input">
+                <label class="custom-file-label mb-0" for="id_back">
+                    Click or Drag images here
+                </label>
+                <span class="error" style="color: red;"><?= form_error('id_back'); ?></span>
+              </div>
+            </div>
 
-        </form>
+            <div class="form-group mb-6">
+              <button type="submit" class="btn btn-primary"> Book Now asdf </button>
+            </div>
+          <?php else: ?>
+            <a href="<?= base_url('auth/login'); ?>" class="btn btn-primary">Book Now</a>
+          <?php endif; ?>
+
+        <?= form_close() ?>
 
       </div>
     </div>

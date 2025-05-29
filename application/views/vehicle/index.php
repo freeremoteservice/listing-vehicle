@@ -55,7 +55,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         </li>
                                     </ul>
                                     <h3>
-                                        <a href="listing-reservation.html">
+                                        <a href="<?= base_url('vehicle/' . $vehicle['id']); ?>">
                                             <?= $vehicle['name'];?> <i class="fa fa-check-circle" aria-hidden="true"></i>
                                         </a>
                                     </h3>
