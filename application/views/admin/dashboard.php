@@ -48,6 +48,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </nav>
 
 
-<section style="margin: 200px 0;">
-<h1>This is Dashboard Page...</h1>
-</section>
+<div class="container">
+  <section style="margin: 200px 0;">
+    <h1>This is Dashboard Page...</h1>
+  </section>
+</div>

@@ -20,17 +20,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </li>
 
         <li class="nav-item">
-          <a class="nav-link " href="<?= base_url('admin/orders'); ?>">
+          <a class="nav-link active" href="<?= base_url('admin/orders'); ?>">
             <i class="fa fa-users" aria-hidden="true"></i> List Orders </a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link active" href="<?= base_url('admin/vehicles'); ?>">
+          <a class="nav-link" href="<?= base_url('admin/vehicles'); ?>">
             <i class="fa fa-list-ul" aria-hidden="true"></i> List Vehicles </a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link " href="<?= base_url('admin/users'); ?>">
+          <a class="nav-link" href="<?= base_url('admin/users'); ?>">
             <i class="fas fa-user-circle" aria-hidden="true"></i> General Users </a>
         </li>
       </ul>
@@ -47,8 +47,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   </div>
 </nav>
 
-
-
 <!-- ====================================
 ——— LISTINGS
 ===================================== -->
@@ -56,43 +54,49 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <div class="container">
     <!-- Breadcrumb -->
     <nav class="bg-transparent breadcrumb breadcrumb-2 px-0 mb-5" aria-label="breadcrumb">
-      <h2 class="fw-normal mb-4 mb-md-0">All Vehicles</h2>
+      <h2 class="fw-normal mb-4 mb-md-0">All Orders</h2>
       <ul class="list-unstyled d-flex p-0 m-0">
         <li class="breadcrumb-item"><a href="<?= base_url(); ?>">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">All Vehicles</li>
+        <li class="breadcrumb-item active" aria-current="page">All Orders</li>
       </ul>
     </nav>
 
     <table id="my-listing" class="display nowrap table-data-default" style="width:100%">
       <thead>
         <tr class="table-row-bg-white">
-          <th>Image</th>
-          <th>Type</th>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Price</th>
+          <th>User ID</th>
+          <th>Vehicle ID</th>
+          <th>Front of ID</th>
+          <th>Back of ID</th>
           <th>Status</th>
+          <th>Ordered At</th>
           <th data-priority="2"></th>
         </tr>
       </thead>
       <tbody>
-        <?php if (!empty($vehicles)): ?>
-          <?php foreach ($vehicles as $vehicle): ?>
+        <?php if (!empty($orders)): ?>
+          <?php foreach ($orders as $order): ?>
             <tr class="table-row-bg-white">
+              <td><?= $order['user_id']; ?></td>
+              <td><?= $order['vehicle_id']; ?></td>
               <td class="td-media">
                 <div class="media media-table">
                   <a class="media-img" href="listing-reservation.html">
-                    <img class="img-fluid rounded me-2 lazyestload" data-src="<?= !empty($vehicle['image']) ? base_url('uploads/vehicles/' . $vehicle['image']) : base_url('public/img/default-vehicle.jpg'); ?>" src="<?= !empty($vehicle['image']) ? base_url('uploads/vehicles/' . $vehicle['image']) : base_url('public/img/default-vehicle.jpg'); ?>">
+                    <img class="img-fluid rounded me-2 lazyestload" data-src="<?= !empty($order['id_front_image']) ? base_url('uploads/ids/' . $order['id_front_image']) : base_url('public/img/default-id.jpg'); ?>" src="<?= !empty($order['id_front_image']) ? base_url('uploads/ids/' . $order['id_front_image']) : base_url('public/img/default-id.jpg'); ?>">
                   </a>
                 </div>
               </td>
-              <td><?= $vehicle['type']; ?></td>
-              <td><?= $vehicle['name']; ?></td>
-              <td><?= $vehicle['description']; ?></td>
-              <td><?= $vehicle['price']; ?></td>
-              <td>
-                <span class="badge badge-warning px-2 py-1 text-white">Pending</span>
+              <td class="td-media">
+                <div class="media media-table">
+                  <a class="media-img" href="listing-reservation.html">
+                  <img class="img-fluid rounded me-2 lazyestload" data-src="<?= !empty($order['id_back_image']) ? base_url('uploads/ids/' . $order['id_back_image']) : base_url('public/img/default-id.jpg'); ?>" src="<?= !empty($order['id_back_image']) ? base_url('uploads/ids/' . $order['id_back_image']) : base_url('public/img/default-id.jpg'); ?>">
+                  </a>
+                </div>
               </td>
+              <td>
+                <span class="badge badge-warning px-2 py-1 text-white"><?= $order['status']; ?></span>
+              </td>
+              <td><?= $order['created_at']; ?></td>
               <td>
                 <div class="dropdown">
                   <a class="dropdown-toggle icon-burger-mini" href="javascript:void(0)" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
@@ -100,8 +104,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   </a>
 
                   <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="javascript:void(0)">Edit</a>
-                    <a class="dropdown-item" href="javascript:void(0)">Remove</a>
+                    <a class="dropdown-item" href="javascript:void(0)">Approve</a>
+                    <a class="dropdown-item" href="javascript:void(0)">Cancel</a>
                   </div>
                 </div>
               </td>
@@ -109,7 +113,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <?php endforeach; ?>
         <?php else: ?>
           <tr>
-            <td colspan="6">No vehicles available</td>
+            <td colspan="6">No orders available</td>
           </tr>
         <?php endif; ?>
 

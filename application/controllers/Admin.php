@@ -7,6 +7,7 @@ class Admin extends MY_Controller {
         parent::__construct();
         $this->load->model('User_model');
         $this->load->model('Vehicle_model');
+        $this->load->model('Order_model');
         $this->load->helper(['form', 'url']);
         $this->load->library(['form_validation']); // Load form validation library
         $this->load->library('upload'); // Load upload library
@@ -91,9 +92,16 @@ class Admin extends MY_Controller {
 
     public function orders() {
         $data['title'] = "Admin Panel - List Orders";
-        $this->load->model('Order_model');
-        $data['orders'] = $this->Order_model->getAll();
-        $this->load->view('admin/orders', $data);
+        $data['orders'] = $this->Order_model->get_all_orders();
+        $data['page_level_css'] = [
+            'assets/plugins/DataTables/DataTables-1.10.18/css/jquery.dataTables.min.css',
+            'assets/plugins/DataTables/Responsive-2.2.2/css/responsive.dataTables.min.css'
+        ];
+        $data['page_level_js'] = [
+            'assets/plugins/DataTables/DataTables-1.10.18/js/jquery.dataTables.min.js',
+            'assets/plugins/DataTables/Responsive-2.2.2/js/dataTables.responsive.min.js'
+        ];
+        $this->render('admin/orders', $data);
     }
 
     public function approve($id) {
