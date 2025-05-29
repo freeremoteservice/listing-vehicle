@@ -64,8 +64,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <table id="my-listing" class="display nowrap table-data-default" style="width:100%">
       <thead>
         <tr class="table-row-bg-white">
-          <th>User ID</th>
-          <th>Vehicle ID</th>
+          <th>Username</th>
+          <th>Vehicle Name</th>
           <th>Front of ID</th>
           <th>Back of ID</th>
           <th>Status</th>
@@ -77,26 +77,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <?php if (!empty($orders)): ?>
           <?php foreach ($orders as $order): ?>
             <tr class="table-row-bg-white">
-              <td><?= $order['user_id']; ?></td>
-              <td><?= $order['vehicle_id']; ?></td>
+              <td><?= $order->user_name; ?></td>
+              <td><?= $order->vehicle_name; ?></td>
               <td class="td-media">
                 <div class="media media-table">
                   <a class="media-img" href="listing-reservation.html">
-                    <img class="img-fluid rounded me-2 lazyestload" data-src="<?= !empty($order['id_front_image']) ? base_url('uploads/ids/' . $order['id_front_image']) : base_url('public/img/default-id.jpg'); ?>" src="<?= !empty($order['id_front_image']) ? base_url('uploads/ids/' . $order['id_front_image']) : base_url('public/img/default-id.jpg'); ?>">
+                    <img class="img-fluid rounded me-2 lazyestload" data-src="<?= !empty($order->id_front_image) ? base_url('uploads/ids/' . $order->id_front_image) : base_url('public/img/default-id.jpg'); ?>" src="<?= !empty($order->id_front_image) ? base_url('uploads/ids/' . $order->id_front_image) : base_url('public/img/default-id.jpg'); ?>">
                   </a>
                 </div>
               </td>
               <td class="td-media">
                 <div class="media media-table">
                   <a class="media-img" href="listing-reservation.html">
-                  <img class="img-fluid rounded me-2 lazyestload" data-src="<?= !empty($order['id_back_image']) ? base_url('uploads/ids/' . $order['id_back_image']) : base_url('public/img/default-id.jpg'); ?>" src="<?= !empty($order['id_back_image']) ? base_url('uploads/ids/' . $order['id_back_image']) : base_url('public/img/default-id.jpg'); ?>">
+                  <img class="img-fluid rounded me-2 lazyestload" data-src="<?= !empty($order->id_back_image) ? base_url('uploads/ids/' . $order->id_back_image) : base_url('public/img/default-id.jpg'); ?>" src="<?= !empty($order->id_back_image) ? base_url('uploads/ids/' . $order->id_back_image) : base_url('public/img/default-id.jpg'); ?>">
                   </a>
                 </div>
               </td>
               <td>
-                <span class="badge badge-warning px-2 py-1 text-white"><?= $order['status']; ?></span>
+                <span class="badge badge-warning px-2 py-1 text-white"><?= $order->status; ?></span>
               </td>
-              <td><?= $order['created_at']; ?></td>
+              <td><?= $order->created_at; ?></td>
               <td>
                 <div class="dropdown">
                   <a class="dropdown-toggle icon-burger-mini" href="javascript:void(0)" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
