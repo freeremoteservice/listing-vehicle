@@ -18,6 +18,11 @@ class Home extends MY_Controller {
         $this->render('contact_us', $data);
     }
 
+    public function terms_of_services() {
+        $data['title'] = "Terms of Services";
+        $this->render('terms_of_services', $data);
+    }
+
     public function blog() {
         $data['title'] = "Blog";
         $this->render('blog', $data);
