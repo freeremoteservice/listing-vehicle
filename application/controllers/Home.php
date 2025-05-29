@@ -12,4 +12,14 @@ class Home extends MY_Controller {
         // Default behavior for guests (not logged in)
         $this->render('home', $data);
     }
+
+    public function contact_us() {
+        $data['title'] = "Contact Us";
+        $this->render('contact_us', $data);
+    }
+
+    public function blog() {
+        $data['title'] = "Blog";
+        $this->render('blog', $data);
+    }
 }

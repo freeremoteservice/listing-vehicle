@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -63,7 +64,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="container clearfix">
           <div id="menuzord" class="menuzord menuzord-responsive">
 
-            <a href="index.html" class="menuzord-brand">
+            <a href="<?= base_url(); ?>" class="menuzord-brand">
               <svg class="logo-svg" version="1.1" xmlns="http://www.w3.org/2000/svg" width="140" height="44">
                 <path class="fill-primay" d="M0 44V0h139.813v44H0zM137.346 2.467H2.467v39.065h134.879V2.467z" />
                 <path class="fill-primay"
@@ -120,13 +121,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <li class="">
                 <a href="javascript:0">Pages</a>
                 <ul class="dropdown">
-                  <li><a href="contact-us.html">Contact Us</a></li>
+                  <li><a href="<?= base_url('contact_us'); ?>">Contact Us</a></li>
                   <li><a href="terms-of-services.html">Terms and Conditions</a></li>
                   <li><a href="how-it-works.html">How It Works</a></li>
                 </ul>
               </li>
               <li class="">
-                <a href="blog.html">Blog</a>
+                <a href="<?= base_url('blog'); ?>">Blog</a>
               </li>
             </ul>
             <?php endif; ?>
