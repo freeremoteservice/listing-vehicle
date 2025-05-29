@@ -29,6 +29,19 @@ class Admin extends MY_Controller {
         $this->render('admin/dashboard', $data);
     }
 
+    public function vehicles() {
+        $data['vehicles'] = $this->Vehicle_model->get_all_vehicles();
+        $data['page_level_css'] = [
+            'assets/plugins/DataTables/DataTables-1.10.18/css/jquery.dataTables.min.css',
+            'assets/plugins/DataTables/Responsive-2.2.2/css/responsive.dataTables.min.css'
+        ];
+        $data['page_level_js'] = [
+            'assets/plugins/DataTables/DataTables-1.10.18/js/jquery.dataTables.min.js',
+            'assets/plugins/DataTables/Responsive-2.2.2/js/dataTables.responsive.min.js'
+        ];
+        $this->render('admin/vehicles', $data);
+    }
+
     public function add_vehicle() {
         // Set form validation rules
         $this->form_validation->set_rules('type', 'Vehicle Type', 'required');
