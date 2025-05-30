@@ -48,13 +48,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="form-group col-md-6 mb-6">
                         <label class="form-label" for="price">Price:</label>
                         <input type="number" id="price" name="price" class="form-control" value="<?= set_value('price'); ?>">
-                        <?= form_error('price'); ?>
+                        <span style="color: red;"><?= form_error('price'); ?></span>
                     </div>
 
                     <div class="form-group col-md-12 mb-6">
                         <label class="form-label" for="name">Name:</label>
                         <input type="text" id="name" name="name" class="form-control" value="<?= set_value('name'); ?>">
-                        <?= form_error('name'); ?>
+                        <span style="color: red;"><?= form_error('name'); ?></span>
                     </div>
 
                     <div class="form-group col-md-12 mb-6">
@@ -65,10 +65,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="form-group position-relative col-md-12 mb-6 form-group-dragable">
                         <input type="file" id="image" name="image" class="custom-file-input">
                         <label class="custom-file-label mb-0" for="image">
-                            Click or Drag images here
+                            Click or Drag image here
                         </label>
+                        <div id="imagePreview" style="position: absolute; top: 0; left: 0; height: 100%;"></div>
                         <?php if ($this->session->flashdata('error')): ?>
-                            <p style="color: red;"><?= $this->session->flashdata('error'); ?></p>
+                            <span style="color: red;"><?= $this->session->flashdata('error'); ?></span>
                         <?php endif; ?>
                     </div>
                 </div>
@@ -89,3 +90,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   </div>
 </section>
 
+<script>
+    document.getElementById('image').addEventListener('change', function (event) {
+        const files = event.target.files;
+        const previewContainer = document.getElementById('imagePreview');
+        previewContainer.innerHTML = ''; // Clear previous previews
+
+        Array.from(files).forEach(file => {
+            if (file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.style.height = 'calc(100% - 10px)'; // Adjust size
+                    img.style.margin = '5px';
+                    previewContainer.appendChild(img);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    });
+</script>
