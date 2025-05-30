@@ -8,10 +8,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <section class="bg-light py-5 height100vh">
   <div class="container">
     <nav class="bg-transparent breadcrumb breadcrumb-2 px-0 mb-5" aria-label="breadcrumb">
-	    <h2 class="fw-normal mb-4 mb-md-0">Add a New Vehicle</h2>
+	    <h2 class="fw-normal mb-4 mb-md-0">Edit Vehicle</h2>
 	    <ul class="list-unstyled d-flex p-0 m-0">
 	      <li class="breadcrumb-item"><a href="<?= base_url(); ?>">Home</a></li>
-	      <li class="breadcrumb-item active" aria-current="page">Add Vehicle</li>
+	      <li class="breadcrumb-item active" aria-current="page">Edit Vehicle</li>
 	    </ul>
     </nav>
 
@@ -29,17 +29,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <h3 class="h4 mb-4">About</h3>
           <p class="mb-5">We are not responsible for any damages caused by the use of this website, or by posting business listings here. Please use our site at your own discretion and exercise good judgement as well as common sense when advertising business here.</p>
             
-            <?= form_open_multipart('admin/add_vehicle', ['class' => 'vehicle-form', 'method' => 'post']); ?>
+            <?= form_open_multipart('admin/edit_vehicle/' . $vehicle->id, ['class' => 'vehicle-form', 'method' => 'post']); ?>
                 <div class="row">
                     <div class="form-group col-md-6 mb-6">
                         <label class="form-label" for="type">Type</label>
                         <div class="select-default bg-white">
                             <select id="type" name="type" class="select-location">
-                                <option value="car">Car</option>
-                                <option value="van">Van</option>
-                                <option value="motorbike">Motorbike</option>
-                                <option value="caravan">Caravan</option>
-                                <option value="tractor">Tractor</option>
+                                <option value="car" <?= set_select('type', 'car', $vehicle->type === 'car'); ?>>Car</option>
+                                <option value="van" <?= set_select('type', 'van', $vehicle->type === 'van'); ?>>Van</option>
+                                <option value="motorbike" <?= set_select('type', 'van', $vehicle->type === 'motorbike'); ?>>Motorbike</option>
+                                <option value="caravan" <?= set_select('type', 'van', $vehicle->type === 'caravan'); ?>>Caravan</option>
+                                <option value="tractor" <?= set_select('type', 'van', $vehicle->type === 'tractor'); ?>>Tractor</option>
                             </select>
                         </div>
                         <?= form_error('type'); ?>
@@ -47,30 +47,34 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                     <div class="form-group col-md-6 mb-6">
                         <label class="form-label" for="price">Price:</label>
-                        <input type="number" id="price" name="price" class="form-control" value="<?= set_value('price'); ?>">
-                        <span style="color: red;"><?= form_error('price'); ?></span>
+                        <input type="number" id="price" name="price" class="form-control" value="<?= $vehicle->price; ?>">
+                        <?= form_error('price'); ?>
                     </div>
 
                     <div class="form-group col-md-12 mb-6">
                         <label class="form-label" for="name">Name:</label>
-                        <input type="text" id="name" name="name" class="form-control" value="<?= set_value('name'); ?>">
-                        <span style="color: red;"><?= form_error('name'); ?></span>
+                        <input type="text" id="name" name="name" class="form-control" value="<?= $vehicle->name; ?>">
+                        <?= form_error('name'); ?>
                     </div>
 
                     <div class="form-group col-md-12 mb-6">
                         <label class="form-label" for="description">Discribe the vehicle</label>
-                        <textarea id="description" name="description" class="form-control" rows="6"><?= set_value('description'); ?></textarea>
+                        <textarea id="description" name="description" class="form-control" rows="6"><?= $vehicle->description; ?></textarea>
                     </div>
 
                     <div class="col-md-12 mb-6">
                         <div class="form-group position-relative form-group-dragable">
                             <input type="file" id="image" name="image" class="custom-file-input">
                             <label class="custom-file-label mb-0" for="image">
-                                Click or Drag image here
+                                Click or Drag images here
                             </label>
-                            <div id="imagePreview" style="position: absolute; top: 0; left: 0; height: 100%;"></div>
+                            <div id="imagePreview" style="position: absolute; top: 0; left: 0; height: 100%;">
+                                <?php if($vehicle->image): ?>
+                                    <img src="<?= base_url('uploads/vehicles/' . $vehicle->image); ?>" alt="" style="height: calc(100% - 10px); margin: 5px;">
+                                <?php endif; ?>
+                            </div>
                             <?php if ($this->session->flashdata('error')): ?>
-                                <span style="color: red;"><?= $this->session->flashdata('error'); ?></span>
+                                <p style="color: red;"><?= $this->session->flashdata('error'); ?></p>
                             <?php endif; ?>
                         </div>
                     </div>

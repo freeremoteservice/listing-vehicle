@@ -69,6 +69,8 @@ class Admin extends MY_Controller {
     }
 
     public function add_vehicle() {
+        $data['title'] = "Add Vehicle";
+
         // Set form validation rules
         $this->form_validation->set_rules('type', 'Vehicle Type', 'required');
         $this->form_validation->set_rules('name', 'Name', 'required');
@@ -84,7 +86,7 @@ class Admin extends MY_Controller {
 
         if ($this->form_validation->run() == FALSE) {
             // Load the add vehicle view with validation errors
-            $this->render('admin/add_vehicle');
+            $this->render('admin/add_vehicle', $data);
         } else {
             // Handle image upload
             $image = NULL;
@@ -97,7 +99,7 @@ class Admin extends MY_Controller {
                 } else {
                     // Set an error message for image upload
                     $this->session->set_flashdata('error', $this->upload->display_errors());
-                    $this->load->view('admin/add_vehicle');
+                    $this->render('admin/add_vehicle', $data);
                     return;
                 }
             }
@@ -117,9 +119,72 @@ class Admin extends MY_Controller {
                 redirect('admin/add_vehicle');
             } else {
                 $this->session->set_flashdata('error', 'Failed to add vehicle.');
-                $this->render('admin/add_vehicle');
+                $this->render('admin/add_vehicle', $data);
             }
         }
+    }
+
+    public function edit_vehicle($vehicle_id) {
+        $data['title'] = "Edit Vehicle";
+
+        // Set form validation rules
+        $this->form_validation->set_rules('type', 'Vehicle Type', 'required');
+        $this->form_validation->set_rules('name', 'Name', 'required');
+        $this->form_validation->set_rules('price', 'Price', 'required|numeric');
+
+        // File upload configuration
+        $config['upload_path'] = './uploads/vehicles/';
+        $config['allowed_types'] = 'jpg|jpeg|png';
+        $config['max_size'] = 2048; // 2MB
+        $config['encrypt_name'] = TRUE;
+
+        $this->upload->initialize($config);
+
+        if ($this->form_validation->run() == FALSE) {
+            // Load the add vehicle view with validation errors
+            $data['vehicle'] = $this->Vehicle_model->getById($vehicle_id);
+            $this->render('admin/edit_vehicle', $data);
+        } else {
+            // Handle image upload
+            $image = NULL;
+
+            // Attempt to upload the image
+            if (!empty($_FILES['image']['name'])) {
+                if ($this->upload->do_upload('image')) {
+                    $image_data = $this->upload->data();
+                    $image = $image_data['file_name']; // Save the file name
+                } else {
+                    // Set an error message for image upload
+                    $this->session->set_flashdata('error', $this->upload->display_errors());
+                    $data['vehicle'] = $this->Vehicle_model->getById($vehicle_id);
+                    $this->render('admin/edit_vehicle', $data);
+                    return;
+                }
+            }
+
+            // Prepare data for updating
+            $data = [
+                'type' => $this->input->post('type'),
+                'name' => $this->input->post('name'),
+                'description' => $this->input->post('description'),
+                'price' => $this->input->post('price')
+            ];
+
+            if ($image) {
+                $data['image'] = $image;
+            }
+
+            // Update the vehicle
+            if ($this->Vehicle_model->update_vehicle($vehicle_id, $data)) {
+                $this->session->set_flashdata('success', 'Vehicle updated successfully!');
+                redirect('admin/edit_vehicle/' . $vehicle_id);
+            } else {
+                $this->session->set_flashdata('error', 'Failed to update vehicle.');
+                $data['vehicle'] = $this->Vehicle_model->getById($vehicle_id);
+                $this->render('admin/edit_vehicle', $data);
+            }
+        }
+
     }
 
     public function remove_vehicle($vehicle_id) {

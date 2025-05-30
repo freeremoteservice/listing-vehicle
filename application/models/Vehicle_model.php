@@ -27,6 +27,11 @@ class Vehicle_model extends CI_Model
         return $this->db->insert('vehicles', $data);
     }
 
+    public function update_vehicle($id, $data) {
+        $this->db->where('id', $id);
+        return $this->db->update('vehicles', $data);
+    }
+
     public function delete_vehicle($vehicle_id) {
         // Check if there are related orders
         $this->db->where('vehicle_id', $vehicle_id);

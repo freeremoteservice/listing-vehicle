@@ -104,7 +104,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   </a>
 
                   <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
-                    <!-- <a class="dropdown-item" href="javascript:void(0)">Edit</a> -->
+                    <a class="dropdown-item" href="<?= site_url('admin/edit_vehicle/' . $vehicle['id']); ?>">Edit</a>
                     <a class="dropdown-item" href="<?= site_url('admin/remove_vehicle/' . $vehicle['id']); ?>">Remove</a>
                   </div>
                 </div>
