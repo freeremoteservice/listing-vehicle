@@ -3,6 +3,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 /*
 |--------------------------------------------------------------------------
+| Application Constants
+|--------------------------------------------------------------------------
+|
+| If set to TRUE, a backtrace will be displayed along with php errors. If
+| error_reporting is disabled, the backtrace will not display, regardless
+| of this setting
+|
+*/
+define('SITE_URL', 'http://localhost/');
+define('SITE_URL_ALIAS', 'localhost/');
+define('WEBSITE_NAME', 'Listty');
+define('WEBSITE_ADDRESS', 'Hahnesch 2, D-49692 Cappeln, Deutschland');
+define('WEBSITE_ADDRESS_1', 'Hahnesch 2');
+define('WEBSITE_ADDRESS_2', 'D-49692 Cappeln');
+define('WEBSITE_ADDRESS_3', 'Deutschland');
+define('COMPANY_VAT_NUMBER', 'DE288283694');
+define('WEBSITE_PHONE', '[88] 657 524 332');
+define('WEBSITE_EMAIL', 'info@listy.com');
+
+/*
+|--------------------------------------------------------------------------
 | Display Debug backtrace
 |--------------------------------------------------------------------------
 |

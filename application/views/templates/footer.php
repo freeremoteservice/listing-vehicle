@@ -22,11 +22,11 @@
         <ul class="list-unstyled text-white">
           <li class="mb-3">
             <i class="fas fa-phone-alt me-3" aria-hidden="true"></i>
-            <a class="text-white" href="tel:[88] 657 524 332">[88] 657 524 332</a>
+            <a class="text-white" href="tel:<?= WEBSITE_PHONE; ?>"><?= WEBSITE_PHONE; ?></a>
           </li>
           <li class="mb-3">
             <i class="fas fa-envelope me-3" aria-hidden="true"></i>
-            <a class="text-white" href="mailto:info@listy.com">info@listy.com</a>
+            <a class="text-white" href="mailto:<?= WEBSITE_EMAIL; ?>"><?= WEBSITE_EMAIL; ?></a>
           </li>
         </ul>
       </div>
