@@ -170,7 +170,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <?php endif; ?>
 
         <!-- Make Online Reservations -->
-        <?= form_open_multipart('vehicle/book/' . $vehicle->id, ['id' => 'booking-form', 'class' => 'mb-5', 'method' => 'post']); ?>
+        <?= form_open_multipart('vehicle/' . $vehicle->id, ['id' => 'booking-form', 'class' => 'mb-5', 'method' => 'post']); ?>
           <?php if (!$this->session->userdata('logged_in')): ?>
             <h3 class="mb-3 fw-normal"><a href="<?= base_url('auth/login'); ?>">Login</a> to be able to book</h3>
           <?php endif; ?>
@@ -187,8 +187,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <label class="custom-file-label mb-0" for="id_front">
                     Click or Drag images here
                 </label>
-                <span class="error" style="color: red;"><?= form_error('id_front'); ?></span>
+                <div id="FrontOfIDPreview" style="position: absolute; top: 0; left: 0; height: 100%;"></div>
               </div>
+              <span class="error" style="color: red;"><?= form_error('id_front'); ?></span>
             </div>
 
             <div class="form-group mb-6">
@@ -198,8 +199,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <label class="custom-file-label mb-0" for="id_back">
                     Click or Drag images here
                 </label>
-                <span class="error" style="color: red;"><?= form_error('id_back'); ?></span>
+                <div id="BackOfIDPreview" style="position: absolute; top: 0; left: 0; height: 100%;"></div>
               </div>
+              <span class="error" style="color: red;"><?= form_error('id_back'); ?></span>
             </div>
 
             <div class="form-group mb-6">
@@ -215,3 +217,45 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div>
   </div>
 </section>
+
+<script>
+    document.getElementById('id_front').addEventListener('change', function (event) {
+        const files = event.target.files;
+        const previewContainer = document.getElementById('FrontOfIDPreview');
+        previewContainer.innerHTML = ''; // Clear previous previews
+
+        Array.from(files).forEach(file => {
+            if (file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.style.height = 'calc(100% - 10px)'; // Adjust size
+                    img.style.margin = '5px';
+                    previewContainer.appendChild(img);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    });
+
+    document.getElementById('id_back').addEventListener('change', function (event) {
+        const files = event.target.files;
+        const previewContainer = document.getElementById('BackOfIDPreview');
+        previewContainer.innerHTML = ''; // Clear previous previews
+
+        Array.from(files).forEach(file => {
+            if (file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.style.height = 'calc(100% - 10px)'; // Adjust size
+                    img.style.margin = '5px';
+                    previewContainer.appendChild(img);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    });
+</script>
