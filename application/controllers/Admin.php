@@ -37,12 +37,47 @@ class Admin extends MY_Controller {
     }
 
     public function approve_order($order_id) {
-        if ($this->Order_model->update_order_status($order_id, 'approved')) {
-            $this->session->set_flashdata('success', 'Order approved successfully.');
+        // Get order details
+        $order = $this->Order_model->get_order_by_id($order_id);
+
+        if ($order) {
+            if ($this->Order_model->update_order_status($order_id, 'approved')) {
+                $this->session->set_flashdata('success', 'Order approved successfully.');
+    
+                // // Send email notification
+                // $this->send_order_approval_email($order);
+    
+                // // Redirect with success message
+                // $this->session->set_flashdata('success', 'Order approved and email sent.');
+            } else {
+                $this->session->set_flashdata('error', 'Failed to approve the order.');
+            }
         } else {
-            $this->session->set_flashdata('error', 'Failed to approve the order.');
+            $this->session->set_flashdata('error', 'Order not found.');
         }
+
         redirect('admin/orders');
+    }
+
+    private function send_order_approval_email($order) {
+        // Load email library if not already loaded
+        $this->load->library('email');
+    
+        // Set email parameters
+        $this->email->from('contact@rr-insolvenz.de', 'Your Site Name');
+        $this->email->to($order->user_email); // Replace with customer's email
+        $this->email->subject('Order Approved');
+        $this->email->message("
+            <p>Dear {$order->user_name},</p>
+            <p>Your order with ID <strong>#{$order->id}</strong> has been approved!</p>
+            <p>Thank you for shopping with us.</p>
+        ");
+    
+        // Send the email
+        if (!$this->email->send()) {
+            var_dump($this->email->print_debugger());exit;
+            log_message('error', $this->email->print_debugger());
+        }
     }
 
     public function reject_order($order_id) {
