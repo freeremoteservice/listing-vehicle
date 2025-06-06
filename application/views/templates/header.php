@@ -119,15 +119,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <a href="<?= base_url('vehicle'); ?>">Vehicle</a>
               </li>
               <li class="">
+                <a href="<?= base_url('about_us'); ?>">About Us</a>
+              </li>
+              <li class="">
                 <a href="javascript:0">Pages</a>
                 <ul class="dropdown">
                   <li><a href="<?= base_url('contact_us'); ?>">Contact Us</a></li>
                   <li><a href="<?= base_url('terms_of_services'); ?>">Terms and Conditions</a></li>
                   <li><a href="<?= base_url('how_it_works'); ?>">How It Works</a></li>
                 </ul>
-              </li>
-              <li class="">
-                <a href="<?= base_url('blog'); ?>">Blog</a>
               </li>
             </ul>
             <?php endif; ?>

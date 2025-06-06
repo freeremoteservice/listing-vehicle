@@ -13,6 +13,11 @@ class Home extends MY_Controller {
         $this->render('home', $data);
     }
 
+    public function about_us() {
+        $data['title'] = "About Us";
+        $this->render('about_us', $data);
+    }
+
     public function contact_us() {
         $data['title'] = "Contact Us";
         $this->render('contact_us', $data);
@@ -26,10 +31,5 @@ class Home extends MY_Controller {
     public function how_it_works() {
         $data['title'] = "How it Works";
         $this->render('how_it_works', $data);
-    }
-
-    public function blog() {
-        $data['title'] = "Blog";
-        $this->render('blog', $data);
     }
 }
