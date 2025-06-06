@@ -125,8 +125,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <a href="javascript:0">Pages</a>
                 <ul class="dropdown">
                   <li><a href="<?= base_url('contact_us'); ?>">Contact Us</a></li>
-                  <li><a href="<?= base_url('terms_of_services'); ?>">Terms and Conditions</a></li>
-                  <li><a href="<?= base_url('how_it_works'); ?>">How It Works</a></li>
+                  <li><a href="<?= base_url('privacy'); ?>">Privacy policy</a></li>
+                  <li><a href="<?= base_url('terms_and_conditions'); ?>">Terms and Conditions</a></li>
+                  <li><a href="<?= base_url('online_terms_and_conditions'); ?>">Online Terms and Conditions</a></li>
+                  <li><a href="<?= base_url('faq'); ?>">How It Works</a></li>
                 </ul>
               </li>
             </ul>

@@ -23,13 +23,23 @@ class Home extends MY_Controller {
         $this->render('contact_us', $data);
     }
 
-    public function terms_of_services() {
-        $data['title'] = "Terms of Services";
-        $this->render('terms_of_services', $data);
+    public function privacy() {
+        $data['title'] = "Privacy Policy";
+        $this->render('privacy', $data);
     }
 
-    public function how_it_works() {
+    public function terms_and_conditions() {
+        $data['title'] = "Terms and Conditions";
+        $this->render('terms_and_conditions', $data);
+    }
+
+    public function online_terms_and_conditions() {
+        $data['title'] = "Online Terms and Conditions";
+        $this->render('online_terms_and_conditions', $data);
+    }
+
+    public function faq() {
         $data['title'] = "How it Works";
-        $this->render('how_it_works', $data);
+        $this->render('faq', $data);
     }
 }
