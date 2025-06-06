@@ -8,219 +8,72 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <section class="py-7 py-md-10">
   <div class="container">
     <div class="row">
-      <div class="col-md-8">
-        <!-- Default Blog -->
-        <div class="card border-0 bg-transparent">
-          <a href="blog-details.html">
-            <img class="card-img-top rounded lazyestload" data-src="assets/img/blog/blog-1.jpg" src="assets/img/blog/blog-1.jpg" alt="Card image cap">
-          </a>
-          <div class="card-body p-0 pt-5">
-            <div class="meta-post">
-              <date class="meta-date">July 22, 2021</date>
-              <span class="meta-author"> By <a href="javascript:void(0)">Admin</a></span>
-            </div>
-            <h3 class="card-title">
-              <a href="blog-details.html"> Lorem ipsum dolor sit amet </a>
-            </h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed eiusmod tempor incididunt labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident. sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem</p>
+      <div class="col-md-12" style="height: 22rem;">
+        <img class="card-img-top rounded lazyestload" data-src="<?= base_url('assets/img/blog/blog-1.jpg'); ?>" src="<?= base_url('assets/img/blog/blog-1.jpg'); ?>" alt="Card image cap" style="width: 100%;height: 100%; object-fit: cover;">
+      </div>
+    </div>
+    <div class="row py-6">
+      <div class="col-md-12">
+        <h3 style="color: rgba(var(--bs-link-color-rgb));">Fast 50 Jahre Kundenzufriedenheit</h3>
+        <h4 style="color: rgba(var(--bs-link-color-rgb));">Kompetenz und Transparenz schafft Vertrauen</h4>
+      </div>
+      <hr>
+      <div class="col-md-6">
+        <p>Bereits seit dem Jahr 1976 ist die IVG (Industrie-Verwertungs-Gesellschaft) erfolgreich auf dem Gebiet der Be- und Verwertungen von mobilen Wirtschaftsgütern und Gewerbe-Immobilien tätig. Fast 50 Jahre, in denen wir uns als kompetentes und erfahrenes Unternehmen am Markt etabliert haben. Denn bei allem, was wir für unsere Kunden tun, setzen wir auf größtmögliche Transparenz.</p>
+        <p>Und diese Rechnung geht auf: Seit Jahrzehnten schenken uns renommierte Insolvenzverwalter und Leasinggesellschaften, namhafte Kanzleien und Banken, die öffentliche Hand und die freie Wirtschaft ihr Vertrauen. Unseren Erfolg verdanken wir der Zufriedenheit unserer Auftraggeber.</p>
+      </div>
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-4">
+            <img src="https://ivg.auction/images/ueber-uns/hubert-kuepers.jpg" alt="About Us" style="width: 100%;height: 100%; object-fit: cover;">
+          </div>
+          <div class="col-md-8">
+            <p><strong>Hubert Küpers</strong></p>
+            <p>Geschäftsführender Gesellschafter</p>
+            <p>Von der IHK Nordwestfalen öffentlich bestellter und vereidigter Sachverständiger sowie öffentlich bestellter und vereidigter Versteigerer für die Bewertung von Maschinen, technischen Anlagen, Betriebs- und Geschäftsausstattungen sowie Fahrzeuge.</p>
           </div>
         </div>
-        <hr class="mb-8">
+      </div>
+    </div>
 
+    <div class="row">
+      <div class="col-md-12">
+        <h3 style="color: rgba(var(--bs-link-color-rgb));">Abwicklung von A bis Z</h3>
+        <h4 style="color: rgba(var(--bs-link-color-rgb));">Eine schnelle Abwicklung zahlt sich aus</h4>
+      </div>
+      <hr>
+      <div class="col-md-6">
+        <p>Wir bieten Sachverstand und Auktionen aus erster Hand. IVG Geschäftsführer Dipl.-Ing. Hubert Küpers ist vereidigter Sachverständiger und Auktionator in Personal­union. Diese Doppelqualifikation garantiert unseren Auftraggebern nicht nur eine kompetente, sondern auch sehr zügige Abwicklung der Verfahren: Von der Inventarisierung und Bewertung über die Versteigerung bis zur Abrechnung und Auszahlung der Verwertungs­erlöse auf zuverlässig geführten Treuhandkonten.</p>
+      </div>
+      <div class="col-md-6">
+        <p>Das IVG-Team kümmert sich darüber hinaus kompetent um die Verhandlung mit Sicherungs­nehmern, Leasinggesellschaften und Banken – auch bei einer etwaigen Ablösung aus Verträgen mittels einer Vorausfinanzierung seitens der IVG. Und damit alles zügig und ordnungsgemäß abläuft, arbeiten wir selbstverständlich ISO-zertifiziert und nach den VID-Grundsätzen ordnungsgemäßer Insolvenzverwaltung (GOI).</p>
+      </div>
+    </div>
+
+    <div class="row py-6">
+      <div class="col-md-12">
         <!-- Carousel Blog -->
-        <div class="card border-0 bg-transparent">
-
+        <div class="card border-0 bg-transparent" style="max-height: 600px;">
           <div class="owl-carousel blog-carousel nav-light">
             <div class="single-item">
-              <img class="lazyestload" data-src="assets/img/blog/blog-2.jpg" src="assets/img/blog/blog-2.jpg" alt="Image blog">
+              <img class="lazyestload" data-src="<?= base_url('assets/img/blog/blog-2.jpg'); ?>" src="<?= base_url('assets/img/blog/blog-2.jpg'); ?>" alt="Image blog" style="max-height: 400px; object-fit: cover;">
             </div>
             <div class="single-item">
-              <img class="lazyestload" data-src="assets/img/blog/blog-01.jpg" src="assets/img/blog/blog-01.jpg" alt="Image blog">
+              <img class="lazyestload" data-src="<?= base_url('assets/img/blog/blog-01.jpg'); ?>" src="<?= base_url('assets/img/blog/blog-01.jpg'); ?>" alt="Image blog" style="max-height: 400px; object-fit: cover;">
             </div>
-          </div>
-          <div class="card-body p-0 pt-5">
-            <div class="meta-post">
-              <date class="meta-date">July 22, 2021</date>
-              <span class="meta-author"> By <a href="blog-details.html">Admin</a></span>
-            </div>
-            <h3 class="card-title">
-              <a href="blog-details.html"> Lorem ipsum dolor sit amet </a>
-            </h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed eiusmod tempor incididunt labore et dolore magna
-              aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-              sint occaecat cupidatat non proident. sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut
-              perspiciatis unde omnis iste natus error sit voluptatem</p>
           </div>
         </div>
-        <hr class="mb-8">
-
-        <!-- Video Blog -->
-        <div class="card border-0 bg-transparent">
-          <div class="ratio ratio-16x9">
-            <iframe src="https://www.youtube.com/embed/jdMXyXuualc" title="YouTube video" allowfullscreen></iframe>
-          </div>
-          <div class="card-body p-0 pt-5">
-            <div class="meta-post">
-              <date class="meta-date">July 22, 2021</date>
-              <span class="meta-author"> By <a href="javascript:void(0)">Admin</a></span>
-            </div>
-            <h3 class="card-title">
-              <a href="blog-details.html"> Lorem ipsum dolor sit amet </a>
-            </h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed eiusmod tempor incididunt labore et dolore magna
-              aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-              sint occaecat cupidatat non proident. sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut
-              perspiciatis unde omnis iste natus error sit voluptatem</p>
-          </div>
-        </div>
-
-        <hr class="mb-8">
-        <!-- Audio Blog -->
-        <div class="card border-0 bg-transparent">
-          <iframe class="w-100" scrolling="no" frameborder="no"
-            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/273828810&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe>
-          <div class="card-body p-0 pt-5">
-            <div class="meta-post">
-              <date class="meta-date">July 22, 2021</date>
-              <span class="meta-author"> By <a href="javascript:void(0)">Admin</a></span>
-            </div>
-            <h3 class="card-title">
-              <a href="blog-details.html"> Lorem ipsum dolor sit amet </a>
-            </h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed eiusmod tempor incididunt labore et dolore magna
-              aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-              sint occaecat cupidatat non proident. sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut
-              perspiciatis unde omnis iste natus error sit voluptatem</p>
-          </div>
-        </div>
-        <hr class="mb-8">
-
-        <div class="card border-0 bg-transparent">
-          <!-- Without Image Blog -->
-          <div class="card-body p-0">
-            <div class="meta-post">
-              <date class="meta-date">July 22, 2021</date>
-              <span class="meta-author"> By <a href="javascript:void(0)">Admin</a></span>
-            </div>
-            <h3 class="card-title">
-              <a href="blog-details.html"> Lorem ipsum dolor sit amet </a>
-            </h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed eiusmod tempor incididunt labore et dolore magna
-              aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-              sint occaecat cupidatat non proident. sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut
-              perspiciatis unde omnis iste natus error sit voluptatem</p>
-          </div>
-        </div>
-
-        <!-- ====================================
-———	pagination
-===================================== -->
-<section class="my-5">
-  <nav aria-label="Page navigation example">
-    <ul class="pagination">
-      <li class="page-item me-2">
-        <a class="page-link" href="javascript:void(0)">
-          <i class="fa fa-angle-left" aria-hidden="true"></i>
-        </a>
-      </li>
-      <li class="page-item active me-2"><a class="page-link" href="javascript:void(0)">1</a></li>
-      <li class="page-item me-2"><a class="page-link" href="javascript:void(0)">2</a></li>
-      <li class="page-item me-2"><a class="page-link" href="javascript:void(0)">3</a></li>
-      <li class="page-item me-2"><a class="page-link" href="javascript:void(0)">4</a></li>
-      <li class="page-item me-2"><a class="page-link" href="javascript:void(0)">5</a></li>
-      <li class="page-item">
-        <a class="page-link" href="javascript:void(0)">
-          <i class="fa fa-angle-right" aria-hidden="true"></i>
-        </a>
-      </li>
-    </ul>
-  </nav>
-</section>
-
       </div>
+    </div>
 
-      <div class="col-md-4">
-        <!-- Search -->
-        <div class="border rounded p-6 mb-5">
-          <form>
-            <div class="input-group">
-              <input type="text" class="form-control border border-end-0" placeholder="Search..." aria-label="Search..." required>
-              <button type="submit" class="input-group-text bg-transparent border-start-0">
-                <i class="fa fa-search" aria-hidden="true"></i>
-              </button>
-            </div>
-          </form>
-        </div>
-
-        <!-- Categories -->
-        <div class="border rounded p-6 mb-5">
-          <h5 class="fw-normal mb-5">Categories</h5>
-          <ul class="list-unstyled list-gray">
-            <li class="border-bottom pb-3 mb-3">
-              <a class="d-flex justify-content-between" href="blog.html">Real Estate <span>(3)</span></a>
-            </li>
-            <li class="border-bottom pb-3 mb-3">
-              <a class="d-flex justify-content-between" href="blog.html">Automotive <span class="pull-right">(7)</span></a>
-            </li>
-            <li class="border-bottom pb-3 mb-3">
-              <a class="d-flex justify-content-between" href="blog.html">Healthcare <span class="pull-right">(12)</span></a>
-            </li>
-            <li class="border-bottom pb-3 mb-3">
-              <a class="d-flex justify-content-between" href="blog.html">Restaurent <span class="pull-right">(5)</span></a>
-            </li>
-            <li>
-              <a class="d-flex justify-content-between" href="blog.html">Business <span class="pull-right">(9)</span></a>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Recent Posts -->
-        <div class="border rounded p-6 mb-5">
-          <h5 class="fw-normal mb-5">Recent Posts</h5>
-          <ul class="list-unstyled list-gray">
-            <li class="border-bottom pb-3 mb-3">
-              <a class="d-flex" href="blog-details.html">Curabitur scelerisque lacus sit amet.</a>
-            </li>
-            <li class="border-bottom pb-3 mb-3">
-              <a class="d-flex" href="blog-details.html">Morbi pretium ipsum ac massa sollicitu.</a>
-            </li>
-            <li class="border-bottom pb-3 mb-3">
-              <a class="d-flex" href="blog-details.html">Etiam eget augue et lorem sagittis.</a>
-            </li>
-            <li class="border-bottom pb-3 mb-3">
-              <a class="d-flex" href="blog-details.html">Sed mollis tincidunt massa vel egestas.</a>
-            </li>
-            <li>
-              <a class="d-flex" href="blog-details.html">Aliquam semper dolor nec metus alique.</a>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Archives -->
-        <div class="border rounded p-6 mb-5">
-          <h5 class="fw-normal mb-5">Archives</h5>
-          <ul class="list-unstyled list-gray">
-            <li class="border-bottom pb-3 mb-3">
-              <a class="d-flex" href="blog.html">Jan 2021</a>
-            </li>
-            <li class="border-bottom pb-3 mb-3">
-              <a class="d-flex" href="blog.html">Feb 2021</a>
-            </li>
-            <li class="border-bottom pb-3 mb-3">
-              <a class="d-flex" href="blog.html">Mar 2021</a>
-            </li>
-            <li class="border-bottom pb-3 mb-3">
-              <a class="d-flex" href="blog.html">April 2021</a>
-            </li>
-            <li>
-              <a class="d-flex" href="blog.html">May 2021</a>
-            </li>
-          </ul>
-        </div>
+    <div class="row">
+      <div class="col-md-12">
+        <h3 style="color: rgba(var(--bs-link-color-rgb));">Qualität – ist doch Logo</h3>
+        <h4 style="color: rgba(var(--bs-link-color-rgb));">Optimiert & zertifiziert: Qualitätsmanagement auf höchstem Niveau</h4>
+      </div>
+      <hr>
+      <div class="col-md-12">
+        <p>Transparenz schafft Vertrauen. Insbesondere wenn es um die Verwertung von Gütern geht. Und Qualität sorgt für zusätzliche Sicherheit. Seit der Gründung unseres Unternehmens im Jahr 1976 arbeiten wir permanent an der Optimierung unserer Abläufe und Prozesse. Mit Erfolg: Das IVG-Qualitätsmanagement verfügt über die Zertifizierung nach ISO 9001:2015 für den Geltungsbereich „Industrieauktionshaus mit Schwerpunkt der Be- und Verwertung von beweglichen Anlagegütern und Gewerbe-Immobilien“. Ein Ansporn, auch in Zukunft auf höchstem Niveau für Sie tätig zu werden. Seriös, kompetent & erfolgreich.</p>
       </div>
     </div>
   </div>
