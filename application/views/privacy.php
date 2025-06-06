@@ -29,16 +29,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <section class="py-7 py-md-10">
   <div class="container">
     <h2 style="color: rgba(var(--bs-link-color-rgb));">Datenschutzerklärung</h2>
-    <div class="py-6">
+    <h3 style="color: rgba(var(--bs-link-color-rgb));">Datenschutz auf einen Blick</h3>
+    <hr>
+    <div>
         <h3 class="h4">Allgemeine Hinweise</h3>
         <p class="mb-0">
             Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie unsere Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiziert werden können. Ausführliche Informationen zum Thema Datenschutz entnehmen Sie unserer unter diesem Text aufgeführten Datenschutzerklärung.
         </p>
     </div>
-    <hr><br />
+    <br /><br /><br />
 
     <h2 style="color: rgba(var(--bs-link-color-rgb));">Datenerfassung auf unserer Website</h2>
-    <div class="py-6">
+    <hr>
+    <div>
         <h3 class="h4">Wer ist verantwortlich für die Datenerfassung auf dieser Website?</h3>
         <p class="mb-0">
             Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen Kontaktdaten können Sie dem Impressum dieser Website entnehmen.
@@ -52,7 +55,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             Andere Daten werden automatisch beim Besuch der Website durch unsere IT-Systeme erfasst. Das sind vor allem technische Daten (z.B. Internetbrowser, Betriebssystem oder Uhrzeit des Seitenaufrufs). Die Erfassung dieser Daten erfolgt automatisch, sobald Sie unsere Website betreten.
         </p>
     </div>
-    <div class="py-6">
+    <div>
         <h3 class="h4">Wofür nutzen wir Ihre Daten?</h3>
         <p class="mb-0">
             Ein Teil der Daten wird erhoben, um eine fehlerfreie Bereitstellung der Website zu gewährleisten. Andere Daten können zur Analyse Ihres Nutzerverhaltens verwendet werden.
@@ -64,7 +67,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             Sie haben jederzeit das Recht unentgeltlich Auskunft über Herkunft, Empfänger und Zweck Ihrer gespeicherten personenbezogenen Daten zu erhalten. Sie haben außerdem ein Recht, die Berichtigung, Sperrung oder Löschung dieser Daten zu verlangen. Hierzu sowie zu weiteren Fragen zum Thema Datenschutz können Sie sich jederzeit unter der im Impressum angegebenen Adresse an uns wenden. Des Weiteren steht Ihnen ein Beschwerderecht bei der zuständigen Aufsichtsbehörde zu.
         </p>
     </div>
-    <div class="py-6">
+    <div>
         <h3 class="h4">Analyse-Tools und Tools von Drittanbietern</h3>
         <p class="mb-0">
             Beim Besuch unserer Website kann Ihr Surf-Verhalten statistisch ausgewertet werden. Das geschieht vor allem mit Cookies und mit sogenannten Analyseprogrammen. Die Analyse Ihres Surf-Verhaltens erfolgt in der Regel anonym; das Surf-Verhalten kann nicht zu Ihnen zurückverfolgt werden. Sie können dieser Analyse widersprechen oder sie durch die Nichtbenutzung bestimmter Tools verhindern. Detaillierte Informationen dazu finden Sie in der folgenden Datenschutzerklärung.
@@ -72,10 +75,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             Sie können dieser Analyse widersprechen. Über die Widerspruchsmöglichkeiten werden wir Sie in dieser Datenschutzerklärung informieren.
         </p>
     </div>
-    <hr><br />
+    <br /><br /><br />
 
     <h2 style="color: rgba(var(--bs-link-color-rgb));">Allgemeine Hinweise und Pflichtinformationen</h2>
-    <div class="py-6">
+    <hr>
+    <div>
         <h3 class="h4">Datenschutz</h3>
         <p class="mb-0">
             Die Betreiber dieser Seiten nehmen den Schutz Ihrer persönlichen Daten sehr ernst. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend der gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung.
@@ -106,7 +110,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             Verantwortliche Stelle ist die natürliche oder juristische Person, die allein oder gemeinsam mit anderen über die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten (z.B. Namen, E-Mail-Adressen o. Ä.) entscheidet.
         </p>
     </div>
-    <div class="py-6">
+    <div>
         <h3 class="h4">Widerruf Ihrer Einwilligung zur Datenverarbeitung</h3>
         <p class="mb-0">
             Viele Datenverarbeitungsvorgänge sind nur mit Ihrer ausdrücklichen Einwilligung möglich. Sie können eine bereits erteilte Einwilligung jederzeit widerrufen. Dazu reicht eine formlose Mitteilung per E-Mail an uns. Die Rechtmäßigkeit der bis zum Widerruf erfolgten Datenverarbeitung bleibt vom Widerruf unberührt.
@@ -118,7 +122,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             Im Falle datenschutzrechtlicher Verstöße steht dem Betroffenen ein Beschwerderecht bei der zuständigen Aufsichtsbehörde zu. Zuständige Aufsichtsbehörde in datenschutzrechtlichen Fragen ist der Landesdatenschutzbeauftragte des Bundeslandes, in dem unser Unternehmen seinen Sitz hat. Eine Liste der Datenschutzbeauftragten sowie deren Kontaktdaten können folgendem Link entnommen werden: <a href="https://www.bfdi.bund.de/DE/Infothek/Anschriften_Links/anschriften_links-node.html">https://www.bfdi.bund.de/DE/Infothek/Anschriften_Links/anschriften_links-node.html</a>. Die für unser Unternehmen zuständige Aufsichtsbehörde ist: Landesbeauftragte für Datenschutz und Informationsfreiheit NRW, Kavalleriestraße 2-4, 40213 Düsseldorf, Telefon: 0211-38424-0
         </p>
     </div>
-    <div class="py-6">
+    <div>
         <h3 class="h4">Recht auf Datenübertragbarkeit</h3>
         <p class="mb-0">
             Sie haben das Recht, Daten, die wir auf Grundlage Ihrer Einwilligung oder in Erfüllung eines Vertrags automatisiert verarbeiten, an sich oder an einen Dritten in einem gängigen, maschinenlesbaren Format aushändigen zu lassen. Sofern Sie die direkte Übertragung der Daten an einen anderen Verantwortlichen verlangen, erfolgt dies nur, soweit es technisch machbar ist.
@@ -132,7 +136,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             Wenn die SSL- bzw. TLS-Verschlüsselung aktiviert ist, können die Daten, die Sie an uns übermitteln, nicht von Dritten mitgelesen werden.
         </p>
     </div>
-    <div class="py-6">
+    <div>
         <h3 class="h4">Auskunft, Sperrung, Löschung</h3>
         <p class="mb-0">
             Sie haben im Rahmen der geltenden gesetzlichen Bestimmungen jederzeit das Recht auf unentgeltliche Auskunft über Ihre gespeicherten personenbezogenen Daten, deren Herkunft und Empfänger und den Zweck der Datenverarbeitung und ggf. ein Recht auf Berichtigung, Sperrung oder Löschung dieser Daten. Hierzu sowie zu weiteren Fragen zum Thema personenbezogene Daten können Sie sich jederzeit unter der im Impressum angegebenen Adresse an uns wenden.
@@ -144,16 +148,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         Der Nutzung von im Rahmen der Impressumspflicht veröffentlichten Kontaktdaten zur Übersendung von nicht ausdrücklich angeforderter Werbung und Informationsmaterialien wird hiermit widersprochen. Die Betreiber der Seiten behalten sich ausdrücklich rechtliche Schritte im Falle der unverlangten Zusendung von Werbeinformationen, etwa durch Spam-E-Mails, vor.
         </p>
     </div>
-    <div class="py-6">
+    <div>
         <h3 class="h4">Gesetzlich vorgeschriebener Datenschutzbeauftragter</h3>
         <p class="mb-0">
             Das Unternehmen hat einen Datenschutzbeauftragten bestellt, der über die Mailadresse datenschutz@ivg.auction oder über die zuvor genannten Kontaktdaten erreichbar ist. Postalische Nachrichten an den Datenschutzbeauftragten versehen Sie bitte im dem Zusatz „Datenschutz – persönlich / vertraulich“.
         </p>
     </div>
-    <hr><br />
+    <br /><br /><br />
 
     <h2 style="color: rgba(var(--bs-link-color-rgb));">Datenerfassung auf unserer Website</h2>
-    <div class="py-6">
+    <hr>
+    <div>
         <h3 class="h4">Cookies</h3>
         <p class="mb-0">
             Die Internetseiten verwenden teilweise so genannte Cookies. Cookies richten auf Ihrem Rechner keinen Schaden an und enthalten keine Viren. Cookies dienen dazu, unser Angebot nutzerfreundlicher, effektiver und sicherer zu machen. Cookies sind kleine Textdateien, die auf Ihrem Rechner abgelegt werden und die Ihr Browser speichert.
@@ -184,7 +189,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             Grundlage für die Datenerhebung ist Art. 6 Abs. 1 lit. f DSGVO, der die Verarbeitung von Daten zur Erfüllung eines Vertrags oder vorvertraglicher Maßnahmen gestattet.
         </p>
     </div>
-    <div class="py-6">
+    <div>
         <h3 class="h4">Kontaktformular</h3>
         <p class="mb-0">
             Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.
@@ -200,7 +205,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             Zur Absicherung unseres Kontaktformulars gegen unerwünschte Verwendung nutzen wir den Dienst reCaptcha des Unternehmens Google Inc. Dieser Dienst ermöglicht die Unterscheidung, ob die Eingabe durch einen Menschen oder missbräuchlich und automatisiert durch eine Maschine (Spambot) erfolgt. Zu diesem Zweck werden Ihre IP-Adresse und gegebenenfalls weitere von Google Inc. für den Dienst reCaptcha benötigte Daten an Google Inc. übermittelt. Für diese Daten gelten die abweichenden Datenschutzbestimmungen von Google Inc. Diese finden Sie unter: <a href="https://www.google.com/intl/de/policies/privacy/">https://www.google.com/intl/de/policies/privacy/</a>.
         </p>
     </div>
-    <div class="py-6">
+    <div>
         <h3 class="h4">Google Analytics</h3>
         <p class="mb-0">
             Wir verwenden auf unserer Website den Webanalysedienst Google Analytics der Google Inc. (1600 Amphitheatre Parkway, Mountain View, CA 94043, USA; „Google“). Die Datenverarbeitung dient dem Zweck der Analyse dieser Website und ihrer Besucher. Dazu wird Google im Auftrag des Betreibers dieser Website die gewonnenen Informationen benutzen, um Ihre Nutzung der Website auszuwerten, um Reports über die Websiteaktivitäten zusammenzustellen und um weitere, mit der Websitenutzung und der Internetnutzung verbundene Dienstleistungen gegenüber dem Websitebetreiber zu erbringen. Die im Rahmen von Google Analytics von Ihrem Browser übermittelte IP-Adresse wird nicht mit anderen Daten von Google zusammengeführt.
@@ -224,7 +229,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             Mehr Informationen zum Umgang mit Nutzerdaten finden Sie in der Datenschutzerklärung von Google: <a href="https://www.google.de/intl/de/policies/privacy/">https://www.google.de/intl/de/policies/privacy/</a>.
         </p>
     </div>
-    <div class="py-6">
+    <div>
         <h3 class="h4">YouTube</h3>
         <p class="mb-0">
             Unsere Website nutzt Plugins der von Google betriebenen Seite YouTube. Betreiber der Seiten ist die YouTube, LLC, 901 Cherry Ave., San Bruno, CA 94066, USA. Wenn Sie eine unserer mit einem YouTube-Plugin ausgestatteten Seiten besuchen, wird eine Verbindung zu den Servern von YouTube hergestellt. Dabei wird dem Youtube-Server mitgeteilt, welche unserer Seiten Sie besucht haben.
@@ -240,15 +245,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             Für die Kommentarfunktion auf dieser Seite werden neben Ihrem Kommentar auch Angaben zum Zeitpunkt der Erstellung des Kommentars, Ihre E-Mail-Adresse und, wenn Sie nicht anonym posten, der von Ihnen gewählte Nutzername gespeichert.
         </p>
     </div>
-    <div class="py-6">
+    <div>
         <h3 class="h4">Speicherung der IP Adresse</h3>
         <p class="mb-0">
             Unsere Kommentarfunktion speichert die IP-Adressen der Nutzer, die Kommentare verfassen. Obwohl wir Kommentare auf unserer Seite vor der Freischaltung prüfen, benötigen wir diese Daten, um im Falle von Rechtsverletzungen wie Beleidigungen oder Propaganda gegen den Verfasser vorgehen zu können.
         </p>
     </div>
-    <hr><br />
+    <br /><br /><br />
 
-    <div class="py-6">
+    <hr>
+    <div>
         <h3 class="h4">Datenschutzerklärung für soziale Netzwerke</h3>
         <p class="mb-0">
             Informationen zum Verantwortlichen finden Sie im Impressum des jeweiligen Dienstes sowie auf unserer Homepage. Im Impressum der von uns genutzten sozialen Netzwerke finden Sie auch Angaben zu einem Datenschutzbeauftragten, sofern eine Bestellpflicht für einen Datenschutzbeauftragten vorliegt.
@@ -268,7 +274,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             Unsere Social-Media-Auftritte sollen eine möglichst umfassende Präsenz im Internet gewährleisten. Hierbei handelt es sich um ein berechtigtes Interesse im Sinne von Art. 6 Abs. 1 lit. f DSGVO. Die von den sozialen Netzwerken initiierten Analyseprozesse beruhen ggf. auf abweichenden Rechtsgrundlagen, die von den Betreibern der sozialen Netzwerke anzugeben sind (z.B. Einwilligung im Sinne des Art. 6 Abs. 1 lit. a DSGVO).
         </p>
     </div>
-    <div class="py-6">
+    <div>
         <h3 class="h4">Verantwortlicher und Geltendmachung von Rechten</h3>
         <p class="mb-0">
             Wenn Sie einen unserer Social-Media-Auftritte (z.B. Facebook) besuchen, sind wir gemeinsam mit dem Betreiber der Social-Media-Plattform für die bei diesem Besuch ausgelösten Datenverarbeitungsvorgänge verantwortlich. Sie können Ihre Rechte (Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Beschwerde) grundsätzlich sowohl ggü. uns als auch ggü. dem Betreiber des jeweiligen Social-Media-Portals (z.B. ggü. Facebook) geltend machen.
@@ -284,7 +290,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             Auf die Speicherdauer Ihrer Daten, die von den Betreibern der sozialen Netzwerke zu eigenen Zwecken gespeichert werden, haben wir keinen Einfluss. Für Einzelheiten dazu informieren Sie sich bitte direkt bei den Betreibern der sozialen Netzwerke (z.B. in deren Datenschutzerklärung, siehe unten).
         </p>
     </div>
-    <div class="py-6">
+    <div>
         <h3 class="h4">Soziale Netzwerke im Einzelnen</h3>
         <p class="mb-0">
             <strong>Facebook</strong>

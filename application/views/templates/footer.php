@@ -69,10 +69,10 @@
             <a href="<?= base_url('privacy'); ?>">Privacy Policy</a>
           </li>
           <li class="mb-3">
-            <a href="<?= base_url('terms_and_conditions'); ?>">Terms and Conditions</a>
+            <a href="<?= base_url('tos'); ?>">Terms and Conditions</a>
           </li>
           <li class="mb-3">
-            <a href="<?= base_url('online_terms_and_conditions'); ?>">Online Terms and Conditions</a>
+            <a href="<?= base_url('online_tos'); ?>">Online Terms and Conditions</a>
           </li>
           <li class="mb-3">
             <a href="<?= base_url('faq'); ?>">How It Works</a>

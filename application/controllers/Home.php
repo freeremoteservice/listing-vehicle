@@ -28,14 +28,14 @@ class Home extends MY_Controller {
         $this->render('privacy', $data);
     }
 
-    public function terms_and_conditions() {
+    public function tos() {
         $data['title'] = "Terms and Conditions";
-        $this->render('terms_and_conditions', $data);
+        $this->render('tos', $data);
     }
 
-    public function online_terms_and_conditions() {
+    public function online_tos() {
         $data['title'] = "Online Terms and Conditions";
-        $this->render('online_terms_and_conditions', $data);
+        $this->render('online_tos', $data);
     }
 
     public function faq() {
