@@ -5,10 +5,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <!-- ====================================
 ———	CATEGORY GRID FULL
 ===================================== -->
-<section class="py-7 py-md-10">
+<section class="py-7">
 	<div class="container">
 		<!-- Search Result Bar -->
-        <div class="search-result-bar">
+        <div class="search-result-bar mb-0">
 			<div class="col-md-7">
 				<p>We found <span> <?= count($vehicles); ?> </span> results.</p>
 			</div>
@@ -29,58 +29,39 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			</div>
         </div>
 
-		<div class="row">
-            <?php if (!empty($vehicles)): ?>
-                <?php foreach ($vehicles as $index => $vehicle): ?>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card rounded-0 card-hover-overlay">
-                            <div class="position-relative">
-                                <img class="card-img rounded-0 lazyestload" data-src="<?= $vehicle['image'] ? base_url('uploads/vehicles/' . $vehicle['image']) : 'public/img/default-vehicle.jpg'; ?>" src="<?= $vehicle['image'] ? base_url('uploads/vehicles/' . $vehicle['image']) : 'public/img/default-vehicle.jpg'; ?>" alt="Card image cap">
-                                <div class="card-img-overlay">
-                                    <ul class="list-inline list-inline-rating">
-                                        <li class="list-inline-item">
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        </li>
-                                        <li class="list-inline-item">
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        </li>
-                                        <li class="list-inline-item">
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        </li>
-                                        <li class="list-inline-item">
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        </li>
-                                        <li class="list-inline-item">
-                                        <i class="far fa-star" aria-hidden="true"></i>
-                                        </li>
-                                    </ul>
-                                    <h3>
+        <?php if (!empty($vehicles)): ?>
+            <?php foreach ($vehicles as $index => $vehicle): ?>
+                <div class="card card-list">
+                    <div class="row">
+                        <div class="col-md-4 col-xl-3">
+                            <div class="card-list-img">
+                                <img class="lazyestload" data-src="<?= $vehicle['image'] ? base_url('uploads/vehicles/' . $vehicle['image']) : 'public/img/default-vehicle.jpg'; ?>" src="<?= $vehicle['image'] ? base_url('uploads/vehicles/' . $vehicle['image']) : 'public/img/default-vehicle.jpg'; ?>">
+                                <span class="badge badge-primary">Verified</span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-8 col-xl-9">
+                            <div class="card-body p-0">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <h3 class="card-title mb-0">
                                         <a href="<?= base_url('vehicle/' . $vehicle['id']); ?>">
-                                            <?= $vehicle['name'];?> <i class="fa fa-check-circle" aria-hidden="true"></i>
+                                            <?= $vehicle['name'];?>
                                         </a>
                                     </h3>
-                                    <p class="text-white"><?= $vehicle['description']; ?></p>
                                 </div>
                             </div>
 
-                            <div class="card-footer bg-transparent">
-                                <ul class="list-unstyled d-flex mb-0 py-2">
-                                    <li>
-                                        <button class="btn-like px-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Favourite this listing">
-                                        <i class="fas fa-euro-sign text-primary" aria-hidden="true"></i>
-                                        <span><?= $vehicle['price']; ?></span>
-                                        </button>
-                                    </li>
-                                    <li class="ms-auto">
-                                        <a class="px-2" href="<?= base_url('vehicle/details/' . $vehicle['id']); ?>">View details</a>
-                                    </li>
-                                </ul>
+                            <i class="fas fa-euro-sign text-primary" aria-hidden="true"></i>
+                            <span><?= $vehicle['price']; ?></span>
+                            <p class="mb-4"><?= $vehicle['description']; ?></p>
+                            <div>
+                                <a class="px-2" href="<?= base_url('vehicle/details/' . $vehicle['id']); ?>">View details</a>
                             </div>
                         </div>
                     </div>
-                <?php endforeach; ?>
-            <?php endif; ?>
-        </div>
+                </div>
+            <?php endforeach; ?>
+        <?php endif; ?>
     </div>
 </section>
 
