@@ -40,67 +40,146 @@ class Auth extends MY_Controller {
             $this->load->library('form_validation');
 
             // Validation rules
-            $this->form_validation->set_rules('company_name', 'Company Name', 'required');
-            if ($this->input->post('invoice_email')) {
-                $this->form_validation->set_rules('invoice_email', 'Invoice Email', 'valid_email|is_unique[users.invoice_email]', [
-                    'valid_email' => 'Please enter a valid %s.',
-                    'is_unique' => 'This %s is already registered.'
-                ]);
-            }
-            $this->form_validation->set_rules('company_street', 'Street', 'required');
-            $this->form_validation->set_rules('company_postal_code', 'Postal Code', 'required');
-            $this->form_validation->set_rules('company_city', 'City', 'required');
-            $this->form_validation->set_rules('company_country', 'Country', 'required');
-            $this->form_validation->set_rules('company_phone', 'Phone', 'required');
-            $this->form_validation->set_rules('company_mobile', 'Mobile', 'required');
-            $this->form_validation->set_rules('user_name', 'Username', 'required|is_unique[users.username]');
-            $this->form_validation->set_rules('user_email', 'Email', 'required|valid_email|is_unique[users.email]', [
+            // if ($this->input->post('invoice_email')) {
+            //     $this->form_validation->set_rules('invoice_email', 'Invoice Email', 'valid_email|is_unique[users.invoice_email]', [
+            //         'valid_email' => 'Please enter a valid %s.',
+            //         'is_unique' => 'This %s is already registered.'
+            //     ]);
+            // }
+            $this->form_validation->set_rules('username', 'Username', 'required|is_unique[users.username]');
+            $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[users.email]', [
                 'required' => 'The %s field is required.',
                 'valid_email' => 'Please enter a valid %s.',
                 'is_unique' => 'This %s is already registered.'
             ]);
             $this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
             $this->form_validation->set_rules('password_confirm', 'Confirm Password', 'required|matches[password]');
-            $this->form_validation->set_rules('user_salutation', 'Salutation', 'required'); // Mr. Mrs. Ms. Dr. Prof.
-            $this->form_validation->set_rules('user_first_name', 'First Name', 'required');
-            $this->form_validation->set_rules('user_last_name', 'Last Name', 'required');
-            $this->form_validation->set_rules('user_street', 'Street', 'required');
-            $this->form_validation->set_rules('user_postal_code', 'Postal Code', 'required');
-            $this->form_validation->set_rules('user_city', 'City', 'required');
-            $this->form_validation->set_rules('user_country', 'Country', 'required');
-            $this->form_validation->set_rules('user_mobile', 'Mobile', 'required');
-            $this->form_validation->set_rules('user_birthdate', 'Birthdate', 'required');
+            $this->form_validation->set_rules('first_name', 'First Name', 'required');
+            $this->form_validation->set_rules('last_name', 'Last Name', 'required');
+            $this->form_validation->set_rules('street', 'Street', 'required');
+            $this->form_validation->set_rules('postal_code', 'Postal Code', 'required');
+            $this->form_validation->set_rules('city', 'City', 'required');
+            $this->form_validation->set_rules('country', 'Country', 'required');
+            $this->form_validation->set_rules('phone', 'Phone', 'required');
+            $this->form_validation->set_rules('birthdate', 'Birthdate', 'required');
+            $this->form_validation->set_rules('user_type', 'User Type', 'required');
+            if ($this->input->post('user_type') == 'private') {
+                $this->form_validation->set_rules('id_front_img', 'ID Front Image', 'required');
+                $this->form_validation->set_rules('id_back_img', 'ID Back Image', 'required');
+            }
+            if ($this->input->post('user_type') == 'company') {
+                $this->form_validation->set_rules('user_photo', 'User Photo', 'required');
+                $this->form_validation->set_rules('company_document', 'Company Document', 'required');
+            }
+
+            // File upload configuration
+            $config['upload_path'] = './uploads/users/';
+            $config['allowed_types'] = 'jpg|jpeg|png';
+            $config['max_size'] = 2048; // 2MB
+            $config['encrypt_name'] = TRUE;
+
+            $this->upload->initialize($config);
 
             if ($this->form_validation->run() === TRUE) {
+                $user_type = $this->input->post('user_type');
+
                 $data = [
-                    'company_name' => $this->input->post('company_name'),
-                    'invoice_email' => $this->input->post('invoice_email'),
-                    'company_street' => $this->input->post('company_street'),
-                    'company_address_suffix' => $this->input->post('company_address_suffix'),
-                    'company_postal_code' => $this->input->post('company_postal_code'),
-                    'company_city' => $this->input->post('company_city'),
-                    'company_country' => $this->input->post('company_country'),
-                    'company_phone' => $this->input->post('company_phone'),
-                    'company_mobile' => $this->input->post('company_mobile'),
-                    'company_website' => $this->input->post('company_website'),
-                    'vat' => $this->input->post('vat'),
-                    'username' => $this->input->post('user_name'),
-                    'email'    => $this->input->post('user_email'),
+                    'username' => $this->input->post('username'),
+                    'email'    => $this->input->post('email'),
                     'password' => password_hash($this->input->post('password'), PASSWORD_BCRYPT),
-                    'user_salutation' => $this->input->post('user_salutation'),
-                    'user_title' => $this->input->post('user_title'),
-                    'user_first_name' => $this->input->post('user_first_name'),
-                    'user_last_name' => $this->input->post('user_last_name'),
-                    'user_street' => $this->input->post('user_street'),
-                    'user_postal_code' => $this->input->post('user_postal_code'),
-                    'user_city' => $this->input->post('user_city'),
-                    'user_country' => $this->input->post('user_country'),
-                    'user_mobile' => $this->input->post('user_mobile'),
-                    'user_birthdate' => $this->input->post('user_birthdate'),
-                    'newsletter' => $this->input->post('newsletter_checkbox'),
-                    'role' => 'user' // Default to 'user'
+                    'first_name' => $this->input->post('first_name'),
+                    'last_name' => $this->input->post('last_name'),
+                    'street' => $this->input->post('street'),
+                    'postal_code' => $this->input->post('postal_code'),
+                    'city' => $this->input->post('city'),
+                    'country' => $this->input->post('country'),
+                    'phone' => $this->input->post('phone'),
+                    'birthdate' => $this->input->post('birthdate'),
+                    'role' => $user_type, // default to private user
                 ];
 
+                if ($user_type == 'private') {
+                    // Handle image upload
+                    $id_front_img = NULL;
+
+                    // Attempt to upload the image
+                    if (!empty($_FILES['id_front_img']['name'])) {
+                        if ($this->upload->do_upload('id_front_img')) {
+                            $image_data = $this->upload->data();
+                            $id_front_img = $image_data['file_name']; // Save the file name
+                        } else {
+                            // Set an error message for image upload
+                            $this->session->set_flashdata('error', $this->upload->display_errors());
+                            $this->render('auth/register', $data);
+                            return;
+                        }
+                    }
+
+                    // Handle image upload
+                    $id_back_img = NULL;
+
+                    // Attempt to upload the image
+                    if (!empty($_FILES['id_back_img']['name'])) {
+                        if ($this->upload->do_upload('id_back_img')) {
+                            $image_data = $this->upload->data();
+                            $id_back_img = $image_data['file_name']; // Save the file name
+                        } else {
+                            // Set an error message for image upload
+                            $this->session->set_flashdata('error', $this->upload->display_errors());
+                            $this->render('auth/register', $data);
+                            return;
+                        }
+                    }
+
+                    $data['id_front_img'] = $id_front_img;
+                    $data['id_back_img'] = $id_back_img;
+
+                    var_dump('test 1');
+                    var_dump($_FILES);
+                    var_dump($id_back_img);exit;
+                }
+
+                if ($user_type == 'company') {
+                    // Handle image upload
+                    $user_photo = NULL;
+
+                    // Attempt to upload the image
+                    if (!empty($_FILES['user_photo']['name'])) {
+                        if ($this->upload->do_upload('user_photo')) {
+                            $image_data = $this->upload->data();
+                            $user_photo = $image_data['file_name']; // Save the file name
+                        } else {
+                            // Set an error message for image upload
+                            $this->session->set_flashdata('error', $this->upload->display_errors());
+                            $this->render('auth/register', $data);
+                            return;
+                        }
+                    }
+
+                    // Handle image upload
+                    $company_document = NULL;
+
+                    // Attempt to upload the image
+                    if (!empty($_FILES['company_document']['name'])) {
+                        if ($this->upload->do_upload('company_document')) {
+                            $image_data = $this->upload->data();
+                            $company_document = $image_data['file_name']; // Save the file name
+                        } else {
+                            // Set an error message for image upload
+                            $this->session->set_flashdata('error', $this->upload->display_errors());
+                            $this->render('auth/register', $data);
+                            return;
+                        }
+                    }
+
+                    $data['photo_img'] = $user_photo;
+                    $data['company_doc_file'] = $company_document;
+                    var_dump('test 2');
+                    var_dump($user_photo);
+                    var_dump($company_document);exit;
+                }
+
+                var_dump($data);exit;
 
                 if ($this->User_model->register($data)) {
                     $this->session->set_flashdata('success', 'Registration successful. Please log in.');
@@ -112,6 +191,7 @@ class Auth extends MY_Controller {
                 var_dump($this->form_validation->error_array());exit;
             }
         }
+
         $this->render('auth/register', $data);
     }
 
