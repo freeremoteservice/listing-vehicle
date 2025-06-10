@@ -189,9 +189,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script>
-  document.getElementById('id_front_img').addEventListener('change', function (event) {
+  document.getElementById('id_back_img').addEventListener('change', function (event) {
     const files = event.target.files;
-    const previewContainer = document.getElementById('id_front_img_preview');
+    const previewContainer = document.getElementById('id_back_img_preview');
     previewContainer.innerHTML = ''; // Clear previous previews
 
     Array.from(files).forEach(file => {
@@ -209,9 +209,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     });
   });
 
-  document.getElementById('id_back_img').addEventListener('change', function (event) {
+  document.getElementById('id_front_img').addEventListener('change', function (event) {
     const files = event.target.files;
-    const previewContainer = document.getElementById('id_back_img_preview');
+    const previewContainer = document.getElementById('id_front_img_preview');
     previewContainer.innerHTML = ''; // Clear previous previews
 
     Array.from(files).forEach(file => {
