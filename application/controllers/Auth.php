@@ -6,7 +6,7 @@ class Auth extends MY_Controller {
         parent::__construct();
         $this->load->model('User_model');
         $this->load->helper('form');
-        $this->load->library('upload'); // Load upload library
+        $this->load->library('upload');
     }
 
 	public function login() {
@@ -43,7 +43,7 @@ class Auth extends MY_Controller {
         $config['allowed_types'] = 'jpg|jpeg|png';
         $config['max_size'] = 2048; // 2MB
         $config['encrypt_name'] = TRUE;
-        
+
         $this->upload->initialize($config);
     
         if (!empty($_FILES[$field_name]['name'])) {
