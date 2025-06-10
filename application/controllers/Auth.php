@@ -6,6 +6,7 @@ class Auth extends MY_Controller {
         parent::__construct();
         $this->load->model('User_model');
         $this->load->helper('form');
+        $this->load->library('upload');
     }
 
 	public function login() {
@@ -37,31 +38,36 @@ class Auth extends MY_Controller {
         if (!is_dir($upload_path)) {
             mkdir($upload_path, 0777, true);
         }
-    
+
         $config['upload_path'] = $upload_path;
         $config['allowed_types'] = 'jpg|jpeg|png';
         $config['max_size'] = 2048; // 2MB
         $config['encrypt_name'] = TRUE;
-    
-        $this->load->library('upload', $config);
+
+        $this->upload->initialize($config);
     
         if (!empty($_FILES[$field_name]['name'])) {
-            if ($this->upload->do_upload($field_name)) {
-                return $this->upload->data('file_name');
-            } else {
-                $this->session->set_flashdata('error', $this->upload->display_errors());
+            if (!$this->upload->do_upload($field_name)) {
+                $error = $this->upload->display_errors();
+                log_message('error', 'Upload Error for ' . $field_name . ': ' . $error);
+                $this->session->set_flashdata('error', $error);
                 return false;
+            } else {
+                return $this->upload->data('file_name');
             }
+        } else {
+            log_message('error', 'No file selected for ' . $field_name);
         }
         return null; // No file uploaded
     }
 
-    public function file_required($file) {
-        if (empty($_FILES[$file]['name'])) {
-            $this->form_validation->set_message('file_required', 'The {field} field is required.');
-            return false;
+    public function file_required($dummy, $field_name) {
+        if (isset($_FILES[$field_name]) && $_FILES[$field_name]['error'] === 0) {
+            return true;
         }
-        return true;
+
+        $this->form_validation->set_message('file_required', 'The {field} field is required.');
+        return false;
     }
     
     public function register() {
