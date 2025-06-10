@@ -32,6 +32,37 @@ class Auth extends MY_Controller {
         }
         $this->render('auth/login', $data);
     }
+
+    public function upload_file($field_name, $upload_path) {
+        if (!is_dir($upload_path)) {
+            mkdir($upload_path, 0777, true);
+        }
+    
+        $config['upload_path'] = $upload_path;
+        $config['allowed_types'] = 'jpg|jpeg|png';
+        $config['max_size'] = 2048; // 2MB
+        $config['encrypt_name'] = TRUE;
+    
+        $this->load->library('upload', $config);
+    
+        if (!empty($_FILES[$field_name]['name'])) {
+            if ($this->upload->do_upload($field_name)) {
+                return $this->upload->data('file_name');
+            } else {
+                $this->session->set_flashdata('error', $this->upload->display_errors());
+                return false;
+            }
+        }
+        return null; // No file uploaded
+    }
+
+    public function file_required($file) {
+        if (empty($_FILES[$file]['name'])) {
+            $this->form_validation->set_message('file_required', 'The {field} field is required.');
+            return false;
+        }
+        return true;
+    }
     
     public function register() {
         $data['title'] = "Sign Up";
@@ -39,13 +70,6 @@ class Auth extends MY_Controller {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $this->load->library('form_validation');
 
-            // Validation rules
-            // if ($this->input->post('invoice_email')) {
-            //     $this->form_validation->set_rules('invoice_email', 'Invoice Email', 'valid_email|is_unique[users.invoice_email]', [
-            //         'valid_email' => 'Please enter a valid %s.',
-            //         'is_unique' => 'This %s is already registered.'
-            //     ]);
-            // }
             $this->form_validation->set_rules('username', 'Username', 'required|is_unique[users.username]');
             $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[users.email]', [
                 'required' => 'The %s field is required.',
@@ -64,21 +88,14 @@ class Auth extends MY_Controller {
             $this->form_validation->set_rules('birthdate', 'Birthdate', 'required');
             $this->form_validation->set_rules('user_type', 'User Type', 'required');
             if ($this->input->post('user_type') == 'private') {
-                $this->form_validation->set_rules('id_front_img', 'ID Front Image', 'required');
-                $this->form_validation->set_rules('id_back_img', 'ID Back Image', 'required');
+                $this->form_validation->set_rules('id_front_img', 'ID Front Image', 'callback_file_required[id_front_img]');
+                $this->form_validation->set_rules('id_back_img', 'ID Back Image', 'callback_file_required[id_back_img]');
+
             }
             if ($this->input->post('user_type') == 'company') {
-                $this->form_validation->set_rules('user_photo', 'User Photo', 'required');
-                $this->form_validation->set_rules('company_document', 'Company Document', 'required');
+                $this->form_validation->set_rules('user_photo', 'User Photo', 'callback_file_required[user_photo]');
+                $this->form_validation->set_rules('company_document', 'Company Document', 'callback_file_required[company_document]');
             }
-
-            // File upload configuration
-            $config['upload_path'] = './uploads/users/';
-            $config['allowed_types'] = 'jpg|jpeg|png';
-            $config['max_size'] = 2048; // 2MB
-            $config['encrypt_name'] = TRUE;
-
-            $this->upload->initialize($config);
 
             if ($this->form_validation->run() === TRUE) {
                 $user_type = $this->input->post('user_type');
@@ -99,87 +116,28 @@ class Auth extends MY_Controller {
                 ];
 
                 if ($user_type == 'private') {
-                    // Handle image upload
-                    $id_front_img = NULL;
-
-                    // Attempt to upload the image
-                    if (!empty($_FILES['id_front_img']['name'])) {
-                        if ($this->upload->do_upload('id_front_img')) {
-                            $image_data = $this->upload->data();
-                            $id_front_img = $image_data['file_name']; // Save the file name
-                        } else {
-                            // Set an error message for image upload
-                            $this->session->set_flashdata('error', $this->upload->display_errors());
-                            $this->render('auth/register', $data);
-                            return;
-                        }
+                    $id_front_img = $this->upload_file('id_front_img', './uploads/users/');
+                    $id_back_img = $this->upload_file('id_back_img', './uploads/users/');
+                    if ($id_front_img && $id_back_img) {
+                        $data['id_front_img'] = $id_front_img;
+                        $data['id_back_img'] = $id_back_img;
+                    } else {
+                        $this->render('auth/register', $data);
+                        return;
                     }
-
-                    // Handle image upload
-                    $id_back_img = NULL;
-
-                    // Attempt to upload the image
-                    if (!empty($_FILES['id_back_img']['name'])) {
-                        if ($this->upload->do_upload('id_back_img')) {
-                            $image_data = $this->upload->data();
-                            $id_back_img = $image_data['file_name']; // Save the file name
-                        } else {
-                            // Set an error message for image upload
-                            $this->session->set_flashdata('error', $this->upload->display_errors());
-                            $this->render('auth/register', $data);
-                            return;
-                        }
-                    }
-
-                    $data['id_front_img'] = $id_front_img;
-                    $data['id_back_img'] = $id_back_img;
-
-                    var_dump('test 1');
-                    var_dump($_FILES);
-                    var_dump($id_back_img);exit;
                 }
 
                 if ($user_type == 'company') {
-                    // Handle image upload
-                    $user_photo = NULL;
-
-                    // Attempt to upload the image
-                    if (!empty($_FILES['user_photo']['name'])) {
-                        if ($this->upload->do_upload('user_photo')) {
-                            $image_data = $this->upload->data();
-                            $user_photo = $image_data['file_name']; // Save the file name
-                        } else {
-                            // Set an error message for image upload
-                            $this->session->set_flashdata('error', $this->upload->display_errors());
-                            $this->render('auth/register', $data);
-                            return;
-                        }
+                    $user_photo = $this->upload_file('user_photo', './uploads/users/');
+                    $company_document = $this->upload_file('company_document', './uploads/users/');
+                    if ($user_photo && $company_document) {
+                        $data['photo_img'] = $user_photo;
+                        $data['company_doc_file'] = $company_document;
+                    } else {
+                        $this->render('auth/register', $data);
+                        return;
                     }
-
-                    // Handle image upload
-                    $company_document = NULL;
-
-                    // Attempt to upload the image
-                    if (!empty($_FILES['company_document']['name'])) {
-                        if ($this->upload->do_upload('company_document')) {
-                            $image_data = $this->upload->data();
-                            $company_document = $image_data['file_name']; // Save the file name
-                        } else {
-                            // Set an error message for image upload
-                            $this->session->set_flashdata('error', $this->upload->display_errors());
-                            $this->render('auth/register', $data);
-                            return;
-                        }
-                    }
-
-                    $data['photo_img'] = $user_photo;
-                    $data['company_doc_file'] = $company_document;
-                    var_dump('test 2');
-                    var_dump($user_photo);
-                    var_dump($company_document);exit;
                 }
-
-                var_dump($data);exit;
 
                 if ($this->User_model->register($data)) {
                     $this->session->set_flashdata('success', 'Registration successful. Please log in.');
@@ -187,8 +145,6 @@ class Auth extends MY_Controller {
                 } else {
                     $this->session->set_flashdata('error', 'Something went wrong. Try again.');
                 }
-            } else {
-                var_dump($this->form_validation->error_array());exit;
             }
         }
 

@@ -134,6 +134,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   Click or Drag image here
                 </label>
                 <div id="id_front_img_preview" style="position: absolute; top: 0; left: 0; height: 100%;"></div>
+                <span class="error"><?= form_error('id_front_img'); ?></span>
               </div>
             </div>
             <div class="col-md-6">
@@ -144,6 +145,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   Click or Drag image here
                 </label>
                 <div id="id_back_img_preview" style="position: absolute; top: 0; left: 0; height: 100%;"></div>
+                <span class="error"><?= form_error('id_back_img'); ?></span>
               </div>
             </div>
           </div>
@@ -157,6 +159,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   Click or Drag image here
                 </label>
                 <div id="user_photo_preview" style="position: absolute; top: 0; left: 0; height: 100%;"></div>
+                <span class="error"><?= form_error('user_photo'); ?></span>
               </div>
             </div>
             <div class="col-md-6">
@@ -167,6 +170,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   Click or Drag file here
                 </label>
                 <div id="company_document_preview" style="position: absolute; top: 0; left: 0; height: 100%;"></div>
+                <span class="error"><?= form_error('company_document'); ?></span>
               </div>
             </div>
           </div>
