@@ -11,8 +11,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | of this setting
 |
 */
-define('SITE_URL', 'http://localhost/');
-define('SITE_URL_ALIAS', 'localhost/');
+define('SITE_URL', 'http://customurl.local/');
+define('SITE_URL_ALIAS', 'customurl.local');
 define('WEBSITE_NAME', 'Listty');
 define('WEBSITE_ADDRESS', 'Hahnesch 2, D-49692 Cappeln, Deutschland');
 define('WEBSITE_ADDRESS_1', 'Hahnesch 2');
