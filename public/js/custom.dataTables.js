@@ -184,9 +184,10 @@ if (tableGeneralUser.length !== 0) {
         pageLength: 5,
         lengthMenu: [5, 10, 25, 50, 100],
         searching: false,
-        aoColumnDefs: [{ "bSortable": false, "aTargets": [-2, -1] }],
+        aoColumnDefs: [{ "bSortable": false, "aTargets": [ -1] }],
         responsive: true,
         order: [1, 'asc'],
+        dom: 'rtip<"dt-bottom-controls d-flex justify-content-end align-items-center"l>'
     });
 }
 
@@ -205,9 +206,10 @@ if (tableGeneralUser.length !== 0) {
         pageLength: 5,
         lengthMenu: [5, 10, 25, 50, 100],
         searching: false,
-        aoColumnDefs: [{ "bSortable": false, "aTargets": [-2, -1] }],
+        aoColumnDefs: [{ "bSortable": false, "aTargets": [0, -1] }],
         responsive: true,
         order: [1, 'asc'],
+        dom: 'rtip<"dt-bottom-controls d-flex justify-content-end align-items-center"l>'
     });
 }
 
@@ -226,8 +228,9 @@ if (tableGeneralUser.length !== 0) {
         pageLength: 5,
         lengthMenu: [5, 10, 25, 50, 100],
         searching: false,
-        aoColumnDefs: [{ "bSortable": false, "aTargets": [-2, -1] }],
+        aoColumnDefs: [{ "bSortable": false, "aTargets": [-4, -3, -1] }],
         responsive: true,
         order: [1, 'asc'],
+        dom: 'rtip<"dt-bottom-controls d-flex justify-content-end align-items-center"l>'
     });
 }
