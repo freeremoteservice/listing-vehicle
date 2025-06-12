@@ -129,7 +129,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <?php endforeach; ?>
         <?php else: ?>
           <tr>
-            <td colspan="4">No users available</td>
+            <td colspan="7">No users available</td>
           </tr>
         <?php endif; ?>
 
