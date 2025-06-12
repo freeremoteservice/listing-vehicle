@@ -48,9 +48,6 @@
           <li class="mb-3">
             <a href="<?= base_url('vehicle'); ?>">Vehicle</a>
           </li>
-          <li class="mb-3">
-            <a href="<?= base_url('blog'); ?>">Blog</a>
-          </li>
         </ul>
       </div>
 

@@ -68,7 +68,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <!-- ====================================
 ———	pagination
 ===================================== -->
-<section class="my-5">
+<!-- <section class="my-5">
     <div class="container">
         <nav aria-label="Page navigation example">
             <ul class="pagination">
@@ -90,4 +90,4 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </ul>
         </nav>
     </div>
-</section>
+</section> -->
