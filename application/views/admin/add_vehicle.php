@@ -56,13 +56,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <input type="text" id="name" name="name" class="form-control" value="<?= set_value('name'); ?>">
                         <span style="color: red;"><?= form_error('name'); ?></span>
                     </div>
-
-                    <div class="form-group col-md-12 mb-6">
-                        <label class="form-label" for="name">Name:</label>
-                        <input type="text" id="name" name="name" class="form-control" value="">
-                        <?= form_error('name'); ?>
-                    </div>
-
+                    
                     <div class="form-group col-md-6 mb-6">
                         <label class="form-label" for="manufacturer_brand">Manufacturer Brand:</label>
                         <input type="text" id="manufacturer_brand" name="manufacturer_brand" class="form-control" value="">
