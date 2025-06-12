@@ -103,80 +103,76 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           </div>
 
           <?php if ($this->session->userdata('logged_in')): ?>
-            <div class="form-group mb-6">
-              <label for="id_front">Upload Front photo of your ID:</label>
-              <div class="form-group position-relative mb-6 form-group-dragable">
-                <input type="file" id="id_front" name="id_front" class="custom-file-input">
-                <label class="custom-file-label mb-0" for="id_front">
-                  Click or Drag images here
-                </label>
-                <div id="FrontOfIDPreview" style="position: absolute; top: 0; left: 0; height: 100%;"></div>
-              </div>
-              <span class="error" style="color: red;"><?= form_error('id_front'); ?></span>
-            </div>
 
             <div class="form-group mb-6">
-              <label for="id_back">Upload Back photo of your ID:</label>
-              <div class="form-group position-relative mb-6 form-group-dragable">
-                <input type="file" id="id_back" name="id_back" class="custom-file-input">
-                <label class="custom-file-label mb-0" for="id_back">
-                  Click or Drag images here
-                </label>
-                <div id="BackOfIDPreview" style="position: absolute; top: 0; left: 0; height: 100%;"></div>
-              </div>
-              <span class="error" style="color: red;"><?= form_error('id_back'); ?></span>
-            </div>
-
-            <div class="form-group mb-6">
-              <button type="submit" class="btn btn-primary"> Book Now asdf </button>
+              <button type="submit" class="btn btn-primary"> Book Now </button>
             </div>
           <?php else: ?>
-            <a href="<?= base_url('auth/login'); ?>" class="btn btn-primary">Book Now</a>
+            <button type="button" id="bookNowBtn" class="btn btn-primary"> Book Now </button>
           <?php endif; ?>
         <?= form_close() ?>
+        <div class="card mt-4" style="background: #f5f8fa; border: none;">
+          <div class="card-body text-center">
+            <div class="fw-bold mb-2" style="color: #294a7d; font-size: 1.2em;">
+              Do you have any questions<br>about the product?<br>
+              <span style="font-size: 1.1em;">Talk to us!</span>
+            </div>
+            <div class="mb-2" style="color: #294a7d;">
+              <?= WEBSITE_PHONE?><br>
+              <a href="<?= WEBSITE_EMAIL?>" style="color: #294a7d; text-decoration: underline;"><?= WEBSITE_EMAIL?></a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- Members Log In Style Modal for Booking -->
+<div class="modal fade" id="bookNowModal" tabindex="-1" aria-labelledby="bookNowModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header" style="background: #2196f3; color: #fff;">
+        <h5 class="modal-title w-100 text-center map-sidebar" id="bookNowModalLabel">Members Log In</h5>
+        <button type="button" class="btn-close main-wrapper" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <?= form_open('auth/login'); ?>
+          <input type="hidden" name="redirect" value="<?= current_url(); ?>">
+          <div class="mb-3">
+            <label for="modalEmail" class="form-label">Email*</label>
+            <input type="email" name="email" class="form-control" id="modalEmail" required>
+            <small class="form-text text-muted">Enter your Foundation username.</small>
+          </div>
+          <div class="mb-3">
+            <label for="modalPassword" class="form-label">Password*</label>
+            <input type="password" name="password" class="form-control" id="modalPassword" required>
+            <small class="form-text text-muted">Enter the password that accompanies your username.</small>
+          </div>
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <button type="submit" class="btn btn-outline-primary px-4">LOG IN</button>
+            <a href="#" class="text-primary" style="font-size: 0.95em;">Forgot Password?</a>
+          </div>
+        <?= form_close(); ?>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <span>Not a member yet? <a href="<?= base_url('auth/register'); ?>" class="text-primary">Sign up</a></span>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
-document.getElementById('id_front').addEventListener('change', function (event) {
-  const files = event.target.files;
-  const previewContainer = document.getElementById('FrontOfIDPreview');
-  previewContainer.innerHTML = ''; // Clear previous previews
-
-  Array.from(files).forEach(file => {
-    if (file.type.startsWith('image/')) {
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        const img = document.createElement('img');
-        img.src = e.target.result;
-        img.style.height = 'calc(100% - 10px)'; // Adjust size
-        img.style.margin = '5px';
-        previewContainer.appendChild(img);
-      };
-      reader.readAsDataURL(file);
-    }
-  });
-});
-
-document.getElementById('id_back').addEventListener('change', function (event) {
-  const files = event.target.files;
-  const previewContainer = document.getElementById('BackOfIDPreview');
-  previewContainer.innerHTML = ''; // Clear previous previews
-
-  Array.from(files).forEach(file => {
-    if (file.type.startsWith('image/')) {
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        const img = document.createElement('img');
-        img.src = e.target.result;
-        img.style.height = 'calc(100% - 10px)'; // Adjust size
-        img.style.margin = '5px';
-        previewContainer.appendChild(img);
-      };
-      reader.readAsDataURL(file);
-    }
-  });
+// Modal logic for Book Now
+document.addEventListener('DOMContentLoaded', function () {
+  var bookNowBtn = document.getElementById('bookNowBtn');
+  if (bookNowBtn) {
+    bookNowBtn.addEventListener('click', function () {
+      var modal = new bootstrap.Modal(document.getElementById('bookNowModal'));
+      modal.show();
+    });
+  }
+  // You can handle modal form submission here if needed
 });
 </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

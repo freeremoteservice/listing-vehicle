@@ -166,12 +166,18 @@ class Admin extends MY_Controller {
         $this->form_validation->set_rules('type', 'Vehicle Type', 'required');
         $this->form_validation->set_rules('name', 'Name', 'required');
         $this->form_validation->set_rules('price', 'Price', 'required|numeric');
+        $this->form_validation->set_rules('manufacturer_brand', 'Manufacturer Brand', 'required');
+        $this->form_validation->set_rules('manufacturer_type', 'Manufacturer Type', 'required');
+        $this->form_validation->set_rules('license_plate', 'License Plate', 'required');
+        $this->form_validation->set_rules('vehicle_id_number', 'Vehicle Identification Number', 'required');
+        $this->form_validation->set_rules('total_weight', 'Total Weight', 'required|numeric');
+        $this->form_validation->set_rules('equipment', 'Equipment', 'required');
 
         // File upload configuration
         $config['upload_path'] = './uploads/vehicles/';
         $config['allowed_types'] = 'jpg|jpeg|png';
-        $config['max_size'] = 2048; // 2MB
-        $config['encrypt_name'] = TRUE;
+        $config['max_size'] = 5120; // 2MB
+        $config['encrypt_name'] = TRUE; //print_r($_FILES);exit;
 
         $this->upload->initialize($config);
 
@@ -202,7 +208,14 @@ class Admin extends MY_Controller {
                 'type' => $this->input->post('type'),
                 'name' => $this->input->post('name'),
                 'description' => $this->input->post('description'),
-                'price' => $this->input->post('price')
+                'damages' => $this->input->post('damages'),
+                'price' => $this->input->post('price'),
+                'manufacturer_brand' => $this->input->post('manufacturer_brand'),
+                'manufacturer_type' => $this->input->post('manufacturer_type'),
+                'license_plate' => $this->input->post('license_plate'),
+                'vehicle_id_number' => $this->input->post('vehicle_id_number'),
+                'total_weight' => $this->input->post('total_weight'),
+                'equipment' => $this->input->post('equipment'),
             ];
 
             if ($image) {

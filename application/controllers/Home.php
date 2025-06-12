@@ -5,7 +5,7 @@ class Home extends MY_Controller {
 	public function index() {
         // Check if the user is logged in
         if ($this->session->userdata('logged_in') && is_admin()) {
-            redirect('admin/dashboard'); // Admin's root page
+            redirect('admin/orders'); // Admin's root page
         }
 
         $data['title'] = "Homepage";
