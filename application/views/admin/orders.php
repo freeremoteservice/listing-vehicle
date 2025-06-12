@@ -66,22 +66,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <?php endif; ?>
 
 
-    <table id="my-listing" class="display nowrap table-data-default" style="width:100%">
+    <table id="table-list-order" class="display nowrap table-data-default" style="width:100%">
       <thead>
         <tr class="table-row-bg-white">
           <th>Username</th>
           <th>Vehicle Name</th>
-          <th>Front of ID</th>
-          <th>Back of ID</th>
           <th>Status</th>
           <th>Ordered At</th>
           <th data-priority="2"></th>
         </tr>
       </thead>
       <tbody>
-        <?php 
-            if (!empty($orders)):
-            foreach ($orders as $order): 
+        <?php if (!empty($orders)): ?>
+          <?php foreach ($orders as $order): 
                 $status_class = '';
                 switch ($order->status) {
                     case 'approved':
@@ -96,24 +93,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         $status_class = "bg-warning";
                         break;
             }
-        ?>
+          ?>
             <tr class="table-row-bg-white">
               <td><?= $order->user_name; ?></td>
               <td><?= $order->vehicle_name; ?></td>
-              <td class="td-media">
-                <div class="media media-table">
-                  <a class="media-img" href="listing-reservation.html">
-                    <img class="img-fluid rounded me-2 lazyestload" data-src="<?= !empty($order->id_front_image) ? base_url('uploads/ids/' . $order->id_front_image) : base_url('public/img/default-id.jpg'); ?>" src="<?= !empty($order->id_front_image) ? base_url('uploads/ids/' . $order->id_front_image) : base_url('public/img/default-id.jpg'); ?>">
-                  </a>
-                </div>
-              </td>
-              <td class="td-media">
-                <div class="media media-table">
-                  <a class="media-img" href="listing-reservation.html">
-                  <img class="img-fluid rounded me-2 lazyestload" data-src="<?= !empty($order->id_back_image) ? base_url('uploads/ids/' . $order->id_back_image) : base_url('public/img/default-id.jpg'); ?>" src="<?= !empty($order->id_back_image) ? base_url('uploads/ids/' . $order->id_back_image) : base_url('public/img/default-id.jpg'); ?>">
-                  </a>
-                </div>
-              </td>
               <td>
                 <span class="badge <?= $status_class; ?> px-2 py-1 text-white"><?= $order->status; ?></span>
               </td>
@@ -131,19 +114,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </div>
               </td>
             </tr>
-        <?php 
-            endforeach;
-                else: 
-        ?>
+          <?php 
+              endforeach;
+          ?>
+        <?php else :?>
           <tr>
-            <td colspan="6">No orders available</td>
+            <td colspan="5">No orders available</td>
           </tr>
         <?php 
             endif;
         ?>
-
       </tbody>
     </table>
-
   </div>
 </section>

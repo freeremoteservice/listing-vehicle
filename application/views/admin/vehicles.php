@@ -42,8 +42,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   </div>
 </nav>
 
-
-
 <!-- ====================================
 ——— LISTINGS
 ===================================== -->
@@ -71,7 +69,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="alert alert-danger"><?= $this->session->flashdata('error'); ?></div>
     <?php endif; ?>
 
-    <table id="my-listing" class="display nowrap table-data-default" style="width:100%">
+    <table id="table-list-vehicle" class="display table-data-default" style="width:100%">
       <thead>
         <tr class="table-row-bg-white">
           <th>Image</th>
@@ -88,7 +86,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <tr class="table-row-bg-white">
               <td class="td-media">
                 <div class="media media-table">
-                  <a class="media-img" href="listing-reservation.html">
+                  <a class="media-img" href="#">
                     <img class="img-fluid rounded me-2 lazyestload" data-src="<?= !empty($vehicle['image']) ? base_url('uploads/vehicles/' . $vehicle['image']) : base_url('public/img/default-vehicle.jpg'); ?>" src="<?= !empty($vehicle['image']) ? base_url('uploads/vehicles/' . $vehicle['image']) : base_url('public/img/default-vehicle.jpg'); ?>">
                   </a>
                 </div>

@@ -111,7 +111,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <button type="button" id="bookNowBtn" class="btn btn-primary"> Book Now </button>
           <?php endif; ?>
         <?= form_close() ?>
-        <div class="card mt-4" style="background: #f5f8fa; border: none;">
+        <div class="card mt-4" style="background: #dde2e5;">
           <div class="card-body text-center">
             <div class="fw-bold mb-2" style="color: #294a7d; font-size: 1.2em;">
               Do you have any questions<br>about the product?<br>
@@ -175,4 +175,3 @@ document.addEventListener('DOMContentLoaded', function () {
   // You can handle modal form submission here if needed
 });
 </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

@@ -31,7 +31,8 @@ class Admin extends MY_Controller {
         ];
         $data['page_level_js'] = [
             'assets/plugins/DataTables/DataTables-1.10.18/js/jquery.dataTables.min.js',
-            'assets/plugins/DataTables/Responsive-2.2.2/js/dataTables.responsive.min.js'
+            'assets/plugins/DataTables/Responsive-2.2.2/js/dataTables.responsive.min.js',
+            'public/js/custom.dataTables.js'
         ];
         $this->render('admin/orders', $data);
     }
@@ -98,7 +99,8 @@ class Admin extends MY_Controller {
         ];
         $data['page_level_js'] = [
             'assets/plugins/DataTables/DataTables-1.10.18/js/jquery.dataTables.min.js',
-            'assets/plugins/DataTables/Responsive-2.2.2/js/dataTables.responsive.min.js'
+            'assets/plugins/DataTables/Responsive-2.2.2/js/dataTables.responsive.min.js',
+            'public/js/custom.dataTables.js'
         ];
         $this->render('admin/vehicles', $data);
     }
@@ -253,7 +255,8 @@ class Admin extends MY_Controller {
         ];
         $data['page_level_js'] = [
             'assets/plugins/DataTables/DataTables-1.10.18/js/jquery.dataTables.min.js',
-            'assets/plugins/DataTables/Responsive-2.2.2/js/dataTables.responsive.min.js'
+            'assets/plugins/DataTables/Responsive-2.2.2/js/dataTables.responsive.min.js',
+            'public/js/custom.dataTables.js'
         ];
         $this->render('admin/users', $data);
     }

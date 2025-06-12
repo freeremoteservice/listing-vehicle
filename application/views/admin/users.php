@@ -70,15 +70,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <?php endif; ?>
 
 
-    <table id="my-listing" class="display nowrap table-data-default" style="width:100%">
+    <table id="table-list-users" class="display nowrap table-data-default" style="width:100%">
       <thead>
         <tr class="table-row-bg-white">
           <th>Username</th>
           <th>Email</th>
           <th>Role</th>
+          <th>ID Front/Photo</th>
+          <th>ID Back/Company Doc</th>
           <th>Registered At</th>
-          <th>ID Front Image</th>
-          <th>ID Back Image</th>
           <th data-priority="2"></th>
         </tr>
       </thead>
@@ -99,21 +99,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <td><?= $user['username']; ?></td>
               <td><?= $user['email']; ?></td>
               <td><?= $user['role']; ?></td>
-              <td><?= $user['created_at']; ?></td>
-              <td class="td-media">
+              <td class="td-media" align="center">
                 <div class="media media-table" style="width: 60px;">
                   <a class="media-img" href="listing-reservation.html">
                     <img class="img-fluid rounded me-2 lazyestload" data-src="<?=  $img1;?>" src="<?= $img1; ?>">
                   </a>
                 </div>
               </td>
-              <td class="td-media">
+              <td class="td-media" align="center">
                 <div class="media media-table" style="width: 60px;">
                   <a class="media-img" href="listing-reservation.html">
                     <img class="img-fluid rounded me-2 lazyestload" data-src="<?= $img2; ?>" src="<?= $img2; ?>">
                   </a>
                 </div>
               </td>
+              <td><?= $user['created_at']; ?></td>
               <td>
                 <div class="dropdown">
                   <a class="dropdown-toggle icon-burger-mini" href="javascript:void(0)" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
@@ -138,4 +138,5 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
   </div>
 </section>
+</script>
 
