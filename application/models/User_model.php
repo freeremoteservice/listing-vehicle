@@ -9,7 +9,8 @@ class User_model extends CI_Model {
 
     public function get_users_by_role($role) {
         // Fetch users by role
-        $this->db->where('role', $role);
+        // $this->db->where('role', $role);
+        $this->db->where('role <> \'admin\'');
         return $this->db->get('users')->result_array();
     }
 

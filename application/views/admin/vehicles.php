@@ -15,11 +15,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link" href="<?= base_url(); ?>">
-            <i class="fas fa-tachometer-alt" aria-hidden="true"></i> Dashboard <span class="sr-only">(current)</span></a>
-        </li>
-
-        <li class="nav-item">
           <a class="nav-link " href="<?= base_url('admin/orders'); ?>">
             <i class="fa fa-users" aria-hidden="true"></i> List Orders </a>
         </li>
@@ -56,7 +51,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <div class="container">
     <!-- Breadcrumb -->
     <nav class="bg-transparent breadcrumb breadcrumb-2 px-0 mb-5" aria-label="breadcrumb">
-      <h2 class="fw-normal mb-4 mb-md-0">All Vehicles</h2>
+      <h2 class="fw-normal mb-4 mb-md-0 d-inline-block">
+        All Vehicles
+        <span class="small text-muted ms-2 fs-6">
+          <?= count($vehicles); ?> Vehicles Found
+        </span>
+      </h2>
       <ul class="list-unstyled d-flex p-0 m-0">
         <li class="breadcrumb-item"><a href="<?= base_url(); ?>">Home</a></li>
         <li class="breadcrumb-item active" aria-current="page">All Vehicles</li>

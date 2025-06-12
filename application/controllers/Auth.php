@@ -10,11 +10,11 @@ class Auth extends MY_Controller {
     }
 
 	public function login() {
-        $data['title'] = "Sign In";
-
+        $data['title'] = "Sign In";        
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $email = $this->input->post('email');
             $password = $this->input->post('password');
+            $redirect = $this->input->post('redirect');
 
             $user = $this->User_model->get_user_by_email($email);
             if ($user && password_verify($password, $user->password)) {
@@ -26,7 +26,7 @@ class Auth extends MY_Controller {
                     'logged_in' => TRUE
                 ]);
                 $this->session->set_flashdata('success', 'Login successful.');
-                redirect(base_url());
+                redirect($redirect ? $redirect : base_url());
             } else {
                 $this->session->set_flashdata('error', 'Invalid email or password.');
             }
