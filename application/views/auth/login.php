@@ -30,14 +30,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               </div>
               <div class="form-group d-flex justify-content-between align-items-center mb-7">
                 <button type="submit" class="btn btn-outline-primary text-uppercase">
-                  Log in
+                  Anmelden
                 </button>
                 <a href="#FogotPassword">Fogot Password?</a>
               </div>
             <?= form_close(); ?>
           </div>
           <div class="card-footer bg-transparent text-center py-3">
-            <p class="mb-0">Not a member yet? <a href="<?= base_url('auth/register'); ?>" class="link">Sign up</a></p>
+            <p class="mb-0">Not a member yet? <a href="<?= base_url('auth/register'); ?>" class="link">Registrieren</a></p>
           </div>
         </div>
       </div>

@@ -6,7 +6,7 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-7 col-xs-12">
-        <a class="d-inline-block mb-6" href="index.html">
+        <a class="d-inline-block mb-6" href="<?= base_url(); ?>">
           <svg class="logo-svg" version="1.1" xmlns="http://www.w3.org/2000/svg" width="140" height="44">
             <path class="fill-primay" d="M0 44V0h139.813v44H0zM137.346 2.467H2.467v39.065h134.879V2.467z" />
             <path class="fill-primay"
@@ -37,13 +37,13 @@
         </div>
         <ul class="list-unstyled list-gray">
           <li class="mb-3">
-            <a href="<?= base_url(); ?>">Home</a>
+            <a href="<?= base_url(); ?>">Startseite</a>
           </li>
           <li class="mb-3">
-            <a href="<?= base_url('auth/register'); ?>">Create Account</a>
+            <a href="<?= base_url('auth/register'); ?>">Registrieren</a>
           </li>
           <li class="mb-3">
-            <a href="<?= base_url('auth/login'); ?>">Login</a>
+            <a href="<?= base_url('auth/login'); ?>">Anmelden</a>
           </li>
           <li class="mb-3">
             <a href="<?= base_url('vehicle'); ?>">Vehicle</a>
@@ -60,7 +60,7 @@
             <a href="<?= base_url('contact_us'); ?>">Contact Us</a>
           </li>
           <li class="mb-3">
-            <a href="<?= base_url('about_us'); ?>">About Us</a>
+            <a href="<?= base_url('about_us'); ?>">Über uns</a>
           </li>
           <li class="mb-3">
             <a href="<?= base_url('privacy'); ?>">Privacy Policy</a>
@@ -72,7 +72,7 @@
             <a href="<?= base_url('online_tos'); ?>">Online Terms and Conditions</a>
           </li>
           <li class="mb-3">
-            <a href="<?= base_url('faq'); ?>">How It Works</a>
+            <a href="<?= base_url('faq'); ?>">So funktioniert's</a>
           </li>
         </ul>
       </div>

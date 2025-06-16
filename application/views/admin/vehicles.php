@@ -56,7 +56,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </span>
       </h2>
       <ul class="list-unstyled d-flex p-0 m-0">
-        <li class="breadcrumb-item"><a href="<?= base_url(); ?>">Home</a></li>
+        <li class="breadcrumb-item"><a href="<?= base_url(); ?>">Startseite</a></li>
         <li class="breadcrumb-item active" aria-current="page">All Vehicles</li>
       </ul>
     </nav>
