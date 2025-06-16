@@ -9,10 +9,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <div class="container">
     <div class="d-flex flex-column justify-content-center align-items-center">
       <nav aria-label="breadcrumb">
-        <h2 class="breadcrumb-title text-center mb-4">How It Works</h2>
+        <h2 class="breadcrumb-title text-center mb-4">So funktioniert's</h2>
         <ul class="breadcrumb bg-transparent justify-content-center p-0 m-0">
-          <li class="breadcrumb-item"><a href="<?= base_url(); ?>">Home</a></li>
-          <li class="breadcrumb-item active" aria-current="page">How It Works</li>
+          <li class="breadcrumb-item"><a href="<?= base_url(); ?>">Startseite</a></li>
+          <li class="breadcrumb-item active" aria-current="page">So funktioniert's</li>
         </ul>
       </nav>
     </div>

@@ -12,7 +12,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <nav aria-label="breadcrumb">
         <h2 class="breadcrumb-title text-center text-white mb-4">Contact Us</h2>
         <ul class="breadcrumb bg-transparent justify-content-center p-0 m-0">
-          <li class="breadcrumb-item"><a class="text-white" href="index.html">Home</a></li>
+          <li class="breadcrumb-item"><a class="text-white" href="<?= base_url(); ?>">Startseite</a></li>
           <li class="breadcrumb-item text-white active" aria-current="page">Contact Us</li>
         </ul>
       </nav>
