@@ -9,7 +9,7 @@ class Home extends MY_Controller {
         }
 
         $this->load->model('Vehicle_model');
-        $data['recent_items'] = $this->Vehicle_model->get_3_recent_items();
+        $data['recent_items'] = $this->Vehicle_model->get_recent_items();
         $data['title'] = "Homepage";
         // Default behavior for guests (not logged in)
         $this->render('home', $data);

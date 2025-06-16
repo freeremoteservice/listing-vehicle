@@ -301,21 +301,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <p>This are some of most popular listing</p>
     </div>
 
-    <!-- Data Filter-->
-    <!-- <div class="mb-7">
-      <div id="filters" class="button-group d-flex flex-column flex-md-row justify-content-center">
-        <button type="button" class="btn btn-outline-secondary button is-checked me-2 mb-2" data-filter="*">
-          Popular Items
-        </button>
-        <button type="button" class="btn btn-outline-secondary button me-2 mb-2" data-filter=".recent-item">
-          Recent Items
-        </button>
-        <button type="button" class="btn btn-outline-secondary button me-2 mb-2" data-filter=".featured-item">
-          Featured Items
-        </button>
-      </div>
-    </div> -->
-
     <!-- Grid-->
     <div class="row grid">
       <?php if($recent_items) :?>
