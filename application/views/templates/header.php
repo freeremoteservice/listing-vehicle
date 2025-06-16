@@ -61,7 +61,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     <!-- HEADER -->
     <header class="header">
-      <nav class="nav-menuzord <?= (uri_string() !== '') ? '' : 'nav-menuzord-transparent'; ?> navbar-sticky">
+      <nav class="nav-menuzord navbar-sticky">
         <div class="container clearfix">
           <div id="menuzord" class="menuzord menuzord-responsive <?= is_admin() ? 'admin_menu' : ''; ?>">
 
@@ -102,8 +102,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </div>
             <?php else: ?>
                 <div class="float-right btn-wrapper">
-                    <a class="btn btn-outline-primary" href="/auth/login">+ <span>Login</span></a>
-                    <a class="btn btn-outline-primary" href="/auth/register">+ <span>Register</span></a>
+                    <a class="btn btn-outline-primary" href="/auth/login">+ <span>Anmelden</span></a>
+                    <a class="btn btn-outline-primary" href="/auth/register">+ <span>Registrieren</span></a>
                 </div>
             <?php endif; ?>
 
@@ -114,13 +114,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <?php else: ?>
             <ul class="menuzord-menu menuzord-right">
               <li class="">
-                <a href="<?= base_url(); ?>">Home</a>
+                <a href="<?= base_url(); ?>">Startseite</a>
               </li>
               <li class="">
                 <a href="<?= base_url('vehicle'); ?>">Vehicle</a>
               </li>
               <li class="">
-                <a href="<?= base_url('about_us'); ?>">About Us</a>
+                <a href="<?= base_url('about_us'); ?>">Über uns</a>
               </li>
               <li class="">
                 <a href="javascript:0">Pages</a>
@@ -129,7 +129,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   <li><a href="<?= base_url('privacy'); ?>">Privacy policy</a></li>
                   <li><a href="<?= base_url('tos'); ?>">Terms and Conditions</a></li>
                   <li><a href="<?= base_url('online_tos'); ?>">Online Terms and Conditions</a></li>
-                  <li><a href="<?= base_url('faq'); ?>">How It Works</a></li>
+                  <li><a href="<?= base_url('faq'); ?>">So funktioniert's</a></li>
                 </ul>
               </li>
             </ul>

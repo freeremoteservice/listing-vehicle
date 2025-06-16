@@ -10,7 +10,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <nav class="bg-transparent breadcrumb breadcrumb-2 px-0 mb-5" aria-label="breadcrumb">
 	    <h2 class="fw-normal mb-4 mb-md-0">Edit Vehicle</h2>
 	    <ul class="list-unstyled d-flex p-0 m-0">
-	      <li class="breadcrumb-item"><a href="<?= base_url(); ?>">Home</a></li>
+	      <li class="breadcrumb-item"><a href="<?= base_url(); ?>">Startseite</a></li>
 	      <li class="breadcrumb-item"><a href="<?= base_url('admin/vehicles'); ?>">List vehicles</a></li>
 	      <li class="breadcrumb-item active" aria-current="page">Edit Vehicle</li>
 	    </ul>

@@ -10,7 +10,7 @@ class Auth extends MY_Controller {
     }
 
 	public function login() {
-        $data['title'] = "Sign In";        
+        $data['title'] = "Anmelden";
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $email = $this->input->post('email');
             $password = $this->input->post('password');
