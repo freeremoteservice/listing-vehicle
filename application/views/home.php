@@ -28,7 +28,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <section class="py-7 pt-md-10 sec-pb-70">
   <div class="container">
     <div class="section-title">
-      <h2> All Used Cars </h2>
+      <h2> Recent Cars </h2>
       <p>This are some of most popular listing</p>
     </div>
 
