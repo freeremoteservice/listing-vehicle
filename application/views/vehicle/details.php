@@ -346,7 +346,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div class="modal-content">
       <div class="modal-header" style="background: #2196f3; color: #fff;">
         <h5 class="modal-title w-100 text-center map-sidebar" id="bookNowModalLabel">Members Log In</h5>
-        <button type="button" class="btn-close main-wrapper" data-bs-dismiss="modal" aria-label="Close"></button>
+        <i class="fas fa-window-close main-wrapper" data-bs-dismiss="modal" aria-label="Close" style="cursor: pointer;"></i>
       </div>
       <div class="modal-body">
         <?= form_open('auth/login'); ?>

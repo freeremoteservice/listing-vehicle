@@ -1,3 +1,7 @@
 .admin_menu .showhide {
     display: none !important;
 }
+
+.modal-title {
+    color: white !important;
+}
