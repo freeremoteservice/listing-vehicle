@@ -51,7 +51,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div class="p-4">
                   <div class="d-flex justify-content-between align-items-center mb-1">
                     <h3 class="card-title mb-0">
-                      <a href="<?= base_url('vehicle/'); ?>">
+                      <a href="<?= base_url('vehicle/' . $item['id']); ?>">
                         <?= $item['name'];?>
                       </a>
                     </h3>
@@ -59,7 +59,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                   <div class="mb-6 meta-post">
                     <date class="text-capitalize meta-time"><?= $item['created_at']?>,</date>
-                    <a class="text-uppercase" href="<?= base_url('vehicle/'); ?>"><?= $item['manufacturer_brand']?></a>
+                    <a class="text-uppercase" href="<?= base_url('vehicle/' . $item['id']); ?>"><?= $item['manufacturer_brand']?></a>
                   </div>
                   <div class="card-text">
                     <h4 class="text-primary">$<?= $item['price']?></h4>
