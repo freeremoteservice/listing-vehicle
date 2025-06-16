@@ -125,30 +125,39 @@ class Admin extends MY_Controller {
         $config['max_size'] = 2048; // 2MB
         $config['encrypt_name'] = TRUE;
 
-        $this->upload->initialize($config);
-
         if ($this->form_validation->run() == FALSE) {
-            // Load the add vehicle view with validation errors
             $this->render('admin/add_vehicle', $data);
         } else {
-            // Handle image upload
-            $image = NULL;
+            $uploaded_images = [];
 
-            // Attempt to upload the image
-            if (!empty($_FILES['image']['name'])) {
-                if ($this->upload->do_upload('image')) {
-                    $image_data = $this->upload->data();
-                    $image = $image_data['file_name']; // Save the file name
-                } else {
-                    // Set an error message for image upload
-                    $this->session->set_flashdata('error', $this->upload->display_errors());
-                    $this->render('admin/add_vehicle', $data);
-                    return;
+            // Handle multiple image uploads
+            if (!empty($_FILES['image']['name'][0])) {
+                $files = $_FILES;
+                $file_count = count($_FILES['image']['name']);
+
+                for ($i = 0; $i < $file_count; $i++) {
+                    $_FILES['image']['name'] = $files['image']['name'][$i];
+                    $_FILES['image']['type'] = $files['image']['type'][$i];
+                    $_FILES['image']['tmp_name'] = $files['image']['tmp_name'][$i];
+                    $_FILES['image']['error'] = $files['image']['error'][$i];
+                    $_FILES['image']['size'] = $files['image']['size'][$i];
+
+                    $this->upload->initialize($config);
+
+                    if ($this->upload->do_upload('image')) {
+                        $image_data = $this->upload->data();
+                        $uploaded_images[] = $image_data['file_name'];
+                    } else {
+                        // If any file fails to upload, show error and return
+                        $this->session->set_flashdata('error', $this->upload->display_errors());
+                        $this->render('admin/add_vehicle', $data);
+                        return;
+                    }
                 }
             }
 
             // Prepare data for insertion
-            $data = [
+            $vehicle_data = [
                 'type' => $this->input->post('type'),
                 'name' => $this->input->post('name'),
                 'description' => $this->input->post('description'),
@@ -160,12 +169,11 @@ class Admin extends MY_Controller {
                 'vehicle_id_number' => $this->input->post('vehicle_id_number'),
                 'total_weight' => $this->input->post('total_weight'),
                 'equipment' => $this->input->post('equipment'),
-                'price' => $this->input->post('price'),
-                'image' => $image
+                'image' => implode(',', $uploaded_images) // save multiple images as CSV (or move this to separate table later)
             ];
 
-            // Insert the vehicle
-            if ($this->Vehicle_model->insert_vehicle($data)) {
+            // Insert vehicle record
+            if ($this->Vehicle_model->insert_vehicle($vehicle_data)) {
                 $this->session->set_flashdata('success', 'Vehicle added successfully!');
                 redirect('admin/add_vehicle');
             } else {
@@ -175,10 +183,11 @@ class Admin extends MY_Controller {
         }
     }
 
+
     public function edit_vehicle($vehicle_id) {
         $data['title'] = "Edit Vehicle";
 
-        // Set form validation rules
+        // Validation Rules
         $this->form_validation->set_rules('type', 'Vehicle Type', 'required');
         $this->form_validation->set_rules('name', 'Name', 'required');
         $this->form_validation->set_rules('price', 'Price', 'required|numeric');
@@ -189,66 +198,74 @@ class Admin extends MY_Controller {
         $this->form_validation->set_rules('total_weight', 'Total Weight', 'required|numeric');
         $this->form_validation->set_rules('equipment', 'Equipment', 'required');
 
-        // File upload configuration
-        $config['upload_path'] = './uploads/vehicles/';
-        $config['allowed_types'] = 'jpg|jpeg|png';
-        $config['max_size'] = 5120; // 2MB
-        $config['encrypt_name'] = TRUE; //print_r($_FILES);exit;
-
-        $this->upload->initialize($config);
-
         if ($this->form_validation->run() == FALSE) {
-            // Load the add vehicle view with validation errors
+            // Load form with errors
             $data['vehicle'] = $this->Vehicle_model->getById($vehicle_id);
             $this->render('admin/edit_vehicle', $data);
-        } else {
-            // Handle image upload
-            $image = NULL;
+            return;
+        }
 
-            // Attempt to upload the image
-            if (!empty($_FILES['image']['name'])) {
-                if ($this->upload->do_upload('image')) {
-                    $image_data = $this->upload->data();
-                    $image = $image_data['file_name']; // Save the file name
-                } else {
-                    // Set an error message for image upload
+        // Handle Multiple Image Uploads
+        $uploadedImages = []; 
+
+        if (!empty($_FILES['image']['name']) && is_array($_FILES['image']['name'])) {
+            $filesCount = count($_FILES['image']['name']);
+
+            for ($i = 0; $i < $filesCount; $i++) {
+                $_FILES['file']['name']     = $_FILES['image']['name'][$i];
+                $_FILES['file']['type']     = $_FILES['image']['type'][$i];
+                $_FILES['file']['tmp_name'] = $_FILES['image']['tmp_name'][$i];
+                $_FILES['file']['error']    = $_FILES['image']['error'][$i];
+                $_FILES['file']['size']     = $_FILES['image']['size'][$i];
+
+                $config['upload_path']   = './uploads/vehicles/';
+                $config['allowed_types'] = 'jpg|jpeg|png';
+                $config['max_size']      = 5120;
+                $config['encrypt_name']  = TRUE;
+
+                $this->load->library('upload', $config);
+                $this->upload->initialize($config);
+
+                if ($this->upload->do_upload('file')) {
+                    $dataUpload = $this->upload->data();
+                    $uploadedImages[] = $dataUpload['file_name'];
+                } else {//print_r($_FILES['image']['name']);die;
                     $this->session->set_flashdata('error', $this->upload->display_errors());
                     $data['vehicle'] = $this->Vehicle_model->getById($vehicle_id);
                     $this->render('admin/edit_vehicle', $data);
                     return;
                 }
             }
-
-            // Prepare data for updating
-            $data = [
-                'type' => $this->input->post('type'),
-                'name' => $this->input->post('name'),
-                'description' => $this->input->post('description'),
-                'damages' => $this->input->post('damages'),
-                'price' => $this->input->post('price'),
-                'manufacturer_brand' => $this->input->post('manufacturer_brand'),
-                'manufacturer_type' => $this->input->post('manufacturer_type'),
-                'license_plate' => $this->input->post('license_plate'),
-                'vehicle_id_number' => $this->input->post('vehicle_id_number'),
-                'total_weight' => $this->input->post('total_weight'),
-                'equipment' => $this->input->post('equipment'),
-            ];
-
-            if ($image) {
-                $data['image'] = $image;
-            }
-
-            // Update the vehicle
-            if ($this->Vehicle_model->update_vehicle($vehicle_id, $data)) {
-                $this->session->set_flashdata('success', 'Vehicle updated successfully!');
-                redirect('admin/edit_vehicle/' . $vehicle_id);
-            } else {
-                $this->session->set_flashdata('error', 'Failed to update vehicle.');
-                $data['vehicle'] = $this->Vehicle_model->getById($vehicle_id);
-                $this->render('admin/edit_vehicle', $data);
-            }
         }
 
+        // Prepare vehicle data
+        $updateData = [
+            'type'                => $this->input->post('type'),
+            'name'                => $this->input->post('name'),
+            'description'         => $this->input->post('description'),
+            'damages'             => $this->input->post('damages'),
+            'price'               => $this->input->post('price'),
+            'manufacturer_brand'  => $this->input->post('manufacturer_brand'),
+            'manufacturer_type'   => $this->input->post('manufacturer_type'),
+            'license_plate'       => $this->input->post('license_plate'),
+            'vehicle_id_number'   => $this->input->post('vehicle_id_number'),
+            'total_weight'        => $this->input->post('total_weight'),
+            'equipment'           => $this->input->post('equipment')
+        ];
+
+        // Save image filenames as comma-separated string
+        if (!empty($uploadedImages)) {
+            $updateData['image'] = implode(',', $uploadedImages);
+        }
+
+        // Update DB
+        if ($this->Vehicle_model->update_vehicle($vehicle_id, $updateData)) {
+            $this->session->set_flashdata('success', 'Vehicle updated successfully!');
+        } else {
+            $this->session->set_flashdata('error', 'Failed to update vehicle.');
+        }
+
+        redirect('admin/edit_vehicle/' . $vehicle_id);
     }
 
     public function remove_vehicle($vehicle_id) {
