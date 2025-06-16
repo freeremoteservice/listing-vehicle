@@ -48,9 +48,6 @@
           <li class="mb-3">
             <a href="<?= base_url('vehicle'); ?>">Vehicle</a>
           </li>
-          <li class="mb-3">
-            <a href="<?= base_url('blog'); ?>">Blog</a>
-          </li>
         </ul>
       </div>
 
@@ -132,9 +129,7 @@
   <script src='<?= base_url("assets/plugins/revolution/js/jquery.themepunch.revolution.min.js"); ?>'></script>
   <script src='<?= base_url("assets/plugins/smoothscroll/SmoothScroll.js"); ?>'></script>
   <script src='<?= base_url("assets/plugins/lazyestload/lazyestload.js"); ?>'></script>
-  <script src='<?= base_url("assets/plugins/owl-carousel/owl.carousel.min.js"); ?>'></script>
-  
-  
+  <script src='<?= base_url("assets/plugins/owl-carousel/owl.carousel.min.js"); ?>'></script>  
   
   
   <!-- Page Level JS -->

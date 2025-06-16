@@ -15,11 +15,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link" href="<?= base_url(); ?>">
-            <i class="fas fa-tachometer-alt" aria-hidden="true"></i> Dashboard <span class="sr-only">(current)</span></a>
-        </li>
-
-        <li class="nav-item">
           <a class="nav-link " href="<?= base_url('admin/orders'); ?>">
             <i class="fa fa-users" aria-hidden="true"></i> List Orders </a>
         </li>
@@ -47,8 +42,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   </div>
 </nav>
 
-
-
 <!-- ====================================
 ——— LISTINGS
 ===================================== -->
@@ -56,7 +49,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <div class="container">
     <!-- Breadcrumb -->
     <nav class="bg-transparent breadcrumb breadcrumb-2 px-0 mb-5" aria-label="breadcrumb">
-      <h2 class="fw-normal mb-4 mb-md-0">All Vehicles</h2>
+      <h2 class="fw-normal mb-4 mb-md-0 d-inline-block">
+        All Vehicles
+        <span class="small text-muted ms-2 fs-6">
+          <?= count($vehicles); ?> Vehicles Found
+        </span>
+      </h2>
       <ul class="list-unstyled d-flex p-0 m-0">
         <li class="breadcrumb-item"><a href="<?= base_url(); ?>">Home</a></li>
         <li class="breadcrumb-item active" aria-current="page">All Vehicles</li>
@@ -71,7 +69,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="alert alert-danger"><?= $this->session->flashdata('error'); ?></div>
     <?php endif; ?>
 
-    <table id="my-listing" class="display nowrap table-data-default" style="width:100%">
+    <table id="table-list-vehicle" class="display table-data-default" style="width:100%">
       <thead>
         <tr class="table-row-bg-white">
           <th>Image</th>
@@ -88,7 +86,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <tr class="table-row-bg-white">
               <td class="td-media">
                 <div class="media media-table">
-                  <a class="media-img" href="listing-reservation.html">
+                  <a class="media-img" href="#">
                     <img class="img-fluid rounded me-2 lazyestload" data-src="<?= !empty($vehicle['image']) ? base_url('uploads/vehicles/' . $vehicle['image']) : base_url('public/img/default-vehicle.jpg'); ?>" src="<?= !empty($vehicle['image']) ? base_url('uploads/vehicles/' . $vehicle['image']) : base_url('public/img/default-vehicle.jpg'); ?>">
                   </a>
                 </div>

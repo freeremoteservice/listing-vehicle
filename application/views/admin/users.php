@@ -15,11 +15,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link" href="<?= base_url(); ?>">
-            <i class="fas fa-tachometer-alt" aria-hidden="true"></i> Dashboard <span class="sr-only">(current)</span></a>
-        </li>
-
-        <li class="nav-item">
           <a class="nav-link " href="<?= base_url('admin/orders'); ?>">
             <i class="fa fa-users" aria-hidden="true"></i> List Orders </a>
         </li>
@@ -54,7 +49,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <div class="container">
     <!-- Breadcrumb -->
     <nav class="bg-transparent breadcrumb breadcrumb-2 px-0 mb-5" aria-label="breadcrumb">
-      <h2 class="fw-normal mb-4 mb-md-0">All Users</h2>
+      <h2 class="fw-normal mb-4 mb-md-0 d-inline-block">
+        All Users
+        <span class="small text-muted ms-2 fs-6">
+          <?= count($users); ?> Users Found
+        </span>
+      </h2>
       <ul class="list-unstyled d-flex p-0 m-0">
         <li class="breadcrumb-item"><a href="<?= base_url(); ?>">Home</a></li>
         <li class="breadcrumb-item active" aria-current="page">All Users</li>
@@ -70,11 +70,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <?php endif; ?>
 
 
-    <table id="my-listing" class="display nowrap table-data-default" style="width:100%">
+    <table id="table-list-users" class="display nowrap table-data-default" style="width:100%">
       <thead>
         <tr class="table-row-bg-white">
           <th>Username</th>
           <th>Email</th>
+          <th>Role</th>
+          <th>ID Front/Photo</th>
+          <th>ID Back/Company Doc</th>
           <th>Registered At</th>
           <th data-priority="2"></th>
         </tr>
@@ -82,9 +85,34 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <tbody>
         <?php if (!empty($users)): ?>
           <?php foreach ($users as $user): ?>
+            <?php
+              $img1 = $img2 = '';
+              if($user['role'] == 'private') {
+                $img1 = !empty($user['id_front_img']) ? base_url('uploads/users/' . $user['id_front_img']) : base_url('public/img/default-vehicle.jpg');
+                $img2 = !empty($user['id_back_img']) ? base_url('uploads/users/' . $user['id_back_img']) : base_url('public/img/default-vehicle.jpg');
+              } else {
+                $img1 = !empty($user['photo_img']) ? base_url('uploads/vehicles/' . $user['photo_img']) : base_url('public/img/default-vehicle.jpg');
+                $img2 = !empty($user['company_doc_file']) ? base_url('uploads/vehicles/' . $user['company_doc_file']) : base_url('public/img/default-vehicle.jpg');
+              }
+              ?>
             <tr class="table-row-bg-white">
               <td><?= $user['username']; ?></td>
               <td><?= $user['email']; ?></td>
+              <td><?= $user['role']; ?></td>
+              <td class="td-media" align="center">
+                <div class="media media-table" style="width: 60px;">
+                  <a class="media-img" href="listing-reservation.html">
+                    <img class="img-fluid rounded me-2 lazyestload" data-src="<?=  $img1;?>" src="<?= $img1; ?>">
+                  </a>
+                </div>
+              </td>
+              <td class="td-media" align="center">
+                <div class="media media-table" style="width: 60px;">
+                  <a class="media-img" href="listing-reservation.html">
+                    <img class="img-fluid rounded me-2 lazyestload" data-src="<?= $img2; ?>" src="<?= $img2; ?>">
+                  </a>
+                </div>
+              </td>
               <td><?= $user['created_at']; ?></td>
               <td>
                 <div class="dropdown">
@@ -101,7 +129,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <?php endforeach; ?>
         <?php else: ?>
           <tr>
-            <td colspan="6">No users available</td>
+            <td colspan="7">No users available</td>
           </tr>
         <?php endif; ?>
 
@@ -110,3 +138,5 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
   </div>
 </section>
+</script>
+

@@ -11,6 +11,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	    <h2 class="fw-normal mb-4 mb-md-0">Edit Vehicle</h2>
 	    <ul class="list-unstyled d-flex p-0 m-0">
 	      <li class="breadcrumb-item"><a href="<?= base_url(); ?>">Home</a></li>
+	      <li class="breadcrumb-item"><a href="<?= base_url('admin/vehicles'); ?>">List vehicles</a></li>
 	      <li class="breadcrumb-item active" aria-current="page">Edit Vehicle</li>
 	    </ul>
     </nav>
@@ -55,6 +56,47 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <label class="form-label" for="name">Name:</label>
                         <input type="text" id="name" name="name" class="form-control" value="<?= $vehicle->name; ?>">
                         <?= form_error('name'); ?>
+                    </div>
+
+                    <div class="form-group col-md-6 mb-6">
+                        <label class="form-label" for="manufacturer_brand">Manufacturer Brand:</label>
+                        <input type="text" id="manufacturer_brand" name="manufacturer_brand" class="form-control" value="<?= $vehicle->manufacturer_brand; ?>">
+                        <?= form_error('name'); ?>
+                    </div>
+
+                    <div class="form-group col-md-6 mb-6">
+                        <label class="form-label" for="manufacturer_type">Manufacturer Type:</label>
+                        <input type="text" id="manufacturer_type" name="manufacturer_type" class="form-control" value="<?= $vehicle->manufacturer_type; ?>">
+                        <?= form_error('name'); ?>
+                    </div>
+
+                    <div class="form-group col-md-6 mb-6">
+                        <label class="form-label" for="license_plate">License Plate:</label>
+                        <input type="text" id="license_plate" name="license_plate" class="form-control" value="<?= $vehicle->license_plate; ?>">
+                        <?= form_error('name'); ?>
+                    </div>
+
+                    <div class="form-group col-md-6 mb-6">
+                        <label class="form-label" for="vehicle_id_number">Vehicle Identification Number:</label>
+                        <input type="text" id="vehicle_id_number" name="vehicle_id_number" class="form-control" value="<?= $vehicle->vehicle_id_number; ?>">
+                        <?= form_error('name'); ?>
+                    </div>
+
+                    <div class="form-group col-md-6 mb-6">
+                        <label class="form-label" for="total_weight">Total Weight:</label>
+                        <input type="text" id="total_weight" name="total_weight" class="form-control" value="<?= $vehicle->total_weight; ?>">
+                        <?= form_error('name'); ?>
+                    </div>
+
+                    <div class="form-group col-md-6 mb-6">
+                        <label class="form-label" for="equipment">Equipment:</label>
+                        <input type="text" id="equipment" name="equipment" class="form-control" value="<?= $vehicle->equipment; ?>">
+                        <?= form_error('name'); ?>
+                    </div>
+
+                    <div class="form-group col-md-12 mb-6">
+                        <label class="form-label" for="damages">Damages</label>
+                        <textarea id="damages" name="damages" class="form-control" rows="6"><?= $vehicle->damages; ?></textarea>
                     </div>
 
                     <div class="form-group col-md-12 mb-6">

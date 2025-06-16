@@ -41,6 +41,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
   <!-- CUSTOM CSS -->
   <link href="<?= base_url('assets/css/style.css'); ?>" rel="stylesheet" id="option_style">
+  <link rel="stylesheet" href="<?= base_url('public/css/custom.css'); ?>">
 
   <!-- <link rel="stylesheet" href="assets/css/default.css" id="option_color"> -->
 
@@ -62,7 +63,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <header class="header">
       <nav class="nav-menuzord <?= (uri_string() !== '') ? '' : 'nav-menuzord-transparent'; ?> navbar-sticky">
         <div class="container clearfix">
-          <div id="menuzord" class="menuzord menuzord-responsive">
+          <div id="menuzord" class="menuzord menuzord-responsive <?= is_admin() ? 'admin_menu' : ''; ?>">
 
             <a href="<?= base_url(); ?>" class="menuzord-brand">
               <svg class="logo-svg" version="1.1" xmlns="http://www.w3.org/2000/svg" width="140" height="44">

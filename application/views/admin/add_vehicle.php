@@ -56,6 +56,47 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <input type="text" id="name" name="name" class="form-control" value="<?= set_value('name'); ?>">
                         <span style="color: red;"><?= form_error('name'); ?></span>
                     </div>
+                    
+                    <div class="form-group col-md-6 mb-6">
+                        <label class="form-label" for="manufacturer_brand">Manufacturer Brand:</label>
+                        <input type="text" id="manufacturer_brand" name="manufacturer_brand" class="form-control" value="">
+                        <?= form_error('name'); ?>
+                    </div>
+
+                    <div class="form-group col-md-6 mb-6">
+                        <label class="form-label" for="manufacturer_type">Manufacturer Type:</label>
+                        <input type="text" id="manufacturer_type" name="manufacturer_type" class="form-control" value="">
+                        <?= form_error('name'); ?>
+                    </div>
+
+                    <div class="form-group col-md-6 mb-6">
+                        <label class="form-label" for="license_plate">License Plate:</label>
+                        <input type="text" id="license_plate" name="license_plate" class="form-control" value="">
+                        <?= form_error('name'); ?>
+                    </div>
+
+                    <div class="form-group col-md-6 mb-6">
+                        <label class="form-label" for="vehicle_id_number">Vehicle Identification Number:</label>
+                        <input type="text" id="vehicle_id_number" name="vehicle_id_number" class="form-control" value="">
+                        <?= form_error('name'); ?>
+                    </div>
+
+                    <div class="form-group col-md-6 mb-6">
+                        <label class="form-label" for="total_weight">Total Weight:</label>
+                        <input type="text" id="total_weight" name="total_weight" class="form-control" value="">
+                        <?= form_error('name'); ?>
+                    </div>
+
+                    <div class="form-group col-md-6 mb-6">
+                        <label class="form-label" for="equipment">Equipment:</label>
+                        <input type="text" id="equipment" name="equipment" class="form-control" value="">
+                        <?= form_error('name'); ?>
+                    </div>
+
+                    <div class="form-group col-md-12 mb-6">
+                        <label class="form-label" for="damages">Damages</label>
+                        <textarea id="damages" name="damages" class="form-control" rows="6"></textarea>
+                    </div>
 
                     <div class="form-group col-md-12 mb-6">
                         <label class="form-label" for="description">Discribe the vehicle</label>
