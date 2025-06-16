@@ -46,4 +46,10 @@ class Vehicle_model extends CI_Model
         return $this->db->delete('vehicles');
     }
 
+    public function get_3_recent_items() {
+        $this->db->order_by('created_at desc');
+        $this->db->limit(3, 0);
+        return $this->db->get('vehicles')->result_array();
+    }
+
 }
