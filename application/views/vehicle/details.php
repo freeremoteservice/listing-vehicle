@@ -27,6 +27,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         </a>
                       </div>
                     <?php endforeach;?>
+                  <?php else:?>
+                    <div class="single-item">
+                      <a class="overlay-dark" href="<?= base_url('public/img/default-vehicle.jpg'); ?>" data-fancybox="gallery" data-caption="Caption for single image">
+                        <img class="lazyestload" data-src="<?= base_url('public/img/default-vehicle.jpg'); ?>" src="<?= base_url('public/img/default-vehicle.jpg'); ?>" alt="Image" />
+                      </a>
+                    </div>
                   <?php endif;?>
               </div>
             </div>
