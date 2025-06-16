@@ -38,7 +38,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <?php foreach($recent_items as $item) :?>
           <div class="col-md-6 col-lg-4 col-xs-12 element-item recent-item">
             <div class="card">
-              <a href="listings-half-screen-map-list.html" class="card-img">
+              <a href="<?= base_url('vehicle/' . $item['id']); ?>" class="card-img">
                 <?php if($item['image']): 
                   $img = explode(',', $item['image'])[0];
                   ?>
@@ -51,19 +51,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div class="p-4">
                   <div class="d-flex justify-content-between align-items-center mb-1">
                     <h3 class="card-title mb-0">
-                      <a href="listings-half-screen-map-list.html"> <?= $item['name'];?>
-                        <i class="fas fa-check-circle" aria-hidden="true"></i>
+                      <a href="<?= base_url('vehicle/'); ?>">
+                        <?= $item['name'];?>
                       </a>
                     </h3>
-                    <button class="btn-like px-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Favourite this listing">
-                      <i class="far fa-heart text-primary" aria-hidden="true"></i>
-                      <span>9 k</span>
-                    </button>
                   </div>
 
                   <div class="mb-6 meta-post">
                     <date class="text-capitalize meta-time"><?= $item['created_at']?>,</date>
-                    <a class="text-uppercase" href="listings-half-screen-map-list.html"><?= $item['manufacturer_brand']?></a>
+                    <a class="text-uppercase" href="<?= base_url('vehicle/'); ?>"><?= $item['manufacturer_brand']?></a>
                   </div>
                   <div class="card-text">
                     <h4 class="text-primary">$<?= $item['price']?></h4>
