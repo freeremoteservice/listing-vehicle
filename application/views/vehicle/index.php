@@ -35,7 +35,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="row">
                         <div class="col-md-4 col-xl-3">
                             <div class="card-list-img">
-                                <img class="lazyestload" data-src="<?= $vehicle['image'] ? base_url('uploads/vehicles/' . $vehicle['image']) : 'public/img/default-vehicle.jpg'; ?>" src="<?= $vehicle['image'] ? base_url('uploads/vehicles/' . $vehicle['image']) : 'public/img/default-vehicle.jpg'; ?>">
+                                <?php if($vehicle['image']): 
+                                    $img = explode(',', $vehicle['image'])[0];
+                                ?>
+                                    <img class="lazyestload" data-src="<?= base_url('uploads/vehicles/' . $img); ?>" src="<?= base_url('uploads/vehicles/' . $img); ?>" alt="gallery-img">
+                                <?php else :?>
+                                    <img class="lazyestload" data-src="<?= base_url('public/img/default-vehicle.jpg'); ?>" src="<?= base_url('public/img/default-vehicle.jpg'); ?>" alt="gallery-img">
+                                <?php endif;?>
                                 <span class="badge badge-primary">Verified</span>
                             </div>
                         </div>

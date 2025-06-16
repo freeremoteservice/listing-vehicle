@@ -34,108 +34,50 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     <!-- Grid-->
     <div class="row grid">
-      <div class="col-md-6 col-lg-4 col-xs-12 element-item featured-item ">
-        <div class="card">
-          <a href="listings-half-screen-map-list.html" class="card-img">
-            <img class="card-img-top lazyestload" data-src="assets/img/cars/car-img-01.jpg" src="assets/img/cars/car-img-01.jpg" alt="Car img">
-          </a>
-          <div class="card-body p-0">
-            <div class="p-4">
-              <div class="d-flex justify-content-between align-items-center mb-1">
-                <h3 class="card-title mb-0">
-                  <a href="listings-half-screen-map-list.html"> Audi A5 3.0
-                    <i class="fas fa-check-circle" aria-hidden="true"></i>
-                  </a>
-                </h3>
-                <button class="btn-like px-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Favourite this listing">
-                  <i class="far fa-heart text-primary" aria-hidden="true"></i>
-                  <span>11 k</span>
-                </button>
-              </div>
+      <?php if($recent_items) :?>
+        <?php foreach($recent_items as $item) :?>
+          <div class="col-md-6 col-lg-4 col-xs-12 element-item recent-item">
+            <div class="card">
+              <a href="listings-half-screen-map-list.html" class="card-img">
+                <?php if($item['image']): 
+                  $img = explode(',', $item['image'])[0];
+                  ?>
+                  <img class="card-img-top lazyestload" data-src="<?= base_url('uploads/vehicles/' . $img); ?>" src="<?= base_url('uploads/vehicles/' . $img); ?>" alt="gallery-img">
+                <?php else :?>
+                  <img class="card-img-top lazyestload" data-src="<?= base_url('public/img/default-vehicle.jpg'); ?>" src="<?= base_url('public/img/default-vehicle.jpg'); ?>" alt="gallery-img">
+                <?php endif;?>
+              </a>
+              <div class="card-body p-0">
+                <div class="p-4">
+                  <div class="d-flex justify-content-between align-items-center mb-1">
+                    <h3 class="card-title mb-0">
+                      <a href="listings-half-screen-map-list.html"> <?= $item['name'];?>
+                        <i class="fas fa-check-circle" aria-hidden="true"></i>
+                      </a>
+                    </h3>
+                    <button class="btn-like px-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Favourite this listing">
+                      <i class="far fa-heart text-primary" aria-hidden="true"></i>
+                      <span>9 k</span>
+                    </button>
+                  </div>
 
-              <div class="mb-6 meta-post">
-                <date class="text-capitalize meta-time">20 may, 2021,</date>
-                <a class="text-uppercase" href="listings-half-screen-map-list.html">audi</a>
-              </div>
-              <div class="card-text">
-                <h4 class="text-primary">$80,000</h4>
-              </div>
-            </div>
+                  <div class="mb-6 meta-post">
+                    <date class="text-capitalize meta-time"><?= $item['created_at']?>,</date>
+                    <a class="text-uppercase" href="listings-half-screen-map-list.html"><?= $item['manufacturer_brand']?></a>
+                  </div>
+                  <div class="card-text">
+                    <h4 class="text-primary">$<?= $item['price']?></h4>
+                  </div>
+                </div>
 
-            <div class="card-footer py-3 px-4 bg-transparent">
-              <p class="mb-0">Brand New, Automatic, 50 km/h</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-4 col-xs-12 element-item recent-item">
-        <div class="card">
-          <a href="listings-half-screen-map-list.html" class="card-img">
-            <img class="card-img-top lazyestload" data-src="assets/img/cars/car-img-02.jpg" src="assets/img/cars/car-img-02.jpg" alt="gallery-img">
-          </a>
-          <div class="card-body p-0">
-            <div class="p-4">
-              <div class="d-flex justify-content-between align-items-center mb-1">
-                <h3 class="card-title mb-0">
-                  <a href="listings-half-screen-map-list.html"> Audi A4
-                    <i class="fas fa-check-circle" aria-hidden="true"></i>
-                  </a>
-                </h3>
-                <button class="btn-like px-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Favourite this listing">
-                  <i class="far fa-heart text-primary" aria-hidden="true"></i>
-                  <span>9 k</span>
-                </button>
+                <div class="card-footer py-3 px-4 bg-transparent">
+                  <p class="mb-0">Brand New, Automatic, 80 km/h</p>
+                </div>
               </div>
-
-              <div class="mb-6 meta-post">
-                <date class="text-capitalize meta-time">23 may, 2021,</date>
-                <a class="text-uppercase" href="listings-half-screen-map-list.html">AUDI</a>
-              </div>
-              <div class="card-text">
-                <h4 class="text-primary">$90,000</h4>
-              </div>
-            </div>
-
-            <div class="card-footer py-3 px-4 bg-transparent">
-              <p class="mb-0">Brand New, Automatic, 80 km/h</p>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-4 col-xs-12 element-item recent-item">
-        <div class="card">
-          <a href="listings-half-screen-map-list.html" class="card-img">
-            <img class="card-img-top lazyestload" data-src="assets/img/cars/car-img-03.jpg" src="assets/img/cars/car-img-03.jpg" alt="gallery-img">
-          </a>
-          <div class="card-body p-0">
-            <div class="p-4">
-              <div class="d-flex justify-content-between align-items-center mb-1">
-                <h3 class="card-title mb-0">
-                  <a href="listings-half-screen-map-list.html"> Toyota FJ Cruiser
-                    <i class="fas fa-check-circle" aria-hidden="true"></i>
-                  </a>
-                </h3>
-                <button class="btn-like px-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Favourite this listing">
-                  <i class="far fa-heart text-primary" aria-hidden="true"></i>
-                  <span>7.5 k</span>
-                </button>
-              </div>
-
-              <div class="mb-6 meta-post">
-                <date class="text-capitalize meta-time">24 may, 2021,</date>
-                <a class="text-uppercase" href="listings-half-screen-map-list.html">TOYOTA</a>
-              </div>
-              <div class="card-text">
-                <h4 class="text-primary">$95,000</h4>
-              </div>
-            </div>
-
-            <div class="card-footer py-3 px-4 bg-transparent">
-              <p class="mb-0">Brand New, Automatic, 80 km/h</p>
-            </div>
-          </div>
-        </div>
-      </div>
+        <?php endforeach;?>
+      <?php endif;?>
     </div>
   </div>
 </section>

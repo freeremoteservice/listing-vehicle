@@ -105,7 +105,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                     <div class="col-md-12 mb-6">
                         <div class="form-group position-relative form-group-dragable">
-                            <input type="file" id="image" name="image" class="custom-file-input">
+                            <input type="file" id="image" name="image[]" class="custom-file-input" multiple>
                             <label class="custom-file-label mb-0" for="image">
                                 Click or Drag image here
                             </label>

@@ -8,6 +8,8 @@ class Home extends MY_Controller {
             redirect('admin/orders'); // Admin's root page
         }
 
+        $this->load->model('Vehicle_model');
+        $data['recent_items'] = $this->Vehicle_model->get_recent_items();
         $data['title'] = "Homepage";
         // Default behavior for guests (not logged in)
         $this->render('home', $data);

@@ -12,12 +12,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="row">
           <div class="col-md-8">
             <div class="img-fluid mb-4 mb-md-0">
-              <a class="overlay-dark" href="<?= $vehicle->image ? base_url('uploads/vehicles/' . $vehicle->image) : base_url('public/img/default-vehicle.jpg'); ?>">
+              <!-- <a class="overlay-dark" href="<?= $vehicle->image ? base_url('uploads/vehicles/' . $vehicle->image) : base_url('public/img/default-vehicle.jpg'); ?>">
                 <img class="card-img lazyestload"
                      data-src="<?= $vehicle->image ? base_url('uploads/vehicles/' . $vehicle->image) : base_url('public/img/default-vehicle.jpg'); ?>"
                      src="<?= $vehicle->image ? base_url('uploads/vehicles/' . $vehicle->image) : base_url('public/img/default-vehicle.jpg'); ?>"
                      alt="Image" />
-              </a>
+              </a> -->
+              <div class="owl-carousel owl-theme listing-details-carousel nav-light-dark">
+                  <?php if($vehicle->image): ?>
+                    <?php foreach (explode(',', $vehicle->image) as $img): ?>
+                      <div class="single-item">
+                        <a class="overlay-dark" href="<?= base_url('uploads/vehicles/' . $img); ?>" data-fancybox="gallery" data-caption="Caption for single image">
+                          <img class="lazyestload" data-src="<?= base_url('uploads/vehicles/' . $img); ?>" src="<?= base_url('uploads/vehicles/' . $img); ?>" alt="Image" />
+                        </a>
+                      </div>
+                    <?php endforeach;?>
+                  <?php else:?>
+                    <div class="single-item">
+                      <a class="overlay-dark" href="<?= base_url('public/img/default-vehicle.jpg'); ?>" data-fancybox="gallery" data-caption="Caption for single image">
+                        <img class="lazyestload" data-src="<?= base_url('public/img/default-vehicle.jpg'); ?>" src="<?= base_url('public/img/default-vehicle.jpg'); ?>" alt="Image" />
+                      </a>
+                    </div>
+                  <?php endif;?>
+              </div>
             </div>
           </div>
           <div class="col-md-4 d-flex justify-content-start">
@@ -162,6 +179,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   </div>
 </div>
 
+<script src='<?= base_url("assets/plugins/jquery/jquery-3.4.1.min.js"); ?>'></script>
+
 <script>
 // Modal logic for Book Now
 document.addEventListener('DOMContentLoaded', function () {
@@ -174,4 +193,18 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   // You can handle modal form submission here if needed
 });
+
+  $(document).ready(function(){
+    var $carousel = $('.listing-details-carousel');
+    if ($carousel.hasClass('owl-loaded')) {
+      $carousel.trigger('destroy.owl.carousel').removeClass('owl-loaded');
+      $carousel.find('.owl-stage-outer').children().unwrap();
+    }
+    $carousel.owlCarousel({
+      items: 1,
+      loop: true,
+      nav: true,
+      dots: true
+    });
+  });
 </script>

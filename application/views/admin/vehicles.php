@@ -87,7 +87,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <td class="td-media">
                 <div class="media media-table">
                   <a class="media-img" href="#">
-                    <img class="img-fluid rounded me-2 lazyestload" data-src="<?= !empty($vehicle['image']) ? base_url('uploads/vehicles/' . $vehicle['image']) : base_url('public/img/default-vehicle.jpg'); ?>" src="<?= !empty($vehicle['image']) ? base_url('uploads/vehicles/' . $vehicle['image']) : base_url('public/img/default-vehicle.jpg'); ?>">
+                    <?php if($vehicle['image']): 
+                      $img = explode(',', $vehicle['image'])[0];
+                    ?>
+                      <img class="img-fluid rounded me-2 lazyestload" data-src="<?= base_url('uploads/vehicles/' . $img); ?>" src="<?= base_url('uploads/vehicles/' . $img); ?>" alt="gallery-img">
+                    <?php else :?>
+                      <img class="img-fluid rounded me-2 lazyestload" data-src="<?= base_url('public/img/default-vehicle.jpg'); ?>" src="<?= base_url('public/img/default-vehicle.jpg'); ?>" alt="gallery-img">
+                    <?php endif;?>
                   </a>
                 </div>
               </td>
