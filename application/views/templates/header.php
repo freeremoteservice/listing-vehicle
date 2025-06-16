@@ -24,6 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   
   <link href='<?= base_url("assets/plugins/owl-carousel/assets/owl.carousel.min.css"); ?>' rel='stylesheet'>
   <link href='<?= base_url("assets/plugins/owl-carousel/assets/owl.theme.default.min.css"); ?>' rel='stylesheet'>
+  <link href='<?= base_url("assets/plugins/fancybox/jquery.fancybox.min.css"); ?>' rel='stylesheet'>
   <link href='<?= base_url("assets/plugins/revolution/css/settings.css"); ?>' rel='stylesheet'>
   
   <!-- Page Level CSS -->

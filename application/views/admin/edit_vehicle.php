@@ -106,13 +106,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
                     <div class="col-md-12 mb-6">
                         <div class="form-group position-relative form-group-dragable">
-                            <input type="file" id="image" name="image" class="custom-file-input">
+                            <input type="file" id="image" name="image[]" class="custom-file-input" multiple>
                             <label class="custom-file-label mb-0" for="image">
                                 Click or Drag images here
                             </label>
                             <div id="imagePreview" style="position: absolute; top: 0; left: 0; height: 100%;">
                                 <?php if($vehicle->image): ?>
-                                    <img src="<?= base_url('uploads/vehicles/' . $vehicle->image); ?>" alt="" style="height: calc(100% - 10px); margin: 5px;">
+                                    <?php foreach (explode(',', $vehicle->image) as $img): ?>
+                                        <img src="<?= base_url('uploads/vehicles/' . $img); ?>" alt="" style="height: 100px; margin: 5px;">
+                                    <?php endforeach; ?>
                                 <?php endif; ?>
                             </div>
                             <?php if ($this->session->flashdata('error')): ?>
