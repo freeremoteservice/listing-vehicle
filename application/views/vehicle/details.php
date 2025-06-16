@@ -323,7 +323,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <button type="button" id="bookNowBtn" class="btn btn-primary"> Book Now </button>
           <?php endif; ?>
         <?= form_close() ?>
-        <div class="card mt-4" style="background: #dde2e5;">
+
+        <div class="card mt-4" style="background: #f3f8fb;">
           <div class="card-body text-center">
             <div class="fw-bold mb-2" style="color: #294a7d; font-size: 1.2em;">
               Do you have any questions<br>about the product?<br>
