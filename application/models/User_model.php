@@ -7,6 +7,11 @@ class User_model extends CI_Model {
         return $this->db->insert('users', $data);
     }
 
+    public function update_user($id, $data) {
+        $this->db->where('id', $id);
+        return $this->db->update('users', $data);
+    }
+
     public function get_users_by_role($role) {
         // Fetch users by role
         // $this->db->where('role', $role);

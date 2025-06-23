@@ -5,6 +5,8 @@ class Vehicle extends MY_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('Vehicle_model');
+        $this->load->model('Order_model');
+        $this->load->model('User_model');
     }
 
     public function index() {
@@ -67,6 +69,78 @@ class Vehicle extends MY_Controller {
             return FALSE;
         }
         return TRUE;
+    }
+
+    public function upload_file($field_name, $upload_path) {
+        if (!is_dir($upload_path)) {
+            mkdir($upload_path, 0777, true);
+        }
+
+        $config['upload_path'] = $upload_path;
+        $config['allowed_types'] = 'jpg|jpeg|png|webp';
+        $config['max_size'] = 5120; // 2MB
+        $config['encrypt_name'] = TRUE;
+        $this->upload->initialize($config);
+    
+        if (!empty($_FILES[$field_name]['name'])) {
+            if (!$this->upload->do_upload($field_name)) {
+                $error = $this->upload->display_errors();
+                log_message('error', 'Upload Error for ' . $field_name . ': ' . $error);
+                $this->session->set_flashdata('error', $error);
+                return false;
+            } else {
+                return $this->upload->data('file_name');
+            }
+        } else {
+            log_message('error', 'No file selected for ' . $field_name);
+        }
+        return null; // No file uploaded
+    }
+
+    public function order_vehicle() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if ($this->session->userdata('role') == 'private') {
+                $data = array();
+                $id_front_img = $this->upload_file('id_front_img', './uploads/users/');
+                $id_back_img = $this->upload_file('id_back_img', './uploads/users/');
+                if ($id_front_img && $id_back_img) {
+                    $data['id_front_img'] = $id_front_img;
+                    $data['id_back_img'] = $id_back_img;
+                    $this->User_model->update_user($this->session->userdata('user_id'), $data);
+                } else {
+                    $data['vehicle'] = $this->Vehicle_model->getById($_POST['vehicle_id']);
+                    $this->render('vehicle/details', $data);
+                    return;
+                }
+            }
+
+            if ($this->session->userdata('role') == 'company') {
+                $data = array();
+                $user_photo = $this->upload_file('user_photo', './uploads/users/');
+                $company_document = $this->upload_file('company_document', './uploads/users/');
+                if ($user_photo && $company_document) {
+                    $data['photo_img'] = $user_photo;
+                    $data['company_doc_file'] = $company_document;
+                    $this->User_model->update_user($this->session->userdata('user_id'), $data);
+                } else {
+                    $data['vehicle'] = $this->Vehicle_model->getById($_POST['vehicle_id']);
+                    $this->render('vehicle/details', $data);
+                    return;
+                }
+            }
+
+            $order_data = array(
+                'user_id' => $this->session->userdata('user_id'),
+                'vehicle_id' => $_POST['vehicle_id'],
+                'delivery_address' => $_POST['delivery_address'],
+                'status' => 'pending'
+            );
+            $this->Order_model->insert_order($order_data);
+            $data = array();
+            $data['vehicle'] = $this->Vehicle_model->getById($_POST['vehicle_id']);
+            $this->render('vehicle/details', $data);
+            return;
+        }
     }
     
     

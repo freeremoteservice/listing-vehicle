@@ -2,6 +2,201 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
+<style>
+  .form-step {
+    display: none;
+  }
+  .form-step.active {
+    display: block;
+  }
+
+  .progress-bar-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+  }
+
+  .progress-bar {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    position: relative;
+  }
+
+  .progress-bar li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    flex: 1;
+    text-align: center;
+  }
+
+  .progress-bar li:not(:first-child)::after {
+    content: '';
+    width: 100%;
+    height: 2px;
+    background-color: #dcdcdc;
+    position: absolute;
+    top: 50%;
+    right: -50%; /* Adjusts alignment for spacing */
+    transform: translateX(-100%);
+    z-index: 0; 
+  }
+
+  .progress-bar li.active::after {
+    background-color: #007bff; /* Active blue color for lines */
+  }
+
+  .progress-bar li i {
+    width: 40px;
+    height: 40px;
+    border: 2px solid #dcdcdc;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    font-size: 20px;
+    color: #dcdcdc;
+    transition: all 0.3s ease;
+    z-index: 1;
+  }
+
+  .progress-bar li.active i {
+    border-color: #007bff;
+    color: #007bff;
+  }
+
+  .progress-bar li span {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #555;
+  }
+
+  .progress-bar li.active span {
+    color: #007bff;
+  }
+
+  .form-step hr {
+    height: 2px;
+    color: #007bff;
+  }
+  .action-group {
+    display: flex;
+    justify-content: flex-end;
+    column-gap: 10px;
+    align-items: center;
+  }
+
+  /* Mobile Responsive Styles */
+  @media (max-width: 768px) {
+    .modal-dialog {
+      margin: 10px;
+      max-width: calc(100% - 20px);
+    }
+    
+    .modal-body {
+      padding: 15px;
+    }
+    
+    .progress-bar li i {
+      width: 30px;
+      height: 30px;
+      font-size: 16px;
+    }
+    
+    .progress-bar li span {
+      font-size: 12px;
+      margin-top: 5px;
+    }
+    
+    .action-group {
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .action-group .btn {
+      width: 100%;
+    }
+    
+    .form-group {
+      margin-bottom: 15px;
+    }
+    
+    .form-group label {
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+    
+    .form-control {
+      font-size: 14px;
+      padding: 8px 12px;
+    }
+    
+    .custom-file-label {
+      font-size: 14px;
+      padding: 8px 12px;
+    }
+    
+    .error {
+      font-size: 12px;
+    }
+    
+    /* Stack columns on mobile */
+    .row .col-md-6 {
+      margin-bottom: 15px;
+    }
+    
+    /* Adjust file upload preview */
+    #id_front_img_preview,
+    #id_back_img_preview,
+    #user_photo_preview,
+    #company_document_preview {
+      position: relative !important;
+      height: auto !important;
+      margin-top: 10px;
+    }
+    
+    #id_front_img_preview img,
+    #id_back_img_preview img,
+    #user_photo_preview img,
+    #company_document_preview img {
+      max-width: 100%;
+      height: auto;
+      margin: 5px 0;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .modal-dialog {
+      margin: 5px;
+      max-width: calc(100% - 10px);
+    }
+    
+    .modal-body {
+      padding: 10px;
+    }
+    
+    .progress-bar li i {
+      width: 25px;
+      height: 25px;
+      font-size: 14px;
+    }
+    
+    .progress-bar li span {
+      font-size: 11px;
+    }
+    
+    .modal-title {
+      font-size: 18px;
+    }
+  }
+</style>
 <!-- ====================================
 ———	LISTING SINGLE HEADING
 ===================================== -->
@@ -122,7 +317,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <?php if ($this->session->userdata('logged_in')): ?>
 
             <div class="form-group mb-6">
-              <button type="submit" class="btn btn-primary"> Book Now </button>
+              <button type="button" id="loggedBookNow" class="btn btn-primary"> Book Now </button>
             </div>
           <?php else: ?>
             <button type="button" id="bookNowBtn" class="btn btn-primary"> Book Now </button>
@@ -179,6 +374,112 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   </div>
 </div>
 
+<div class="modal fade" id="bookNowModal_logged" tabindex="-1" aria-labelledby="bookNowModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header" style="background: #2196f3; color: #fff;">
+        <h5 class="modal-title w-100 text-center map-sidebar" id="bookNowModalLabel">Members Log In</h5>
+        <button type="button" class="btn-close main-wrapper" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <?php if ($this->session->flashdata('error')): ?>
+            <p style="color: red;"><?= $this->session->flashdata('error'); ?></p>
+        <?php endif; ?>
+        <div class="progress-bar-container">
+          <ul class="progress-bar">
+            <li class="active" data-step="1" title="Bidder Company">
+              <i class="fas fa-building"></i>
+            </li>
+            <li data-step="2" title="Bidder">
+              <i class="fas fa-user"></i>
+            </li>
+          </ul>
+        </div>
+        <?= form_open_multipart('vehicle/order_vehicle', ['id' => 'register-form', 'class' => 'register-form', 'method' => 'post']); ?>
+          <div class="multi-step-form">
+            <!-- Step 1: Bidder Company -->
+            <div class="form-step active" id="step-1">
+              <input type="hidden" name="vehicle_id" value="<?= $vehicle->id;?>">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="delivery_address">Delivery Address *</label>
+                    <input type="text" id="delivery_address" name="delivery_address" class="form-control" required>
+                    <span class="error" id="delivery_address_error" style="display: none; color: red;">Please enter a delivery address.</span>
+                    <span class="error"><?= form_error('delivery_address'); ?></span>
+                  </div>
+                </div>
+              </div>
+              <div class="action-group">
+                <button type="button" class="btn btn-primary next-step">Next</button>
+              </div>
+            </div>
+            <!-- Step 2: Bidder -->
+            <div class="form-step" id="step-2">
+              <div class="row" id="id-container" style="display: <?= ($this->session->userdata('role') == 'company' || $this->session->userdata('role') == 'admin') ? 'none' : '';?>">
+                <div class="col-md-6">
+                  <label for="id_front_img">ID Front Image *</label>
+                  <div class="form-group position-relative mb-6 form-group-dragable">
+                    <input type="file" id="id_front_img" name="id_front_img" class="custom-file-input">
+                    <label class="custom-file-label mb-0" for="id_front_img">
+                      Click or Drag image here
+                    </label>
+                    <div id="id_front_img_preview" style="position: absolute; top: 0; left: 0; height: 100%;"></div>
+                    <span class="error" id="id_front_img_error" style="display: none; color: red;">Please upload ID front image.</span>
+                    <span class="error"><?= form_error('id_front_img'); ?></span>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <label for="id_back_img">ID Back Image *</label>
+                  <div class="form-group position-relative mb-6 form-group-dragable">
+                    <input type="file" id="id_back_img" name="id_back_img" class="custom-file-input">
+                    <label class="custom-file-label mb-0" for="id_back_img">
+                      Click or Drag image here
+                    </label>
+                    <div id="id_back_img_preview" style="position: absolute; top: 0; left: 0; height: 100%;"></div>
+                    <span class="error" id="id_back_img_error" style="display: none; color: red;">Please upload ID back image.</span>
+                    <span class="error"><?= form_error('id_back_img'); ?></span>
+                  </div>
+                </div>
+              </div>
+              <div class="row" id="company-doc-container" style="display: <?= ($this->session->userdata('role') == 'private' || $this->session->userdata('role') == 'admin') ? 'none' : '';?>;">
+                <div class="col-md-12">
+                  <label for="user_photo">Your Photo *</label>
+                  <div class="form-group position-relative mb-6 form-group-dragable">
+                    <input type="file" id="user_photo" name="user_photo" class="custom-file-input">
+                    <label class="custom-file-label mb-0" for="user_photo">
+                      Click or Drag image here
+                    </label>
+                    <div id="user_photo_preview" style="position: absolute; top: 0; left: 0; height: 100%;"></div>
+                    <span class="error" id="user_photo_error" style="display: none; color: red;">Please upload your photo.</span>
+                    <span class="error"><?= form_error('user_photo'); ?></span>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <label for="company_document">Company Document *</label>
+                  <div class="form-group position-relative mb-6 form-group-dragable">
+                    <input type="file" id="company_document" name="company_document" class="custom-file-input">
+                    <label class="custom-file-label mb-0" for="company_document">
+                      Click or Drag file here
+                    </label>
+                    <div id="company_document_preview" style="position: absolute; top: 0; left: 0; height: 100%;"></div>
+                    <span class="error" id="company_document_error" style="display: none; color: red;">Please upload company document.</span>
+                    <span class="error"><?= form_error('company_document'); ?></span>
+                  </div>
+                </div>
+              </div>
+              <div class="action-group">
+                <button type="button" class="btn btn-secondary prev-step">Back</button>
+                <button type="button" class="btn btn-primary next-step">Finish</button>
+              </div>
+            </div>
+          </div>
+        <?= form_close();?>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script src='<?= base_url("assets/plugins/jquery/jquery-3.4.1.min.js"); ?>'></script>
 
 <script>
@@ -194,6 +495,98 @@ document.addEventListener('DOMContentLoaded', function () {
   // You can handle modal form submission here if needed
 });
 
+// Modal logic for Book Now
+document.addEventListener('DOMContentLoaded', function () {
+  var bookNowBtn = document.getElementById('loggedBookNow');
+  if (bookNowBtn) {
+    bookNowBtn.addEventListener('click', function () {
+      var modal = new bootstrap.Modal(document.getElementById('bookNowModal_logged'));
+      modal.show();
+    });
+  }
+  // You can handle modal form submission here if needed
+});
+
+document.getElementById('id_back_img').addEventListener('change', function (event) {
+  const files = event.target.files;
+  const previewContainer = document.getElementById('id_back_img_preview');
+  previewContainer.innerHTML = ''; // Clear previous previews
+
+  Array.from(files).forEach(file => {
+    if (file.type.startsWith('image/')) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const img = document.createElement('img');
+        img.src = e.target.result;
+        img.style.height = 'calc(100% - 10px)'; // Adjust size
+        img.style.margin = '5px';
+        previewContainer.appendChild(img);
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+});
+
+document.getElementById('id_front_img').addEventListener('change', function (event) {
+  const files = event.target.files;
+  const previewContainer = document.getElementById('id_front_img_preview');
+  previewContainer.innerHTML = ''; // Clear previous previews
+
+  Array.from(files).forEach(file => {
+    if (file.type.startsWith('image/')) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const img = document.createElement('img');
+        img.src = e.target.result;
+        img.style.height = 'calc(100% - 10px)'; // Adjust size
+        img.style.margin = '5px';
+        previewContainer.appendChild(img);
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+});
+
+document.getElementById('user_photo').addEventListener('change', function (event) {
+  const files = event.target.files;
+  const previewContainer = document.getElementById('user_photo_preview');
+  previewContainer.innerHTML = ''; // Clear previous previews
+
+  Array.from(files).forEach(file => {
+    if (file.type.startsWith('image/')) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const img = document.createElement('img');
+        img.src = e.target.result;
+        img.style.height = 'calc(100% - 10px)'; // Adjust size
+        img.style.margin = '5px';
+        previewContainer.appendChild(img);
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+});
+
+document.getElementById('company_document').addEventListener('change', function (event) {
+  const files = event.target.files;
+  const previewContainer = document.getElementById('company_document_preview');
+  previewContainer.innerHTML = ''; // Clear previous previews
+
+  Array.from(files).forEach(file => {
+    if (file.type.startsWith('image/')) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const img = document.createElement('img');
+        img.src = e.target.result;
+        img.style.height = 'calc(100% - 10px)'; // Adjust size
+        img.style.margin = '5px';
+        previewContainer.appendChild(img);
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+});
+
   $(document).ready(function(){
     var $carousel = $('.listing-details-carousel');
     if ($carousel.hasClass('owl-loaded')) {
@@ -206,5 +599,98 @@ document.addEventListener('DOMContentLoaded', function () {
       nav: true,
       dots: true
     });
+
+    $(".next-step").click(function () {
+      let currentStep = $(".form-step.active");
+      let nextStep = currentStep.next(".form-step");
+      
+      // Validate delivery address if we're on step 1
+      if (currentStep.attr('id') === 'step-1') {
+        let deliveryAddress = $('#delivery_address').val().trim();
+        if (!deliveryAddress) {
+          $('#delivery_address_error').show();
+          $('#delivery_address').focus();
+          return;
+        } else {
+          $('#delivery_address_error').hide();
+        }
+      }
+      
+      // Validate step 2 (Finish button) - image uploads based on user role
+      if (currentStep.attr('id') === 'step-2') {
+        let isValid = true;
+        
+        // Check if user is private (show ID fields) or company (show company fields)
+        let isPrivateUser = $('#id-container').is(':visible');
+        let isCompanyUser = $('#company-doc-container').is(':visible');
+        
+        if (isPrivateUser) {
+          // Validate ID fields for private users
+          let idFrontImg = $('#id_front_img')[0].files.length;
+          let idBackImg = $('#id_back_img')[0].files.length;
+          
+          if (!idFrontImg) {
+            $('#id_front_img_error').show();
+            isValid = false;
+          } else {
+            $('#id_front_img_error').hide();
+          }
+          
+          if (!idBackImg) {
+            $('#id_back_img_error').show();
+            isValid = false;
+          } else {
+            $('#id_back_img_error').hide();
+          }
+        }
+        
+        if (isCompanyUser) {
+          // Validate company fields for company users
+          let userPhoto = $('#user_photo')[0].files.length;
+          let companyDoc = $('#company_document')[0].files.length;
+          
+          if (!userPhoto) {
+            $('#user_photo_error').show();
+            isValid = false;
+          } else {
+            $('#user_photo_error').hide();
+          }
+          
+          if (!companyDoc) {
+            $('#company_document_error').show();
+            isValid = false;
+          } else {
+            $('#company_document_error').hide();
+          }
+        }
+        
+        if (!isValid) {
+          return; // Don't submit if validation fails
+        }
+        
+        // If validation passes, submit the form
+        $('#register-form').submit();
+        return;
+      }
+      
+      currentStep.removeClass("active");
+      nextStep.addClass("active");
+
+      // Update progress bar
+      let stepIndex = $(".form-step").index(nextStep) + 1;
+      $(".progress-bar li").removeClass("active");
+      $(".progress-bar li").slice(0, stepIndex).addClass("active");
+    });
+
+    $(".prev-step").click(function () {
+      let currentStep = $(".form-step.active");
+      let prevStep = currentStep.prev(".form-step");
+      currentStep.removeClass("active");
+      prevStep.addClass("active");
+      // Update progress bar
+      let stepIndex = $(".form-step").index(prevStep) + 1;
+      $(".progress-bar li").removeClass("active");
+      $(".progress-bar li").slice(0, stepIndex).addClass("active");
+    })
   });
 </script>

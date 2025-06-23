@@ -93,15 +93,6 @@ class Auth extends MY_Controller {
             $this->form_validation->set_rules('phone', 'Phone', 'required');
             $this->form_validation->set_rules('birthdate', 'Birthdate', 'required');
             $this->form_validation->set_rules('user_type', 'User Type', 'required');
-            if ($this->input->post('user_type') == 'private') {
-                $this->form_validation->set_rules('id_front_img', 'ID Front Image', 'callback_file_required[id_front_img]');
-                $this->form_validation->set_rules('id_back_img', 'ID Back Image', 'callback_file_required[id_back_img]');
-
-            }
-            if ($this->input->post('user_type') == 'company') {
-                $this->form_validation->set_rules('user_photo', 'User Photo', 'callback_file_required[user_photo]');
-                $this->form_validation->set_rules('company_document', 'Company Document', 'callback_file_required[company_document]');
-            }
 
             if ($this->form_validation->run() === TRUE) {
                 $user_type = $this->input->post('user_type');
@@ -120,30 +111,6 @@ class Auth extends MY_Controller {
                     'birthdate' => $this->input->post('birthdate'),
                     'role' => $user_type, // default to private user
                 ];
-
-                if ($user_type == 'private') {
-                    $id_front_img = $this->upload_file('id_front_img', './uploads/users/');
-                    $id_back_img = $this->upload_file('id_back_img', './uploads/users/');
-                    if ($id_front_img && $id_back_img) {
-                        $data['id_front_img'] = $id_front_img;
-                        $data['id_back_img'] = $id_back_img;
-                    } else {
-                        $this->render('auth/register', $data);
-                        return;
-                    }
-                }
-
-                if ($user_type == 'company') {
-                    $user_photo = $this->upload_file('user_photo', './uploads/users/');
-                    $company_document = $this->upload_file('company_document', './uploads/users/');
-                    if ($user_photo && $company_document) {
-                        $data['photo_img'] = $user_photo;
-                        $data['company_doc_file'] = $company_document;
-                    } else {
-                        $this->render('auth/register', $data);
-                        return;
-                    }
-                }
 
                 if ($this->User_model->register($data)) {
                     $this->session->set_flashdata('success', 'Registration successful. Please log in.');

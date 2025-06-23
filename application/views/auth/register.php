@@ -125,56 +125,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </div>
           </div>
 
-          <div class="row" id="id-container">
-            <div class="col-md-6">
-              <label for="id_front_img">ID Front Image *</label>
-              <div class="form-group position-relative mb-6 form-group-dragable">
-                <input type="file" id="id_front_img" name="id_front_img" class="custom-file-input">
-                <label class="custom-file-label mb-0" for="id_front_img">
-                  Click or Drag image here
-                </label>
-                <div id="id_front_img_preview" style="position: absolute; top: 0; left: 0; height: 100%;"></div>
-                <span class="error"><?= form_error('id_front_img'); ?></span>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <label for="id_back_img">ID Back Image *</label>
-              <div class="form-group position-relative mb-6 form-group-dragable">
-                <input type="file" id="id_back_img" name="id_back_img" class="custom-file-input">
-                <label class="custom-file-label mb-0" for="id_back_img">
-                  Click or Drag image here
-                </label>
-                <div id="id_back_img_preview" style="position: absolute; top: 0; left: 0; height: 100%;"></div>
-                <span class="error"><?= form_error('id_back_img'); ?></span>
-              </div>
-            </div>
-          </div>
-
-          <div class="row" id="company-doc-container" style="display: none;">
-            <div class="col-md-6">
-              <label for="user_photo">Your Photo *</label>
-              <div class="form-group position-relative mb-6 form-group-dragable">
-                <input type="file" id="user_photo" name="user_photo" class="custom-file-input">
-                <label class="custom-file-label mb-0" for="user_photo">
-                  Click or Drag image here
-                </label>
-                <div id="user_photo_preview" style="position: absolute; top: 0; left: 0; height: 100%;"></div>
-                <span class="error"><?= form_error('user_photo'); ?></span>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <label for="company_document">Company Document *</label>
-              <div class="form-group position-relative mb-6 form-group-dragable">
-                <input type="file" id="company_document" name="company_document" class="custom-file-input">
-                <label class="custom-file-label mb-0" for="company_document">
-                  Click or Drag file here
-                </label>
-                <div id="company_document_preview" style="position: absolute; top: 0; left: 0; height: 100%;"></div>
-                <span class="error"><?= form_error('company_document'); ?></span>
-              </div>
-            </div>
-          </div>
-
           <div class="action-group">
             <button type="submit" class="btn btn-primary">Submit</button>
           </div>
@@ -188,87 +138,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </section>
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-<script>
-  document.getElementById('id_back_img').addEventListener('change', function (event) {
-    const files = event.target.files;
-    const previewContainer = document.getElementById('id_back_img_preview');
-    previewContainer.innerHTML = ''; // Clear previous previews
-
-    Array.from(files).forEach(file => {
-      if (file.type.startsWith('image/')) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-          const img = document.createElement('img');
-          img.src = e.target.result;
-          img.style.height = 'calc(100% - 10px)'; // Adjust size
-          img.style.margin = '5px';
-          previewContainer.appendChild(img);
-        };
-        reader.readAsDataURL(file);
-      }
-    });
-  });
-
-  document.getElementById('id_front_img').addEventListener('change', function (event) {
-    const files = event.target.files;
-    const previewContainer = document.getElementById('id_front_img_preview');
-    previewContainer.innerHTML = ''; // Clear previous previews
-
-    Array.from(files).forEach(file => {
-      if (file.type.startsWith('image/')) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-          const img = document.createElement('img');
-          img.src = e.target.result;
-          img.style.height = 'calc(100% - 10px)'; // Adjust size
-          img.style.margin = '5px';
-          previewContainer.appendChild(img);
-        };
-        reader.readAsDataURL(file);
-      }
-    });
-  });
-
-  document.getElementById('user_photo').addEventListener('change', function (event) {
-    const files = event.target.files;
-    const previewContainer = document.getElementById('user_photo_preview');
-    previewContainer.innerHTML = ''; // Clear previous previews
-
-    Array.from(files).forEach(file => {
-      if (file.type.startsWith('image/')) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-          const img = document.createElement('img');
-          img.src = e.target.result;
-          img.style.height = 'calc(100% - 10px)'; // Adjust size
-          img.style.margin = '5px';
-          previewContainer.appendChild(img);
-        };
-        reader.readAsDataURL(file);
-      }
-    });
-  });
-
-  document.getElementById('company_document').addEventListener('change', function (event) {
-    const files = event.target.files;
-    const previewContainer = document.getElementById('company_document_preview');
-    previewContainer.innerHTML = ''; // Clear previous previews
-
-    Array.from(files).forEach(file => {
-      if (file.type.startsWith('image/')) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-          const img = document.createElement('img');
-          img.src = e.target.result;
-          img.style.height = 'calc(100% - 10px)'; // Adjust size
-          img.style.margin = '5px';
-          previewContainer.appendChild(img);
-        };
-        reader.readAsDataURL(file);
-      }
-    });
-  });
-  
+<script>  
   $(document).ready(function () {
     $('input[name="user_type"]').change(function () {
       if ($('#private_user').is(':checked')) {
