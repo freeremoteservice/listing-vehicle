@@ -121,7 +121,7 @@ class Admin extends MY_Controller {
 
         // File upload configuration
         $config['upload_path'] = './uploads/vehicles/';
-        $config['allowed_types'] = 'jpg|jpeg|png';
+        $config['allowed_types'] = 'jpg|jpeg|png|webp';
         $config['max_size'] = 2048; // 2MB
         $config['encrypt_name'] = TRUE;
 
