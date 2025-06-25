@@ -478,8 +478,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   </div>
 </div>
 
-<script src='<?= base_url("assets/plugins/jquery/jquery-3.4.1.min.js"); ?>'></script>
-
 <script>
 document.getElementById('id_back_img').addEventListener('change', function (event) {
   const files = event.target.files;
