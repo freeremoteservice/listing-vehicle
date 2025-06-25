@@ -131,7 +131,31 @@
   <script src='<?= base_url("assets/plugins/lazyestload/lazyestload.js"); ?>'></script>
   <script src='<?= base_url("assets/plugins/owl-carousel/owl.carousel.min.js"); ?>'></script>  
   <script src='<?= base_url("assets/plugins/fancybox/jquery.fancybox.min.js"); ?>'></script>  
+  <script src='<?= base_url("public/plugins/toastr/toastr.min.js"); ?>'></script>
   
+  <script>
+    var d = new Date();
+    var year = d.getFullYear();
+    document.getElementById("copy-year").innerHTML = year;
+
+    toastr.options = {
+      "closeButton": false,
+      "debug": false,
+      "newestOnTop": false,
+      "progressBar": false,
+      "positionClass": "toast-top-right",
+      "preventDuplicates": false,
+      "onclick": null,
+      "showDuration": "300",
+      "hideDuration": "1000",
+      "timeOut": "5000",
+      "extendedTimeOut": "1000",
+      "showEasing": "swing",
+      "hideEasing": "linear",
+      "showMethod": "fadeIn",
+      "hideMethod": "fadeOut"
+    }
+  </script>
   
   <!-- Page Level JS -->
   <?php if (isset($page_level_js) && is_array($page_level_js)): ?>
@@ -140,18 +164,6 @@
     <?php endforeach; ?>
   <?php endif; ?>
   
-  
-  
-  
-  
-  
-  
-  
-  <script>
-    var d = new Date();
-    var year = d.getFullYear();
-    document.getElementById("copy-year").innerHTML = year;
-  </script>
   <script src='<?= base_url("assets/js/listty.js"); ?>'></script>
 </body>
 </html>

@@ -27,6 +27,9 @@ class Vehicle extends MY_Controller {
 
 	public function details($id) {
         $data['title'] = "Vehicle Details Page";
+        $data['page_level_js'] = [
+            'public/js/pages/vehicle/details.js'
+        ];
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Check if the user is logged in

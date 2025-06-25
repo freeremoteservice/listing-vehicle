@@ -16,6 +16,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <!-- PLUGINS CSS STYLE -->
   <link href='<?= base_url("assets/plugins/fontawesome-5.15.2/css/all.min.css"); ?>' rel='stylesheet'>
   <link href='<?= base_url("assets/plugins/fontawesome-5.15.2/css/fontawesome.min.css"); ?>' rel='stylesheet'>
+  <link href='<?= base_url("assets/plugins/bootstrap/css/bootstrap.min.css"); ?>' rel='stylesheet'>
   <link href='<?= base_url("assets/plugins/listtyicons/style.css"); ?>' rel='stylesheet'>
   <link href='<?= base_url("assets/plugins/menuzord/css/menuzord.css"); ?>' rel='stylesheet'>
 
@@ -26,6 +27,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <link href='<?= base_url("assets/plugins/owl-carousel/assets/owl.theme.default.min.css"); ?>' rel='stylesheet'>
   <link href='<?= base_url("assets/plugins/fancybox/jquery.fancybox.min.css"); ?>' rel='stylesheet'>
   <link href='<?= base_url("assets/plugins/revolution/css/settings.css"); ?>' rel='stylesheet'>
+  <link href='<?= base_url("public/plugins/toastr/toastr.css"); ?>' rel="stylesheet">
   
   <!-- Page Level CSS -->
   <?php if (isset($page_level_css) && is_array($page_level_css)): ?>
