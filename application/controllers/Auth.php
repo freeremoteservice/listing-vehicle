@@ -43,26 +43,10 @@ class Auth extends MY_Controller {
 
 	public function login() {
         $data['title'] = "Anmelden";
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $email = $this->input->post('email');
-            $password = $this->input->post('password');
-            $redirect = $this->input->post('redirect');
+        $data['page_level_js'] = [
+            'public/js/pages/auth/login.js'
+        ];
 
-            $user = $this->User_model->get_user_by_email($email);
-            if ($user && password_verify($password, $user->password)) {
-                $this->session->set_userdata([
-                    'user_id' => $user->id,
-                    'username' => $user->username,
-                    'avatar' => $user->avatar ?? 'default-avatar.png', // Default avatar if none set
-                    'role' => $user->role,
-                    'logged_in' => TRUE
-                ]);
-                $this->session->set_flashdata('success', 'Login successful.');
-                redirect($redirect ? $redirect : base_url());
-            } else {
-                $this->session->set_flashdata('error', 'Invalid email or password.');
-            }
-        }
         $this->render('auth/login', $data);
     }
 

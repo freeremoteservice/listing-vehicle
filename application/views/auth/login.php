@@ -13,11 +13,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <div class="bg-primary text-center py-4">
             <h2 class="text-white mb-0 h4">Members Log In</h2>
           </div>
-            <?php if ($this->session->flashdata('error')): ?>
-                <p style="color: red;"><?= $this->session->flashdata('error'); ?></p>
-            <?php endif; ?>
           <div class="card-body px-7 pt-7 pb-0">
-            <?= form_open('auth/login'); ?>
+            <form id="login-form">
               <div class="form-group mb-7">
                 <label class="form-label" for="email">Email*</label>
                 <input type="email" name="email" class="form-control" value="<?= set_value('email'); ?>" required>
@@ -34,7 +31,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </button>
                 <a href="#FogotPassword">Fogot Password?</a>
               </div>
-            <?= form_close(); ?>
+            </form>
           </div>
           <div class="card-footer bg-transparent text-center py-3">
             <p class="mb-0">Not a member yet? <a href="<?= base_url('auth/register'); ?>" class="link">Registrieren</a></p>
