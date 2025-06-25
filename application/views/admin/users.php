@@ -1,5 +1,41 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+
+function generateImageHtml($type, $username, $filename) {
+  $src = base_url('uploads/users/' . $filename);
+  $name_subfix = '';
+  switch ($type) {
+    case "id_front":
+      $name_subfix = '_id_front.jpg';
+      break;
+    
+    case "id_back":
+      $name_subfix = '_id_back.jpg';
+      break;
+
+    case "photo":
+      $name_subfix = '_photo.jpg';
+  
+    default:
+      break;
+  }
+
+  return '
+    <a class="media-img" href="' . $src . '" download="' . $username . $name_subfix . '">
+      <img class="img-fluid rounded me-2 lazyestload" data-src="' . $src . '" src="' . $src . '">
+    </a>
+  ';
+}
+
+function generateFileHtml($username, $filename) {
+  $src = base_url('uploads/users/' . $filename);
+  return '
+    <a class="media-img" href="' . $src . '" download="' . $username . '_company_document.pdf">
+      ' . $filename . '
+    </a>
+  ';
+}
+
 ?>
 
 <nav class="navbar navbar-expand-md navbar-dark">
@@ -86,13 +122,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <?php if (!empty($users)): ?>
           <?php foreach ($users as $user): ?>
             <?php
-              $img1 = $img2 = '';
               if($user['role'] == 'private') {
-                $img1 = !empty($user['id_front_img']) ? base_url('uploads/users/' . $user['id_front_img']) : base_url('public/img/default-vehicle.jpg');
-                $img2 = !empty($user['id_back_img']) ? base_url('uploads/users/' . $user['id_back_img']) : base_url('public/img/default-vehicle.jpg');
+                $_html_for_file1 = generateImageHtml('id_front', $user['username'], $user['id_front_img']);
+                $_html_for_file2 = generateImageHtml('id_back', $user['username'], $user['id_back_img']);
               } else {
-                $img1 = !empty($user['photo_img']) ? base_url('uploads/vehicles/' . $user['photo_img']) : base_url('public/img/default-vehicle.jpg');
-                $img2 = !empty($user['company_doc_file']) ? base_url('uploads/vehicles/' . $user['company_doc_file']) : base_url('public/img/default-vehicle.jpg');
+                $_html_for_file1 = generateImageHtml('photo', $user['username'], $user['photo_img']);
+                $_html_for_file2 = generateFileHtml($user['username'], $user['company_doc_file']);
               }
               ?>
             <tr class="table-row-bg-white">
@@ -101,16 +136,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <td><?= $user['role']; ?></td>
               <td class="td-media" align="center">
                 <div class="media media-table" style="width: 60px;">
-                  <a class="media-img" href="listing-reservation.html">
-                    <img class="img-fluid rounded me-2 lazyestload" data-src="<?=  $img1;?>" src="<?= $img1; ?>">
-                  </a>
+                  <?= $_html_for_file1; ?>
                 </div>
               </td>
               <td class="td-media" align="center">
                 <div class="media media-table" style="width: 60px;">
-                  <a class="media-img" href="listing-reservation.html">
-                    <img class="img-fluid rounded me-2 lazyestload" data-src="<?= $img2; ?>" src="<?= $img2; ?>">
-                  </a>
+                <?= $_html_for_file2; ?>
                 </div>
               </td>
               <td><?= $user['created_at']; ?></td>
@@ -138,5 +169,3 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
   </div>
 </section>
-</script>
-
