@@ -127,9 +127,53 @@ $(document).ready(function() {
         }
       }
       
-      // Validate step 2 (Finish button) - image uploads based on user role
-      if (currentStep.attr('id') === 'step-2') {
-        let isValid = true;
+      currentStep.removeClass("active");
+      nextStep.addClass("active");
+
+      // Update progress bar
+      let stepIndex = $(".form-step").index(nextStep) + 1;
+      $(".progress-bar li").removeClass("active");
+      $(".progress-bar li").slice(0, stepIndex).addClass("active");
+    });
+
+    $("#booking-form").submit(function(e) {
+        e.preventDefault();
+
+        if (!checkValidation()) {
+            return false;
+        }
+
+        // Create a FormData object from the form
+        let formData = new FormData(this);
+
+        $.ajax({
+            url: "order_vehicle",
+            type: "post",
+            data: formData,
+            processData: false, // Prevent jQuery from processing data
+            contentType: false, // Prevent jQuery from setting the content type
+            dataType: "json",
+            success: function(response) {
+                if (response?.status == "success") {
+                    toastr.success(response.message);
+
+                    // Hide the modal
+                    $("#bookNowModal").hide();
+                    // Remove the backdrop
+                    $(".modal-backdrop").remove();
+                    // Remove the 'modal-open' class
+                    $("body").removeClass("modal-open");
+                    $("body").css("overflow", ""); // Reset overflow style
+                    $("body").css("padding-right", ""); // Reset padding added for scrollbar
+                } else {
+                    toastr.error(response.message);
+                }
+            }
+        });
+    });
+
+    function checkValidation() {
+        let result = true;
         
         // Check if user is private (show ID fields) or company (show company fields)
         let isPrivateUser = $('#id-container').is(':visible');
@@ -142,14 +186,14 @@ $(document).ready(function() {
           
           if (!idFrontImg) {
             $('#id_front_img_error').show();
-            isValid = false;
+            result = false;
           } else {
             $('#id_front_img_error').hide();
           }
           
           if (!idBackImg) {
             $('#id_back_img_error').show();
-            isValid = false;
+            result = false;
           } else {
             $('#id_back_img_error').hide();
           }
@@ -162,36 +206,21 @@ $(document).ready(function() {
           
           if (!userPhoto) {
             $('#user_photo_error').show();
-            isValid = false;
+            result = false;
           } else {
             $('#user_photo_error').hide();
           }
           
           if (!companyDoc) {
             $('#company_document_error').show();
-            isValid = false;
+            result = false;
           } else {
             $('#company_document_error').hide();
           }
         }
-        
-        if (!isValid) {
-          return; // Don't submit if validation fails
-        }
-        
-        // If validation passes, submit the form
-        $('#register-form').submit();
-        return;
-      }
-      
-      currentStep.removeClass("active");
-      nextStep.addClass("active");
 
-      // Update progress bar
-      let stepIndex = $(".form-step").index(nextStep) + 1;
-      $(".progress-bar li").removeClass("active");
-      $(".progress-bar li").slice(0, stepIndex).addClass("active");
-    });
+        return result;
+    }
 
     $(".prev-step").click(function () {
       let currentStep = $(".form-step.active");

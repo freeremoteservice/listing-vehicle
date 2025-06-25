@@ -294,16 +294,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
       </div>
       <div class="col-md-3">
-        <?php if ($this->session->flashdata('success')): ?>
-          <p class="success" style="color: green;"><?= $this->session->flashdata('success') ?></p>
-        <?php endif; ?>
-
-        <?php if ($this->session->flashdata('error')): ?>
-          <p class="error"><?= $this->session->flashdata('error') ?></p>
-        <?php endif; ?>
-
         <!-- Make Online Reservations -->
-        <?= form_open_multipart('vehicle/' . $vehicle->id, ['id' => 'booking-form', 'class' => 'mb-5', 'method' => 'post']); ?>
+        <div>
           <?php if (!$this->session->userdata('logged_in')): ?>
             <h3 class="mb-3 fw-normal">
               <a href="<?= base_url('auth/login'); ?>">Login</a> to be able to book
@@ -319,7 +311,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <?php else: ?>
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal"> Book Now </button>
           <?php endif; ?>
-        <?= form_close() ?>
+        </div>
 
         <div class="card mt-4" style="background: #f3f8fb;">
           <div class="card-body text-center">
@@ -392,7 +384,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </li>
           </ul>
         </div>
-        <?= form_open_multipart('vehicle/order_vehicle', ['id' => 'register-form', 'class' => 'register-form', 'method' => 'post']); ?>
+        <form id="booking-form" class="register-form" enctype="multipart/form-data">
           <div class="multi-step-form">
             <!-- Step 1: Bidder Company -->
             <div class="form-step active" id="step-1">
@@ -467,11 +459,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               </div>
               <div class="action-group">
                 <button type="button" class="btn btn-secondary prev-step">Back</button>
-                <button type="button" class="btn btn-primary next-step">Finish</button>
+                <button type="submit" class="btn btn-primary">Book</button>
               </div>
             </div>
           </div>
-        <?= form_close();?>
+        </form>
       </div>
     </div>
   </div>

@@ -101,37 +101,47 @@ class Vehicle extends MY_Controller {
     }
 
     public function order_vehicle() {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if ($this->session->userdata('role') == 'private') {
-                $data = array();
-                $id_front_img = $this->upload_file('id_front_img', './uploads/users/');
-                $id_back_img = $this->upload_file('id_back_img', './uploads/users/');
-                if ($id_front_img && $id_back_img) {
+        $status = 'failed';
+        $message = '';
+        $flagUploadingFiles = false;
+
+        if ($this->session->userdata('role') == 'private') {
+            $data = array();
+            $id_front_img = $this->upload_file('id_front_img', './uploads/users/');
+            $id_back_img = $this->upload_file('id_back_img', './uploads/users/');
+            if ($id_front_img) {
+                if ($id_back_img) {
                     $data['id_front_img'] = $id_front_img;
                     $data['id_back_img'] = $id_back_img;
                     $this->User_model->update_user($this->session->userdata('user_id'), $data);
+                    $flagUploadingFiles = true;
                 } else {
-                    $data['vehicle'] = $this->Vehicle_model->getById($_POST['vehicle_id']);
-                    $this->render('vehicle/details', $data);
-                    return;
+                    $message = "Failed to upload back image of your ID";
                 }
+            } else {
+                $message = "Failed to upload front image of your ID";
             }
+        }
 
-            if ($this->session->userdata('role') == 'company') {
-                $data = array();
-                $user_photo = $this->upload_file('user_photo', './uploads/users/');
-                $company_document = $this->upload_file('company_document', './uploads/users/');
-                if ($user_photo && $company_document) {
+        if ($this->session->userdata('role') == 'company') {
+            $data = array();
+            $user_photo = $this->upload_file('user_photo', './uploads/users/');
+            $company_document = $this->upload_file('company_document', './uploads/users/');
+            if ($user_photo) {
+                if ($company_document) {
                     $data['photo_img'] = $user_photo;
                     $data['company_doc_file'] = $company_document;
                     $this->User_model->update_user($this->session->userdata('user_id'), $data);
+                    $flagUploadingFiles = true;
                 } else {
-                    $data['vehicle'] = $this->Vehicle_model->getById($_POST['vehicle_id']);
-                    $this->render('vehicle/details', $data);
-                    return;
+                    $message = "Failed to upload document file of your company";
                 }
+            } else {
+                $message = "Failed to upload your photo";
             }
+        }
 
+        if ($flagUploadingFiles) {
             $order_data = array(
                 'user_id' => $this->session->userdata('user_id'),
                 'vehicle_id' => $_POST['vehicle_id'],
@@ -139,12 +149,14 @@ class Vehicle extends MY_Controller {
                 'status' => 'pending'
             );
             $this->Order_model->insert_order($order_data);
-            $data = array();
-            $data['vehicle'] = $this->Vehicle_model->getById($_POST['vehicle_id']);
-            $this->render('vehicle/details', $data);
-            return;
+
+            $status = "success";
+            $message = "Thank you for booking! Admin will reply via email with an invoice after checking your order";
         }
+        
+        echo json_encode([
+            'status' => $status,
+            'message' => $message
+        ]);
     }
-    
-    
 }
