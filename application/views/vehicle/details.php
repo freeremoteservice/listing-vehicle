@@ -315,12 +315,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           </div>
 
           <?php if ($this->session->userdata('logged_in')): ?>
-
-            <div class="form-group mb-6">
-              <button type="button" id="loggedBookNow" class="btn btn-primary"> Book Now </button>
-            </div>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bookNowModal"> Book Now </button>
           <?php else: ?>
-            <button type="button" id="bookNowBtn" class="btn btn-primary"> Book Now </button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal"> Book Now </button>
           <?php endif; ?>
         <?= form_close() ?>
 
@@ -341,12 +338,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   </div>
 </section>
 
-<!-- Members Log In Style Modal for Booking -->
-<div class="modal fade" id="bookNowModal" tabindex="-1" aria-labelledby="bookNowModalLabel" aria-hidden="true">
+<!-- Open Login Modal by clicking "Book Now" button if uer wasn't logged in yet -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header" style="background: #2196f3; color: #fff;">
-        <h5 class="modal-title w-100 text-center map-sidebar" id="bookNowModalLabel">Members Log In</h5>
+        <h5 class="modal-title w-100 text-center map-sidebar" id="loginModalLabel">Log In To Book</h5>
         <i class="fas fa-window-close main-wrapper" data-bs-dismiss="modal" aria-label="Close" style="cursor: pointer;"></i>
       </div>
       <div class="modal-body">
@@ -375,12 +372,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   </div>
 </div>
 
-<div class="modal fade" id="bookNowModal_logged" tabindex="-1" aria-labelledby="bookNowModalLabel" aria-hidden="true">
+<div class="modal fade" id="bookNowModal" tabindex="-1" aria-labelledby="bookNowModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
       <div class="modal-header" style="background: #2196f3; color: #fff;">
-        <h5 class="modal-title w-100 text-center map-sidebar" id="bookNowModalLabel">Members Log In</h5>
-        <button type="button" class="btn-close main-wrapper" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h5 class="modal-title w-100 text-center map-sidebar" id="bookNowModalLabel">Book Now</h5>
+        <i class="fas fa-window-close main-wrapper" data-bs-dismiss="modal" aria-label="Close" style="cursor: pointer;"></i>
       </div>
       <div class="modal-body">
         <?php if ($this->session->flashdata('error')): ?>
@@ -484,30 +481,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <script src='<?= base_url("assets/plugins/jquery/jquery-3.4.1.min.js"); ?>'></script>
 
 <script>
-// Modal logic for Book Now
-document.addEventListener('DOMContentLoaded', function () {
-  var bookNowBtn = document.getElementById('bookNowBtn');
-  if (bookNowBtn) {
-    bookNowBtn.addEventListener('click', function () {
-      var modal = new bootstrap.Modal(document.getElementById('bookNowModal'));
-      modal.show();
-    });
-  }
-  // You can handle modal form submission here if needed
-});
-
-// Modal logic for Book Now
-document.addEventListener('DOMContentLoaded', function () {
-  var bookNowBtn = document.getElementById('loggedBookNow');
-  if (bookNowBtn) {
-    bookNowBtn.addEventListener('click', function () {
-      var modal = new bootstrap.Modal(document.getElementById('bookNowModal_logged'));
-      modal.show();
-    });
-  }
-  // You can handle modal form submission here if needed
-});
-
 document.getElementById('id_back_img').addEventListener('change', function (event) {
   const files = event.target.files;
   const previewContainer = document.getElementById('id_back_img_preview');
