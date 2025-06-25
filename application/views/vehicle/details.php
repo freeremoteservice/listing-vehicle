@@ -347,8 +347,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <i class="fas fa-window-close main-wrapper" data-bs-dismiss="modal" aria-label="Close" style="cursor: pointer;"></i>
       </div>
       <div class="modal-body">
-        <?= form_open('auth/login'); ?>
-          <input type="hidden" name="redirect" value="<?= current_url(); ?>">
+        <form id="login-form">
           <div class="mb-3">
             <label for="modalEmail" class="form-label">Email*</label>
             <input type="email" name="email" class="form-control" id="modalEmail" required>
@@ -363,7 +362,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <button type="submit" class="btn btn-outline-primary px-4">LOG IN</button>
             <a href="#" class="text-primary" style="font-size: 0.95em;">Forgot Password?</a>
           </div>
-        <?= form_close(); ?>
+        </form>
       </div>
       <div class="modal-footer justify-content-center">
         <span>Not a member yet? <a href="<?= base_url('auth/register'); ?>" class="text-primary">Sign up</a></span>

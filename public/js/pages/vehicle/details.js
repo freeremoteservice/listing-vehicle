@@ -78,7 +78,27 @@ document.getElementById('company_document').addEventListener('change', function 
   });
 });
 
-$(document).ready(function(){
+$(document).ready(function() {
+    $('#login-form').submit(function(e) {
+        e.preventDefault();
+
+        $.ajax({
+            url: "../auth/do_login",
+            type: "post",
+            data: $(this).serialize(),
+            dataType: 'json',
+            success: function(response) {
+                if (response?.status == "success") {
+                    location.reload();
+                } else {
+                    toastr.error(response.message);
+                }
+            }
+        });
+    
+        return false;
+    });
+
     var $carousel = $('.listing-details-carousel');
     if ($carousel.hasClass('owl-loaded')) {
       $carousel.trigger('destroy.owl.carousel').removeClass('owl-loaded');

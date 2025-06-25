@@ -9,6 +9,38 @@ class Auth extends MY_Controller {
         $this->load->library('upload');
     }
 
+    public function do_login() {
+        $email = $this->input->post('email');
+        $password = $this->input->post('password');
+        $user = $this->User_model->get_user_by_email($email);
+
+        $status = 'failed';
+        $message = '';
+        if ($user) {
+            if (password_verify($password, $user->password)) {
+                $this->session->set_userdata([
+                    'user_id' => $user->id,
+                    'username' => $user->username,
+                    'avatar' => $user->avatar ?? 'default-avatar.png', // Default avatar if none set
+                    'role' => $user->role,
+                    'logged_in' => TRUE
+                ]);
+
+                $status = "success";
+                $message = "Congratulation! You've successfully logged in.";
+            } else {
+                $message = "Your password is wrong";
+            }
+        } else {
+            $message = "You're not registered yet!";
+        }
+
+        echo json_encode([
+            'status' => $status,
+            'message' => $message
+        ]);
+    }
+
 	public function login() {
         $data['title'] = "Anmelden";
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
