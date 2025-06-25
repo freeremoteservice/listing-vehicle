@@ -25,7 +25,7 @@ class Auth extends MY_Controller {
 
         $status = 'failed';
         $message = '';
-        
+
         if ($user) {
             if (password_verify($password, $user->password)) {
                 $this->session->set_userdata([
@@ -61,29 +61,39 @@ class Auth extends MY_Controller {
     }
 
     public function do_register() {
-        $data = [
-            'username' => $this->input->post('username'),
-            'email'    => $this->input->post('email'),
-            'password' => password_hash($this->input->post('password'), PASSWORD_BCRYPT),
-            'first_name' => $this->input->post('first_name'),
-            'last_name' => $this->input->post('last_name'),
-            'street' => $this->input->post('street'),
-            'postal_code' => $this->input->post('postal_code'),
-            'city' => $this->input->post('city'),
-            'country' => $this->input->post('country'),
-            'phone' => $this->input->post('phone'),
-            'birthdate' => $this->input->post('birthdate'),
-            'role' => $this->input->post('user_type')
-        ];
-
         $status = 'failed';
         $message = '';
+        $username = $this->input->post('username'); // or wherever you get username from
 
-        if ($this->User_model->register($data)) {
-            $status = "success";
-            $message = "Registration successful. Please log in.";
+        // Check if username exists
+        $this->db->where('username', $username);
+        $query = $this->db->get('users');
+
+        if ($query->num_rows() > 0) {
+            // Username already exists - handle error
+            $message = "Username already taken, please choose another.";
         } else {
-            $message = "Something went wrong. Try again.";
+            $data = [
+                'username' => $username,
+                'email'    => $this->input->post('email'),
+                'password' => password_hash($this->input->post('password'), PASSWORD_BCRYPT),
+                'first_name' => $this->input->post('first_name'),
+                'last_name' => $this->input->post('last_name'),
+                'street' => $this->input->post('street'),
+                'postal_code' => $this->input->post('postal_code'),
+                'city' => $this->input->post('city'),
+                'country' => $this->input->post('country'),
+                'phone' => $this->input->post('phone'),
+                'birthdate' => $this->input->post('birthdate'),
+                'role' => $this->input->post('user_type')
+            ];
+    
+            if ($this->User_model->register($data)) {
+                $status = "success";
+                $message = "Registration successful. Please log in.";
+            } else {
+                $message = "Something went wrong. Try again.";
+            }
         }
 
         echo json_encode([
