@@ -68,8 +68,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="container clearfix">
           <div id="menuzord" class="menuzord menuzord-responsive <?= is_admin() ? 'admin_menu' : ''; ?>">
 
-            <a href="<?= base_url(); ?>" class="menuzord-brand" style="margin-top: 10px;">
-              <img src="<?= base_url('public/img/logo.png'); ?>" alt="Logo" style="max-height: 77px;">
+            <a href="<?= base_url(); ?>" class="menuzord-brand">
+              <img class="logo" src="<?= base_url('public/img/logo.png'); ?>" alt="Logo">
             </a>
 
             <?php if ($this->session->userdata('logged_in')): ?>

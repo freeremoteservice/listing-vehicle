@@ -7,7 +7,7 @@
     <div class="row">
       <div class="col-sm-7 col-xs-12">
         <a class="d-inline-block mb-6" href="<?= base_url(); ?>">
-          <img src="<?= base_url('public/img/logo-white.png'); ?>" alt="Logo" style="max-height: 77px;">
+          <img class="logo" src="<?= base_url('public/img/logo-white.png'); ?>" alt="Logo">
         </a>
         <p class="text-white pt-1 pb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
           incididunt ut
