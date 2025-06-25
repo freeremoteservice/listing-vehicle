@@ -21,17 +21,18 @@ function generateImageHtml($type, $username, $filename) {
   }
 
   return '
-    <a class="media-img" href="' . $src . '" download="' . $username . $name_subfix . '">
-      <img class="img-fluid rounded me-2 lazyestload" data-src="' . $src . '" src="' . $src . '">
+    <a class="media-img me-0" href="' . $src . '" download="' . $username . $name_subfix . '">
+      <img class="img-fluid rounded lazyestload" data-src="' . $src . '" src="' . $src . '">
     </a>
   ';
 }
 
 function generateFileHtml($username, $filename) {
   $src = base_url('uploads/users/' . $filename);
+  $name = $filename ? 'Company Document' : 'Empty file';
   return '
     <a class="media-img" href="' . $src . '" download="' . $username . '_company_document.pdf">
-      ' . $filename . '
+      ' . $name . '
     </a>
   ';
 }
@@ -140,8 +141,8 @@ function generateFileHtml($username, $filename) {
                 </div>
               </td>
               <td class="td-media" align="center">
-                <div class="media media-table" style="width: 60px;">
-                <?= $_html_for_file2; ?>
+                <div class="media media-table" style="width: <?= $user['role'] == 'private'? '60px' : 'unset; justify-content: center;'?>">
+                  <?= $_html_for_file2; ?>
                 </div>
               </td>
               <td><?= $user['created_at']; ?></td>
