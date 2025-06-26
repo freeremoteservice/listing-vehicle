@@ -30,8 +30,9 @@ function generateImageHtml($type, $username, $filename) {
 function generateFileHtml($username, $filename) {
   $src = base_url('uploads/users/' . $filename);
   $name = $filename ? 'Company Document' : 'Empty file';
+  $extension = pathinfo($filename, PATHINFO_EXTENSION);
   return '
-    <a class="media-img" href="' . $src . '" download="' . $username . '_company_document.pdf">
+    <a class="media-img" href="' . $src . '" download="' . $username . '_company_document.' .  $extension . '">
       ' . $name . '
     </a>
   ';
