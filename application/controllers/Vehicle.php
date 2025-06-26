@@ -30,32 +30,11 @@ class Vehicle extends MY_Controller {
         $data['page_level_js'] = [
             'public/js/pages/vehicle/details.js'
         ];
+        $data['vehicle'] = $this->Vehicle_model->getById($id);
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Check if the user is logged in
-            if (!$this->session->userdata('user_id')) {
-                redirect('auth/login'); // Redirect to login if not logged in
-            }
-        
-            $this->load->library('form_validation');
-        
-            // Save order to database
-            $data = [
-                'vehicle_id' => $id,
-                'user_id' => $this->session->userdata('user_id'),
-                'status' => 'pending',
-                'created_at' => date('Y-m-d H:i:s'),
-            ];
-            $this->db->insert('orders', $data);
-    
-            $this->session->set_flashdata('success', 'Booking successful. The admin will review your request.');
-            redirect('vehicle/' . $id);
-        } else {
-            $data['vehicle'] = $this->Vehicle_model->getById($id);
-            $this->render('vehicle/details', $data);
-        }
+        $this->render('vehicle/details', $data);
     }
-    
+
     public function validate_id_front() {
         // Check if a file is uploaded
         if (empty($_FILES['id_front']['name'])) {
@@ -80,7 +59,7 @@ class Vehicle extends MY_Controller {
         }
 
         $config['upload_path'] = $upload_path;
-        $config['allowed_types'] = 'jpg|jpeg|png|webp';
+        $config['allowed_types'] = 'jpg|jpeg|png|webp|pdf|doc|docx';
         $config['max_size'] = 5120; // 2MB
         $config['encrypt_name'] = TRUE;
         $this->upload->initialize($config);

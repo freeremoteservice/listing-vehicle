@@ -432,7 +432,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </div>
               </div>
               <div class="row" id="company-doc-container" style="display: <?= ($this->session->userdata('role') == 'private' || $this->session->userdata('role') == 'admin') ? 'none' : '';?>;">
-                <div class="col-md-12">
+                <div class="col-md-6">
                   <label for="user_photo">Your Photo *</label>
                   <div class="form-group position-relative mb-6 form-group-dragable">
                     <input type="file" id="user_photo" name="user_photo" class="custom-file-input">
@@ -444,10 +444,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <span class="error"><?= form_error('user_photo'); ?></span>
                   </div>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-6">
                   <label for="company_document">Company Document *</label>
                   <div class="form-group position-relative mb-6 form-group-dragable">
-                    <input type="file" id="company_document" name="company_document" class="custom-file-input">
+                    <input type="file" id="company_document" name="company_document" class="custom-file-input" accept=".pdf,.doc,.docx">
                     <label class="custom-file-label mb-0" for="company_document">
                       Click or Drag file here
                     </label>

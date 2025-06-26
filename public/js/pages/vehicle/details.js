@@ -58,24 +58,12 @@ document.getElementById('user_photo').addEventListener('change', function (event
   });
 });
 
-document.getElementById('company_document').addEventListener('change', function (event) {
-  const files = event.target.files;
-  const previewContainer = document.getElementById('company_document_preview');
-  previewContainer.innerHTML = ''; // Clear previous previews
-
-  Array.from(files).forEach(file => {
-    if (file.type.startsWith('image/')) {
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        const img = document.createElement('img');
-        img.src = e.target.result;
-        img.style.height = 'calc(100% - 10px)'; // Adjust size
-        img.style.margin = '5px';
-        previewContainer.appendChild(img);
-      };
-      reader.readAsDataURL(file);
-    }
-  });
+document.getElementById('company_document').addEventListener('change', function(e) {
+  var fileName = e.target.files[0] ? e.target.files[0].name : "Click or Drag file here";
+  var label = document.querySelector('label[for="company_document"].custom-file-label');
+  if (label) {
+      label.textContent = fileName;
+  }
 });
 
 $(document).ready(function() {
