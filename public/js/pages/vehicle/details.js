@@ -1,68 +1,69 @@
-document.getElementById('id_back_img').addEventListener('change', function (event) {
-  const files = event.target.files;
-  const previewContainer = document.getElementById('id_back_img_preview');
-  previewContainer.innerHTML = ''; // Clear previous previews
-
-  Array.from(files).forEach(file => {
-    if (file.type.startsWith('image/')) {
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        const img = document.createElement('img');
-        img.src = e.target.result;
-        img.style.height = 'calc(100% - 10px)'; // Adjust size
-        img.style.margin = '5px';
-        previewContainer.appendChild(img);
-      };
-      reader.readAsDataURL(file);
-    }
-  });
+document.getElementById('user_photo').addEventListener('change', function(e) {
+  var img = document.getElementById('user_photo_preview_img');
+  var labelText = document.getElementById('user_photo_label_text');
+  if (e.target.files && e.target.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function(ev) {
+          img.src = ev.target.result;
+          img.style.display = 'block';
+          labelText.style.color = '#2196f3';
+          labelText.style.background = 'rgba(255,255,255,0.6)';
+      }
+      reader.readAsDataURL(e.target.files[0]);
+  } else {
+      img.src = '';
+      img.style.display = 'none';
+      labelText.style.color = '#2196f3';
+      labelText.style.background = 'rgba(255,255,255,0.6)';
+  }
 });
 
-document.getElementById('id_front_img').addEventListener('change', function (event) {
-  const files = event.target.files;
-  const previewContainer = document.getElementById('id_front_img_preview');
-  previewContainer.innerHTML = ''; // Clear previous previews
-
-  Array.from(files).forEach(file => {
-    if (file.type.startsWith('image/')) {
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        const img = document.createElement('img');
-        img.src = e.target.result;
-        img.style.height = 'calc(100% - 10px)'; // Adjust size
-        img.style.margin = '5px';
-        previewContainer.appendChild(img);
-      };
-      reader.readAsDataURL(file);
-    }
-  });
+document.getElementById('id_front_img').addEventListener('change', function(e) {
+  var img = document.getElementById('id_front_img_preview_img');
+  var labelText = document.getElementById('id_front_img_label_text');
+  if (e.target.files && e.target.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function(ev) {
+          img.src = ev.target.result;
+          img.style.display = 'block';
+          labelText.style.color = '#2196f3';
+          labelText.style.background = 'rgba(255,255,255,0.6)';
+      }
+      reader.readAsDataURL(e.target.files[0]);
+  } else {
+      img.src = '';
+      img.style.display = 'none';
+      labelText.style.color = '#2196f3';
+      labelText.style.background = 'rgba(255,255,255,0.6)';
+  }
 });
 
-document.getElementById('user_photo').addEventListener('change', function (event) {
-  const files = event.target.files;
-  const previewContainer = document.getElementById('user_photo_preview');
-  previewContainer.innerHTML = ''; // Clear previous previews
-
-  Array.from(files).forEach(file => {
-    if (file.type.startsWith('image/')) {
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        const img = document.createElement('img');
-        img.src = e.target.result;
-        img.style.height = 'calc(100% - 10px)'; // Adjust size
-        img.style.margin = '5px';
-        previewContainer.appendChild(img);
-      };
-      reader.readAsDataURL(file);
-    }
-  });
+document.getElementById('id_back_img').addEventListener('change', function(e) {
+  var img = document.getElementById('id_back_img_preview_img');
+  var labelText = document.getElementById('id_back_img_label_text');
+  if (e.target.files && e.target.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function(ev) {
+          img.src = ev.target.result;
+          img.style.display = 'block';
+          labelText.style.color = '#2196f3';
+          labelText.style.background = 'rgba(255,255,255,0.6)';
+      }
+      reader.readAsDataURL(e.target.files[0]);
+  } else {
+      img.src = '';
+      img.style.display = 'none';
+      labelText.style.color = '#2196f3';
+      labelText.style.background = 'rgba(255,255,255,0.6)';
+  }
 });
 
 document.getElementById('company_document').addEventListener('change', function(e) {
-  var fileName = e.target.files[0] ? e.target.files[0].name : "Click or Drag file here";
-  var label = document.querySelector('label[for="company_document"].custom-file-label');
-  if (label) {
-      label.textContent = fileName;
+  var labelText = document.getElementById('company_document_label_text');
+  if (e.target.files && e.target.files[0]) {
+      labelText.textContent = e.target.files[0].name;
+  } else {
+      labelText.textContent = 'Click or Drag file here';
   }
 });
 

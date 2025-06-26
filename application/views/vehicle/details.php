@@ -408,53 +408,52 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <div class="row" id="id-container" style="display: <?= ($this->session->userdata('role') == 'company' || $this->session->userdata('role') == 'admin') ? 'none' : '';?>">
                 <div class="col-md-6">
                   <label for="id_front_img">ID Front Image *</label>
-                  <div class="form-group position-relative mb-6 form-group-dragable">
-                    <input type="file" id="id_front_img" name="id_front_img" class="custom-file-input">
-                    <label class="custom-file-label mb-0" for="id_front_img">
-                      Click or Drag image here
-                    </label>
-                    <div id="id_front_img_preview" style="position: absolute; top: 0; left: 0; height: 100%;"></div>
-                    <span class="error" id="id_front_img_error" style="display: none; color: red;">Please upload ID front image.</span>
-                    <span class="error"><?= form_error('id_front_img'); ?></span>
+                  <div class="form-group position-relative mb-6 form-group-dragable" style="text-align:center;">
+                    <div class="custom-file-label-box" style="position:relative; width:100%; min-height:200px; background:rgba(245,250,255,0.7); border:2px dashed #2196f3; border-radius:8px; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+                      <img id="id_front_img_preview_img" src="" alt="" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:1;" />
+                      <span id="id_front_img_label_text" style="position:relative; z-index:2; font-weight:bold; color:#2196f3; background:rgba(255,255,255,0.6); padding:8px 12px; border-radius:6px;">Click or Drag image here</span>
+                      <input type="file" id="id_front_img" name="id_front_img" class="custom-file-input" style="opacity:0; position:absolute; top:0; left:0; width:100%; height:100%; cursor:pointer; z-index:3;" />
+                    </div>
                   </div>
+                  <span class="error" id="id_front_img_error" style="display: none; color: red;">Please upload ID front image.</span>
+                  <span class="error"><?= form_error('id_front_img'); ?></span>
                 </div>
                 <div class="col-md-6">
                   <label for="id_back_img">ID Back Image *</label>
-                  <div class="form-group position-relative mb-6 form-group-dragable">
-                    <input type="file" id="id_back_img" name="id_back_img" class="custom-file-input">
-                    <label class="custom-file-label mb-0" for="id_back_img">
-                      Click or Drag image here
-                    </label>
-                    <div id="id_back_img_preview" style="position: absolute; top: 0; left: 0; height: 100%;"></div>
-                    <span class="error" id="id_back_img_error" style="display: none; color: red;">Please upload ID back image.</span>
-                    <span class="error"><?= form_error('id_back_img'); ?></span>
+                  <div class="form-group position-relative mb-6 form-group-dragable" style="text-align:center;">
+                    <div class="custom-file-label-box" style="position:relative; width:100%; min-height:200px; background:rgba(245,250,255,0.7); border:2px dashed #2196f3; border-radius:8px; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+                      <img id="id_back_img_preview_img" src="" alt="" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:1;" />
+                      <span id="id_back_img_label_text" style="position:relative; z-index:2; font-weight:bold; color:#2196f3; background:rgba(255,255,255,0.6); padding:8px 12px; border-radius:6px;">Click or Drag image here</span>
+                      <input type="file" id="id_back_img" name="id_back_img" class="custom-file-input" style="opacity:0; position:absolute; top:0; left:0; width:100%; height:100%; cursor:pointer; z-index:3;" />
+                    </div>
                   </div>
+                  <span class="error" id="id_back_img_error" style="display: none; color: red;">Please upload ID back image.</span>
+                  <span class="error"><?= form_error('id_back_img'); ?></span>
                 </div>
               </div>
               <div class="row" id="company-doc-container" style="display: <?= ($this->session->userdata('role') == 'private' || $this->session->userdata('role') == 'admin') ? 'none' : '';?>;">
                 <div class="col-md-6">
                   <label for="user_photo">Your Photo *</label>
-                  <div class="form-group position-relative mb-6 form-group-dragable">
-                    <input type="file" id="user_photo" name="user_photo" class="custom-file-input">
-                    <label class="custom-file-label mb-0" for="user_photo">
-                      Click or Drag image here
-                    </label>
-                    <div id="user_photo_preview" style="position: absolute; top: 0; left: 0; height: 100%;"></div>
-                    <span class="error" id="user_photo_error" style="display: none; color: red;">Please upload your photo.</span>
-                    <span class="error"><?= form_error('user_photo'); ?></span>
+                  <div class="form-group position-relative mb-6 form-group-dragable" style="text-align:center;">
+                    <div class="custom-file-label-box" style="position:relative; width:100%; min-height:200px; background:rgba(245,250,255,0.7); border:2px dashed #2196f3; border-radius:8px; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+                      <img id="user_photo_preview_img" src="" alt="" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:1;" />
+                      <span id="user_photo_label_text" style="position:relative; z-index:2; font-weight:bold; color:#2196f3; background:rgba(255,255,255,0.6); padding:8px 12px; border-radius:6px;">Click or Drag image here</span>
+                      <input type="file" id="user_photo" name="user_photo" class="custom-file-input" style="opacity:0; position:absolute; top:0; left:0; width:100%; height:100%; cursor:pointer; z-index:3;" />
+                    </div>
                   </div>
+                  <span class="error" id="user_photo_error" style="display: none; color: red;">Please upload your photo.</span>
+                  <span class="error"><?= form_error('user_photo'); ?></span>
                 </div>
                 <div class="col-md-6">
                   <label for="company_document">Company Document *</label>
-                  <div class="form-group position-relative mb-6 form-group-dragable">
-                    <input type="file" id="company_document" name="company_document" class="custom-file-input" accept=".pdf,.doc,.docx">
-                    <label class="custom-file-label mb-0" for="company_document">
-                      Click or Drag file here
-                    </label>
-                    <div id="company_document_preview" style="position: absolute; top: 0; left: 0; height: 100%;"></div>
-                    <span class="error" id="company_document_error" style="display: none; color: red;">Please upload company document.</span>
-                    <span class="error"><?= form_error('company_document'); ?></span>
+                  <div class="form-group position-relative mb-6 form-group-dragable" style="text-align:center;">
+                    <div class="custom-file-label-box" style="position:relative; width:100%; min-height:200px; background:rgba(245,250,255,0.7); border:2px dashed #2196f3; border-radius:8px; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+                      <span id="company_document_label_text" style="position:relative; z-index:2; font-weight:bold; color:#2196f3; background:rgba(255,255,255,0.6); padding:8px 12px; border-radius:6px;">Click or Drag file here</span>
+                      <input type="file" id="company_document" name="company_document" class="custom-file-input" accept=".pdf,.doc,.docx" style="opacity:0; position:absolute; top:0; left:0; width:100%; height:100%; cursor:pointer; z-index:3;" />
+                    </div>
                   </div>
+                  <span class="error" id="company_document_error" style="display: none; color: red;">Please upload company document.</span>
+                  <span class="error"><?= form_error('company_document'); ?></span>
                 </div>
               </div>
               <div class="action-group">
