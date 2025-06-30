@@ -9,15 +9,25 @@ class Auth extends MY_Controller {
         $this->load->library('upload');
     }
 
-	public function login() {
+    public function login() {
         $data['title'] = "Anmelden";
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $email = $this->input->post('email');
-            $password = $this->input->post('password');
-            $redirect = $this->input->post('redirect');
+        $data['page_level_js'] = [
+            'public/js/pages/auth/login.js'
+        ];
 
-            $user = $this->User_model->get_user_by_email($email);
-            if ($user && password_verify($password, $user->password)) {
+        $this->render('auth/login', $data);
+    }
+
+    public function do_login() {
+        $email = $this->input->post('email');
+        $password = $this->input->post('password');
+        $user = $this->User_model->get_user_by_email($email);
+
+        $status = 'failed';
+        $message = '';
+
+        if ($user) {
+            if (password_verify($password, $user->password)) {
                 $this->session->set_userdata([
                     'user_id' => $user->id,
                     'username' => $user->username,
@@ -25,13 +35,71 @@ class Auth extends MY_Controller {
                     'role' => $user->role,
                     'logged_in' => TRUE
                 ]);
-                $this->session->set_flashdata('success', 'Login successful.');
-                redirect($redirect ? $redirect : base_url());
+
+                $status = "success";
+                $message = "Congratulation! You've successfully logged in.";
             } else {
-                $this->session->set_flashdata('error', 'Invalid email or password.');
+                $message = "Your password is wrong";
+            }
+        } else {
+            $message = "You're not registered yet!";
+        }
+
+        echo json_encode([
+            'status' => $status,
+            'message' => $message
+        ]);
+    }
+
+    public function register() {
+        $data['title'] = "Sign Up";
+        $data['page_level_js'] = [
+            'public/js/pages/auth/register.js'
+        ];
+
+        $this->render('auth/register', $data);
+    }
+
+    public function do_register() {
+        $status = 'failed';
+        $message = '';
+        $username = $this->input->post('username'); // or wherever you get username from
+
+        // Check if username exists
+        $this->db->where('username', $username);
+        $query = $this->db->get('users');
+
+        if ($query->num_rows() > 0) {
+            // Username already exists - handle error
+            $message = "Username already taken, please choose another.";
+        } else {
+            $data = [
+                'username' => $username,
+                'email'    => $this->input->post('email'),
+                'password' => password_hash($this->input->post('password'), PASSWORD_BCRYPT),
+                'first_name' => $this->input->post('first_name'),
+                'last_name' => $this->input->post('last_name'),
+                'street' => $this->input->post('street'),
+                'postal_code' => $this->input->post('postal_code'),
+                'city' => $this->input->post('city'),
+                'country' => $this->input->post('country'),
+                'phone' => $this->input->post('phone'),
+                'birthdate' => $this->input->post('birthdate'),
+                'role' => $this->input->post('user_type')
+            ];
+    
+            if ($this->User_model->register($data)) {
+                $status = "success";
+                $message = "Registration successful. Please log in.";
+            } else {
+                $message = "Something went wrong. Try again.";
             }
         }
-        $this->render('auth/login', $data);
+
+        echo json_encode([
+            'status' => $status,
+            'message' => $message
+        ]);
     }
 
     public function upload_file($field_name, $upload_path) {
@@ -68,60 +136,6 @@ class Auth extends MY_Controller {
 
         $this->form_validation->set_message('file_required', 'The {field} field is required.');
         return false;
-    }
-    
-    public function register() {
-        $data['title'] = "Sign Up";
-
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $this->load->library('form_validation');
-
-            $this->form_validation->set_rules('username', 'Username', 'required|is_unique[users.username]');
-            $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[users.email]', [
-                'required' => 'The %s field is required.',
-                'valid_email' => 'Please enter a valid %s.',
-                'is_unique' => 'This %s is already registered.'
-            ]);
-            $this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
-            $this->form_validation->set_rules('password_confirm', 'Confirm Password', 'required|matches[password]');
-            $this->form_validation->set_rules('first_name', 'First Name', 'required');
-            $this->form_validation->set_rules('last_name', 'Last Name', 'required');
-            $this->form_validation->set_rules('street', 'Street', 'required');
-            $this->form_validation->set_rules('postal_code', 'Postal Code', 'required');
-            $this->form_validation->set_rules('city', 'City', 'required');
-            $this->form_validation->set_rules('country', 'Country', 'required');
-            $this->form_validation->set_rules('phone', 'Phone', 'required');
-            $this->form_validation->set_rules('birthdate', 'Birthdate', 'required');
-            $this->form_validation->set_rules('user_type', 'User Type', 'required');
-
-            if ($this->form_validation->run() === TRUE) {
-                $user_type = $this->input->post('user_type');
-
-                $data = [
-                    'username' => $this->input->post('username'),
-                    'email'    => $this->input->post('email'),
-                    'password' => password_hash($this->input->post('password'), PASSWORD_BCRYPT),
-                    'first_name' => $this->input->post('first_name'),
-                    'last_name' => $this->input->post('last_name'),
-                    'street' => $this->input->post('street'),
-                    'postal_code' => $this->input->post('postal_code'),
-                    'city' => $this->input->post('city'),
-                    'country' => $this->input->post('country'),
-                    'phone' => $this->input->post('phone'),
-                    'birthdate' => $this->input->post('birthdate'),
-                    'role' => $user_type, // default to private user
-                ];
-
-                if ($this->User_model->register($data)) {
-                    $this->session->set_flashdata('success', 'Registration successful. Please log in.');
-                    redirect('auth/login');
-                } else {
-                    $this->session->set_flashdata('error', 'Something went wrong. Try again.');
-                }
-            }
-        }
-
-        $this->render('auth/register', $data);
     }
 
     public function logout() {

@@ -1,7 +1,33 @@
+.menuzord-brand {
+    margin-top: 10px;
+}
+
+.logo {
+    max-height: 77px;
+}
+
 .admin_menu .showhide {
     display: none !important;
 }
 
 .modal-title {
     color: white !important;
+}
+
+/* For smaller devices like phones */
+
+@media (max-width: 768px) {
+    .menuzord-brand {
+        margin: 5px 0 !important;
+    }    
+
+    .logo {
+        max-height: 53px;
+    }
+}
+
+@media (max-width: 600px) {
+    .logo {
+        max-height: 51px;
+    }
 }

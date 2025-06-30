@@ -294,16 +294,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
       </div>
       <div class="col-md-3">
-        <?php if ($this->session->flashdata('success')): ?>
-          <p class="success" style="color: green;"><?= $this->session->flashdata('success') ?></p>
-        <?php endif; ?>
-
-        <?php if ($this->session->flashdata('error')): ?>
-          <p class="error"><?= $this->session->flashdata('error') ?></p>
-        <?php endif; ?>
-
         <!-- Make Online Reservations -->
-        <?= form_open_multipart('vehicle/' . $vehicle->id, ['id' => 'booking-form', 'class' => 'mb-5', 'method' => 'post']); ?>
+        <div>
           <?php if (!$this->session->userdata('logged_in')): ?>
             <h3 class="mb-3 fw-normal">
               <a href="<?= base_url('auth/login'); ?>">Login</a> to be able to book
@@ -315,14 +307,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           </div>
 
           <?php if ($this->session->userdata('logged_in')): ?>
-
-            <div class="form-group mb-6">
-              <button type="button" id="loggedBookNow" class="btn btn-primary"> Book Now </button>
-            </div>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bookNowModal"> Book Now </button>
           <?php else: ?>
-            <button type="button" id="bookNowBtn" class="btn btn-primary"> Book Now </button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal"> Book Now </button>
           <?php endif; ?>
-        <?= form_close() ?>
+        </div>
 
         <div class="card mt-4" style="background: #f3f8fb;">
           <div class="card-body text-center">
@@ -341,17 +330,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   </div>
 </section>
 
-<!-- Members Log In Style Modal for Booking -->
-<div class="modal fade" id="bookNowModal" tabindex="-1" aria-labelledby="bookNowModalLabel" aria-hidden="true">
+<!-- Open Login Modal by clicking "Book Now" button if uer wasn't logged in yet -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header" style="background: #2196f3; color: #fff;">
-        <h5 class="modal-title w-100 text-center map-sidebar" id="bookNowModalLabel">Members Log In</h5>
+        <h5 class="modal-title w-100 text-center map-sidebar" id="loginModalLabel">Log In To Book</h5>
         <i class="fas fa-window-close main-wrapper" data-bs-dismiss="modal" aria-label="Close" style="cursor: pointer;"></i>
       </div>
       <div class="modal-body">
-        <?= form_open('auth/login'); ?>
-          <input type="hidden" name="redirect" value="<?= current_url(); ?>">
+        <form id="login-form">
           <div class="mb-3">
             <label for="modalEmail" class="form-label">Email*</label>
             <input type="email" name="email" class="form-control" id="modalEmail" required>
@@ -366,7 +354,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <button type="submit" class="btn btn-outline-primary px-4">LOG IN</button>
             <a href="#" class="text-primary" style="font-size: 0.95em;">Forgot Password?</a>
           </div>
-        <?= form_close(); ?>
+        </form>
       </div>
       <div class="modal-footer justify-content-center">
         <span>Not a member yet? <a href="<?= base_url('auth/register'); ?>" class="text-primary">Sign up</a></span>
@@ -375,12 +363,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   </div>
 </div>
 
-<div class="modal fade" id="bookNowModal_logged" tabindex="-1" aria-labelledby="bookNowModalLabel" aria-hidden="true">
+<div class="modal fade" id="bookNowModal" tabindex="-1" aria-labelledby="bookNowModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
       <div class="modal-header" style="background: #2196f3; color: #fff;">
-        <h5 class="modal-title w-100 text-center map-sidebar" id="bookNowModalLabel">Members Log In</h5>
-        <button type="button" class="btn-close main-wrapper" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h5 class="modal-title w-100 text-center map-sidebar" id="bookNowModalLabel">Book Now</h5>
+        <i class="fas fa-window-close main-wrapper" data-bs-dismiss="modal" aria-label="Close" style="cursor: pointer;"></i>
       </div>
       <div class="modal-body">
         <?php if ($this->session->flashdata('error')): ?>
@@ -396,7 +384,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </li>
           </ul>
         </div>
-        <?= form_open_multipart('vehicle/order_vehicle', ['id' => 'register-form', 'class' => 'register-form', 'method' => 'post']); ?>
+        <form id="booking-form" class="register-form" enctype="multipart/form-data">
           <div class="multi-step-form">
             <!-- Step 1: Bidder Company -->
             <div class="form-step active" id="step-1">
@@ -420,278 +408,62 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <div class="row" id="id-container" style="display: <?= ($this->session->userdata('role') == 'company' || $this->session->userdata('role') == 'admin') ? 'none' : '';?>">
                 <div class="col-md-6">
                   <label for="id_front_img">ID Front Image *</label>
-                  <div class="form-group position-relative mb-6 form-group-dragable">
-                    <input type="file" id="id_front_img" name="id_front_img" class="custom-file-input">
-                    <label class="custom-file-label mb-0" for="id_front_img">
-                      Click or Drag image here
-                    </label>
-                    <div id="id_front_img_preview" style="position: absolute; top: 0; left: 0; height: 100%;"></div>
-                    <span class="error" id="id_front_img_error" style="display: none; color: red;">Please upload ID front image.</span>
-                    <span class="error"><?= form_error('id_front_img'); ?></span>
+                  <div class="form-group position-relative mb-6 form-group-dragable" style="text-align:center;">
+                    <div class="custom-file-label-box" style="position:relative; width:100%; min-height:200px; background:rgba(245,250,255,0.7); border:2px dashed #2196f3; border-radius:8px; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+                      <img id="id_front_img_preview_img" src="" alt="" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:1;" />
+                      <span id="id_front_img_label_text" style="position:relative; z-index:2; font-weight:bold; color:#2196f3; background:rgba(255,255,255,0.6); padding:8px 12px; border-radius:6px;">Click or Drag image here</span>
+                      <input type="file" id="id_front_img" name="id_front_img" class="custom-file-input" style="opacity:0; position:absolute; top:0; left:0; width:100%; height:100%; cursor:pointer; z-index:3;" />
+                    </div>
                   </div>
+                  <span class="error" id="id_front_img_error" style="display: none; color: red;">Please upload ID front image.</span>
+                  <span class="error"><?= form_error('id_front_img'); ?></span>
                 </div>
                 <div class="col-md-6">
                   <label for="id_back_img">ID Back Image *</label>
-                  <div class="form-group position-relative mb-6 form-group-dragable">
-                    <input type="file" id="id_back_img" name="id_back_img" class="custom-file-input">
-                    <label class="custom-file-label mb-0" for="id_back_img">
-                      Click or Drag image here
-                    </label>
-                    <div id="id_back_img_preview" style="position: absolute; top: 0; left: 0; height: 100%;"></div>
-                    <span class="error" id="id_back_img_error" style="display: none; color: red;">Please upload ID back image.</span>
-                    <span class="error"><?= form_error('id_back_img'); ?></span>
+                  <div class="form-group position-relative mb-6 form-group-dragable" style="text-align:center;">
+                    <div class="custom-file-label-box" style="position:relative; width:100%; min-height:200px; background:rgba(245,250,255,0.7); border:2px dashed #2196f3; border-radius:8px; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+                      <img id="id_back_img_preview_img" src="" alt="" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:1;" />
+                      <span id="id_back_img_label_text" style="position:relative; z-index:2; font-weight:bold; color:#2196f3; background:rgba(255,255,255,0.6); padding:8px 12px; border-radius:6px;">Click or Drag image here</span>
+                      <input type="file" id="id_back_img" name="id_back_img" class="custom-file-input" style="opacity:0; position:absolute; top:0; left:0; width:100%; height:100%; cursor:pointer; z-index:3;" />
+                    </div>
                   </div>
+                  <span class="error" id="id_back_img_error" style="display: none; color: red;">Please upload ID back image.</span>
+                  <span class="error"><?= form_error('id_back_img'); ?></span>
                 </div>
               </div>
               <div class="row" id="company-doc-container" style="display: <?= ($this->session->userdata('role') == 'private' || $this->session->userdata('role') == 'admin') ? 'none' : '';?>;">
-                <div class="col-md-12">
+                <div class="col-md-6">
                   <label for="user_photo">Your Photo *</label>
-                  <div class="form-group position-relative mb-6 form-group-dragable">
-                    <input type="file" id="user_photo" name="user_photo" class="custom-file-input">
-                    <label class="custom-file-label mb-0" for="user_photo">
-                      Click or Drag image here
-                    </label>
-                    <div id="user_photo_preview" style="position: absolute; top: 0; left: 0; height: 100%;"></div>
-                    <span class="error" id="user_photo_error" style="display: none; color: red;">Please upload your photo.</span>
-                    <span class="error"><?= form_error('user_photo'); ?></span>
+                  <div class="form-group position-relative mb-6 form-group-dragable" style="text-align:center;">
+                    <div class="custom-file-label-box" style="position:relative; width:100%; min-height:200px; background:rgba(245,250,255,0.7); border:2px dashed #2196f3; border-radius:8px; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+                      <img id="user_photo_preview_img" src="" alt="" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:1;" />
+                      <span id="user_photo_label_text" style="position:relative; z-index:2; font-weight:bold; color:#2196f3; background:rgba(255,255,255,0.6); padding:8px 12px; border-radius:6px;">Click or Drag image here</span>
+                      <input type="file" id="user_photo" name="user_photo" class="custom-file-input" style="opacity:0; position:absolute; top:0; left:0; width:100%; height:100%; cursor:pointer; z-index:3;" />
+                    </div>
                   </div>
+                  <span class="error" id="user_photo_error" style="display: none; color: red;">Please upload your photo.</span>
+                  <span class="error"><?= form_error('user_photo'); ?></span>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-6">
                   <label for="company_document">Company Document *</label>
-                  <div class="form-group position-relative mb-6 form-group-dragable">
-                    <input type="file" id="company_document" name="company_document" class="custom-file-input">
-                    <label class="custom-file-label mb-0" for="company_document">
-                      Click or Drag file here
-                    </label>
-                    <div id="company_document_preview" style="position: absolute; top: 0; left: 0; height: 100%;"></div>
-                    <span class="error" id="company_document_error" style="display: none; color: red;">Please upload company document.</span>
-                    <span class="error"><?= form_error('company_document'); ?></span>
+                  <div class="form-group position-relative mb-6 form-group-dragable" style="text-align:center;">
+                    <div class="custom-file-label-box" style="position:relative; width:100%; min-height:200px; background:rgba(245,250,255,0.7); border:2px dashed #2196f3; border-radius:8px; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+                      <span id="company_document_label_text" style="position:relative; z-index:2; font-weight:bold; color:#2196f3; background:rgba(255,255,255,0.6); padding:8px 12px; border-radius:6px;">Click or Drag file here</span>
+                      <input type="file" id="company_document" name="company_document" class="custom-file-input" accept=".pdf,.doc,.docx" style="opacity:0; position:absolute; top:0; left:0; width:100%; height:100%; cursor:pointer; z-index:3;" />
+                    </div>
                   </div>
+                  <span class="error" id="company_document_error" style="display: none; color: red;">Please upload company document.</span>
+                  <span class="error"><?= form_error('company_document'); ?></span>
                 </div>
               </div>
               <div class="action-group">
                 <button type="button" class="btn btn-secondary prev-step">Back</button>
-                <button type="button" class="btn btn-primary next-step">Finish</button>
+                <button type="submit" class="btn btn-primary">Book</button>
               </div>
             </div>
           </div>
-        <?= form_close();?>
+        </form>
       </div>
     </div>
   </div>
 </div>
-
-<script src='<?= base_url("assets/plugins/jquery/jquery-3.4.1.min.js"); ?>'></script>
-
-<script>
-// Modal logic for Book Now
-document.addEventListener('DOMContentLoaded', function () {
-  var bookNowBtn = document.getElementById('bookNowBtn');
-  if (bookNowBtn) {
-    bookNowBtn.addEventListener('click', function () {
-      var modal = new bootstrap.Modal(document.getElementById('bookNowModal'));
-      modal.show();
-    });
-  }
-  // You can handle modal form submission here if needed
-});
-
-// Modal logic for Book Now
-document.addEventListener('DOMContentLoaded', function () {
-  var bookNowBtn = document.getElementById('loggedBookNow');
-  if (bookNowBtn) {
-    bookNowBtn.addEventListener('click', function () {
-      var modal = new bootstrap.Modal(document.getElementById('bookNowModal_logged'));
-      modal.show();
-    });
-  }
-  // You can handle modal form submission here if needed
-});
-
-document.getElementById('id_back_img').addEventListener('change', function (event) {
-  const files = event.target.files;
-  const previewContainer = document.getElementById('id_back_img_preview');
-  previewContainer.innerHTML = ''; // Clear previous previews
-
-  Array.from(files).forEach(file => {
-    if (file.type.startsWith('image/')) {
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        const img = document.createElement('img');
-        img.src = e.target.result;
-        img.style.height = 'calc(100% - 10px)'; // Adjust size
-        img.style.margin = '5px';
-        previewContainer.appendChild(img);
-      };
-      reader.readAsDataURL(file);
-    }
-  });
-});
-
-document.getElementById('id_front_img').addEventListener('change', function (event) {
-  const files = event.target.files;
-  const previewContainer = document.getElementById('id_front_img_preview');
-  previewContainer.innerHTML = ''; // Clear previous previews
-
-  Array.from(files).forEach(file => {
-    if (file.type.startsWith('image/')) {
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        const img = document.createElement('img');
-        img.src = e.target.result;
-        img.style.height = 'calc(100% - 10px)'; // Adjust size
-        img.style.margin = '5px';
-        previewContainer.appendChild(img);
-      };
-      reader.readAsDataURL(file);
-    }
-  });
-});
-
-document.getElementById('user_photo').addEventListener('change', function (event) {
-  const files = event.target.files;
-  const previewContainer = document.getElementById('user_photo_preview');
-  previewContainer.innerHTML = ''; // Clear previous previews
-
-  Array.from(files).forEach(file => {
-    if (file.type.startsWith('image/')) {
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        const img = document.createElement('img');
-        img.src = e.target.result;
-        img.style.height = 'calc(100% - 10px)'; // Adjust size
-        img.style.margin = '5px';
-        previewContainer.appendChild(img);
-      };
-      reader.readAsDataURL(file);
-    }
-  });
-});
-
-document.getElementById('company_document').addEventListener('change', function (event) {
-  const files = event.target.files;
-  const previewContainer = document.getElementById('company_document_preview');
-  previewContainer.innerHTML = ''; // Clear previous previews
-
-  Array.from(files).forEach(file => {
-    if (file.type.startsWith('image/')) {
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        const img = document.createElement('img');
-        img.src = e.target.result;
-        img.style.height = 'calc(100% - 10px)'; // Adjust size
-        img.style.margin = '5px';
-        previewContainer.appendChild(img);
-      };
-      reader.readAsDataURL(file);
-    }
-  });
-});
-
-  $(document).ready(function(){
-    var $carousel = $('.listing-details-carousel');
-    if ($carousel.hasClass('owl-loaded')) {
-      $carousel.trigger('destroy.owl.carousel').removeClass('owl-loaded');
-      $carousel.find('.owl-stage-outer').children().unwrap();
-    }
-    $carousel.owlCarousel({
-      items: 1,
-      loop: true,
-      nav: true,
-      dots: true
-    });
-
-    $(".next-step").click(function () {
-      let currentStep = $(".form-step.active");
-      let nextStep = currentStep.next(".form-step");
-      
-      // Validate delivery address if we're on step 1
-      if (currentStep.attr('id') === 'step-1') {
-        let deliveryAddress = $('#delivery_address').val().trim();
-        if (!deliveryAddress) {
-          $('#delivery_address_error').show();
-          $('#delivery_address').focus();
-          return;
-        } else {
-          $('#delivery_address_error').hide();
-        }
-      }
-      
-      // Validate step 2 (Finish button) - image uploads based on user role
-      if (currentStep.attr('id') === 'step-2') {
-        let isValid = true;
-        
-        // Check if user is private (show ID fields) or company (show company fields)
-        let isPrivateUser = $('#id-container').is(':visible');
-        let isCompanyUser = $('#company-doc-container').is(':visible');
-        
-        if (isPrivateUser) {
-          // Validate ID fields for private users
-          let idFrontImg = $('#id_front_img')[0].files.length;
-          let idBackImg = $('#id_back_img')[0].files.length;
-          
-          if (!idFrontImg) {
-            $('#id_front_img_error').show();
-            isValid = false;
-          } else {
-            $('#id_front_img_error').hide();
-          }
-          
-          if (!idBackImg) {
-            $('#id_back_img_error').show();
-            isValid = false;
-          } else {
-            $('#id_back_img_error').hide();
-          }
-        }
-        
-        if (isCompanyUser) {
-          // Validate company fields for company users
-          let userPhoto = $('#user_photo')[0].files.length;
-          let companyDoc = $('#company_document')[0].files.length;
-          
-          if (!userPhoto) {
-            $('#user_photo_error').show();
-            isValid = false;
-          } else {
-            $('#user_photo_error').hide();
-          }
-          
-          if (!companyDoc) {
-            $('#company_document_error').show();
-            isValid = false;
-          } else {
-            $('#company_document_error').hide();
-          }
-        }
-        
-        if (!isValid) {
-          return; // Don't submit if validation fails
-        }
-        
-        // If validation passes, submit the form
-        $('#register-form').submit();
-        return;
-      }
-      
-      currentStep.removeClass("active");
-      nextStep.addClass("active");
-
-      // Update progress bar
-      let stepIndex = $(".form-step").index(nextStep) + 1;
-      $(".progress-bar li").removeClass("active");
-      $(".progress-bar li").slice(0, stepIndex).addClass("active");
-    });
-
-    $(".prev-step").click(function () {
-      let currentStep = $(".form-step.active");
-      let prevStep = currentStep.prev(".form-step");
-      currentStep.removeClass("active");
-      prevStep.addClass("active");
-      // Update progress bar
-      let stepIndex = $(".form-step").index(prevStep) + 1;
-      $(".progress-bar li").removeClass("active");
-      $(".progress-bar li").slice(0, stepIndex).addClass("active");
-    })
-  });
-</script>
